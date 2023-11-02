@@ -1,0 +1,38 @@
+<!--The title of the page which displays the viewTitle object (a string) that is defined in its TypeScript-file-->
+<h1 id="tableLabel"> {{viewTitle}} </h1>
+
+<button class="btn-primary btn" (click)="getCategorys()">Get Categories</button>
+
+<!-- Creating the input to write into the filtering event -->
+<div class="row">
+  <div class="col-md-2">Filter by:</div>
+  <div class="col-md-4">
+    <input type="text" [(ngModel)]="listFilter" />
+  </div>
+</div>
+
+<!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
+<div class="row">
+  <div class="col-md-6">
+    <h4>Filtered by: {{listFilter}}</h4>
+  </div>
+</div>
+
+<table class="table table-striped" aria-labelledby="tableLabel">
+  <thead>
+    <tr>
+      <th>Category Id</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of filteredCategorys">
+      <td>{{ category.CategoryId }}</td>
+      <td>{{ category.CategoryName }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- A button for navigating to create a new category-->
+<button class="btn btn-primary" (click)="navigateToCategoryform()">Create New Category</button>

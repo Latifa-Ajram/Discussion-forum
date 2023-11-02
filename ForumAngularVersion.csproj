@@ -26,11 +26,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\Categorys\CategorysComponent.ts" />
+    <None Remove="ClientApp\src\app\categorys\category.ts" />
+    <None Remove="ClientApp\src\app\categorys\categoryform.component.ts" />
+    <None Remove="ClientApp\src\app\categorys\Categorys.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\Categorys\CategorysComponent.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\categorys\categoryform.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\categorys\categorys.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\categorys\category.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\assets\images\" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
