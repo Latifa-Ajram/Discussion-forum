@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICategory } from './category';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CategoryService } from './categorys.service';
 
 @Component({
   selector: 'app-categorys-component',
@@ -15,7 +15,9 @@ export class CategorysComponent implements OnInit {
 
   categorys: ICategory[] = [];
 
-  constructor(private _http: HttpClient, private _router: Router) { }
+  constructor(
+    private _router: Router,
+    private _categoryService: CategoryService) { }
 
   
   get listFilter(): string {
@@ -28,7 +30,7 @@ export class CategorysComponent implements OnInit {
   }
 
   getCategorys(): void {
-    this._http.get<ICategory[]>("api/category/").subscribe(data => {
+    this._categoryService.getCategorys().subscribe(data => {
       console.log('All', JSON.stringify(data));
       this.categorys = data;
       this.filteredCategorys = this.categorys;
@@ -48,5 +50,6 @@ export class CategorysComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('CategoryComponent created');
+    this.getCategorys();
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryService } from './categorys.service';
 
 @Component({
   selector: "app-categorys-categoryform",
@@ -11,7 +12,7 @@ export class CategoryformComponent {
 
   categoryForm: FormGroup;
 
-  constructor(private _formbuilder: FormBuilder, private _router: Router) {
+  constructor(private _formbuilder: FormBuilder, private _router: Router, private _categoryService: CategoryService) {
     this.categoryForm = _formbuilder.group({
       categoryName: ['', Validators.required]
     });
@@ -20,8 +21,17 @@ export class CategoryformComponent {
   onSubmit(){
     console.log("CategoryCreate form submitted");
     console.log(this.categoryForm);
-    console.log('The category ' + this.categoryForm.value.categoryName + ' is created.');
-    console.log(this.categoryForm.touched);
+
+    const newCategory = this.categoryForm.value;
+    this._categoryService.createCategory(newCategory).subscribe(response => {
+      if (response.success) {
+        console.log(response.message);
+        this._router.navigate(['/categorys']);
+      }
+      else {
+        console.log('Category creation failed');
+      }
+    });
   }
 
   backToCategories() {

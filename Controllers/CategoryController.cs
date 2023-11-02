@@ -1,29 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ForumAngularVersion.Models;
+using ForumAngularVersion.DAL;
 
-namespace ForumAngularVersion.Controllers
+namespace ForumAngularVersion.Controllers;
+
+//Veldig viktig at namespace sine bracets fjernes og settes en ; bak, hvis ikke fungerer ikke controller mapping.
+
+[ApiController]
+[Route("api/[controller]")]
+public class CategoryController : Controller
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CategoryController : Controller
-    {
-        private static List<Category> Categories = new List<Category>()
-        {
-            new Category
-            {
-                CategoryId = 1,
-                CategoryName = "Fotball",
-            },
-            new Category
-            {
-                CategoryId = 2,
-                CategoryName = "Politikk",
-            }
-        };
+        
+    private readonly ICategoryRepository _categoryRepository;
+    private readonly ILogger<CategoryController> _logger;
 
-        [HttpGet]
-        public List<Category> GetAll() {
-            return Categories;
+    public CategoryController(ICategoryRepository categoryRepository, ILogger<CategoryController> logger)
+    {
+    _categoryRepository = categoryRepository;
+    _logger = logger;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll() {
+        var categories = await _categoryRepository.GetAll();
+        if(categories == null)
+        {
+            _logger.LogError("[CategoryController] Category list not found while executing _categoryRepository.GetAll()");
+            return NotFound("Category list not found");
+        }
+        return Ok(categories);
+    }
+
+    [HttpPost("create")]
+    public async Task<IActionResult> Create([FromBody] Category newCategory) {
+       if(newCategory == null)
+        {
+            return BadRequest("Invalid Category data");
+        }
+       bool returnOK = await _categoryRepository.Create(newCategory);
+        if(returnOK)
+        {
+            var response = new { success = true, message = "Category " + newCategory.CategoryName + " created successfully" };
+            return Ok(response);
+        }
+        else
+        {
+            var response = new { success = false, message = "Category creation failed" };
+            return Ok(response);
         }
     }
 }
+
