@@ -27,6 +27,7 @@ import { CategoryformComponent } from './categorys/categoryform.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'categorys', component: CategorysComponent },
       { path: 'categoryform', component: CategoryformComponent },
+      { path: 'categoryform/:mode/:id', component: CategoryformComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ])
   ],

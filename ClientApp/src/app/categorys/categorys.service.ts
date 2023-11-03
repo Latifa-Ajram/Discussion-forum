@@ -21,4 +21,20 @@ export class CategoryService {
     const createUrl = 'api/category/create';
     return this._http.post<any>(createUrl, newCategory);
   }
+
+  getCategoryById(categoryId: number): Observable<any> {
+    const url = `${this.baseUrl}/${categoryId}`;
+    return this._http.get(url);
+  }
+
+  updateCategory(categoryId: number, newCategory: any): Observable<any> {
+    const url = `${this.baseUrl}/update/${categoryId}`;
+    newCategory.categoryId = categoryId;
+    return this._http.put<any>(url, newCategory);
+  }
+
+  deleteCategory(categoryId: number): Observable<any> {
+    const url = `${this.baseUrl}/delete/${categoryId}`;
+    return this._http.delete(url);
+  }
 }

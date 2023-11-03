@@ -30,9 +30,14 @@
     <tr *ngFor="let category of filteredCategorys">
       <td>{{ category.CategoryId }}</td>
       <td>{{ category.CategoryName }}</td>
+      <td>
+        <a [routerLink]="['/categoryform', 'edit', category.CategoryId]"> Update </a>
+        <a class="delete-link" (click)="deleteCategory(category)"> Delete </a>
+      </td>
     </tr>
   </tbody>
 </table>
 
-<!-- A button for navigating to create a new category-->
-<button class="btn btn-primary" (click)="navigateToCategoryform()">Create New Category</button>
+<!-- Two buttons for navigating to create a new category-->
+<button class="btn btn-primary" [routerLink]="['/categoryform', 'create', -1]">Create New Category</button>
+<button class="btn btn-secondary" [routerLink]="['/categoryform']">Create New Category</button>

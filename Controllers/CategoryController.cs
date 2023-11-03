@@ -49,5 +49,50 @@ public class CategoryController : Controller
             return Ok(response);
         }
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCategoryById(int id)
+    {
+        var category = await _categoryRepository.GetCategoryById(id);
+        if(category == null)
+        {
+            _logger.LogError("[CategoryController] Category not found while executing _categoryRepository.GetCategoryById(id)");
+            return NotFound("Category not found");
+        }
+        return Ok(category);
+    }
+
+    [HttpPut("update/{id}")]
+    public async Task<IActionResult> Update(Category updatedCategory)
+    {
+        if(updatedCategory == null)
+        {
+            return BadRequest("Invalid category data.");
+        }
+        bool returnOk = await _categoryRepository.Update(updatedCategory);
+        if(returnOk)
+        {
+            var response = new { success = true, message = "Category " + updatedCategory.CategoryName + " updated successfully" };
+            return Ok(response);
+        }
+        else
+        {
+            var response = new { success = false, message = "Category update failed" };
+            return Ok(response);
+        }
+    }
+
+    [HttpDelete("delete/{id}")]
+    public async Task<IActionResult> DeleteCategory(int id)
+    {
+        bool returnOk = await _categoryRepository.Delete(id);
+        if (!returnOk)
+        {
+            _logger.LogError("[CategoryController] Category deletion failed for the CategoryId {CategoryId:0000}", id);
+            return BadRequest("Category deletion failed");
+        }
+        var response = new { success = true, message = "Category " + id.ToString() + " deletion succesfully" };
+        return Ok(response);
+    }
 }
 

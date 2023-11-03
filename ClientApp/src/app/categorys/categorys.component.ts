@@ -29,6 +29,22 @@ export class CategorysComponent implements OnInit {
     this.filteredCategorys = this.performFilter(value);
   }
 
+  deleteCategory(category: ICategory): void {
+    const confirmDelete = confirm(`Are you sure you want to delete "${category.CategoryName}"?`);
+    if (confirmDelete) {
+      this._categoryService.deleteCategory(category.CategoryId).subscribe((response) => {
+        if (response.success) {
+          console.log(response.message);
+          this.filteredCategorys = this.filteredCategorys.filter(c => c !== category);
+        }
+      },
+        (error) => {
+          console.error('Error deleting category: ', error);
+        }
+      );
+    }
+  }
+
   getCategorys(): void {
     this._categoryService.getCategorys().subscribe(data => {
       console.log('All', JSON.stringify(data));
