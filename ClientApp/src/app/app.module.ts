@@ -9,6 +9,9 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CategorysComponent } from './categorys/categorys.component';
 import { CategoryformComponent } from './categorys/categoryform.component';
+import { RoomsComponent } from './rooms/rooms.component'
+import { RoomformComponent } from './rooms/roomform.component';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { CategoryformComponent } from './categorys/categoryform.component';
     HomeComponent,
     CategorysComponent,
     CategoryformComponent,
+    RoomsComponent,
+    RoomformComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,6 +33,9 @@ import { CategoryformComponent } from './categorys/categoryform.component';
       { path: 'categorys', component: CategorysComponent },
       { path: 'categoryform', component: CategoryformComponent },
       { path: 'categoryform/:mode/:id', component: CategoryformComponent },
+      { path: 'rooms', component: RoomsComponent }, // Add the Rooms route
+      { path: 'roomform', component: RoomformComponent }, // Add the Roomform route
+      { path: 'roomform/:mode/:id', component: RoomformComponent }, // Add the Roomform with mode and id route
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ])
   ],

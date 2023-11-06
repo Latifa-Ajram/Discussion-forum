@@ -30,6 +30,10 @@ public static class DBInit
             context.AddRange(categories);
             context.SaveChanges();
         }
+
+      
+  
+        }
     }
-}
+
 

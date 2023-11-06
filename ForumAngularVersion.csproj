@@ -26,28 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\categorys\category.ts" />
-    <None Remove="ClientApp\src\app\categorys\categoryform.component.ts" />
-    <None Remove="ClientApp\src\app\categorys\Categorys.component.ts" />
-    <None Remove="ClientApp\src\app\categorys\categorys.service.ts" />
-    <None Remove="ClientApp\src\app\rooms\room.component.ts" />
-    <None Remove="ClientApp\src\app\rooms\room.service.ts" />
-    <None Remove="ClientApp\src\app\rooms\room.ts" />
-    <None Remove="ClientApp\src\app\rooms\roomform.component.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\categorys\categoryform.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\categorys\categorys.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\categorys\category.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\categorys\categorys.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\rooms\roomform.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\rooms\room.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\rooms\room.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\rooms\room.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="ClientApp\src\assets\images\" />
   </ItemGroup>
 

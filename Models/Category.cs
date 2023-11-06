@@ -10,6 +10,6 @@ namespace ForumAngularVersion.Models
         [JsonPropertyName("CategoryName")]
         public string CategoryName { get; set; } = string.Empty;
 
-       public virtual List<Room>? Rooms { get; set; } 
+      // public virtual List<Room>? Rooms { get; set; } 
     }
 }
