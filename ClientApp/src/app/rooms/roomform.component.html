@@ -1,0 +1,13 @@
+
+<h2> {{ isEditMode ? 'Update' : 'Create' }} Room</h2>
+
+<form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="roomName">Name:</label>
+    <input type="text" id="roomName" formControlName="roomName" class="form-control" />
+  </div>
+
+  <button class="btn-primary btn" type="submit" [disabled]="roomForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Room</button>
+
+  <button class="btn btn-secondary" (click)="backToRooms()">Cancel</button>
+</form>
