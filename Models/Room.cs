@@ -10,9 +10,16 @@ namespace ForumAngularVersion.Models
         [JsonPropertyName("RoomName")]
         public string RoomName { get; set; } = string.Empty;
 
+
+      
         public int CategoryId { get; set; } //FK
-        //Navigaiton property:
-        public virtual Category? Category { get; set; } // Can't be zero. Virtual enables lazy loading. 
+        // Navigaiton property: 
+
+
+        // Når dette kommenteres fungerer GetAll()!
+
+        //public virtual Category? Category { get; set; } // Can't be zero. Virtual enables lazy loading. 
+    
         //public virtual List<Topic>? Topics { get; set; } // One room can have many threads, or zero. ? means it can have zero threads.
     }
 }

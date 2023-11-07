@@ -1,0 +1,14 @@
+<h2>{{ isEditMode ? 'Update' : 'Create' }} Topic</h2>
+
+<form [formGroup]="topicForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="topicName">Name:</label>
+    <input type="text" id="topicName" formControlName="topicName" class="form-control" />
+  </div>
+
+  <button class='btn btn-primary' type="submit" [disabled]="topicForm.invalid">
+    {{ isEditMode ? 'Update' : 'Create' }} Topic
+  </button>
+  <button class='btn btn-secondary' (click)="backToTopics()">Cancel</button>
+</form>
+

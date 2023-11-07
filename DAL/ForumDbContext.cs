@@ -13,6 +13,8 @@ public class ForumDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Room> Rooms { get; set; }
 
+    public DbSet<Topic> Topics { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseLazyLoadingProxies();

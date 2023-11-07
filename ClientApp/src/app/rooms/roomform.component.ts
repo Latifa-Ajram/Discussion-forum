@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoomService } from './rooms.service'; // Import the RoomService
 
@@ -19,10 +19,12 @@ export class RoomformComponent {
     private _formbuilder: FormBuilder,
     private _router: Router,
     private _route: ActivatedRoute,
+  
     private _roomService: RoomService // Inject the RoomService
   ) {
     this.roomForm = _formbuilder.group({
       roomName: ['', Validators.required]
+      
     });
   }
 
@@ -31,6 +33,9 @@ export class RoomformComponent {
     console.log(this.roomForm);
 
     const newRoom = this.roomForm.value;
+  
+    
+
 
     if (this.isEditMode) {
       this._roomService.updateRoom(this.roomId, newRoom).subscribe(response => {

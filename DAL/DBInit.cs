@@ -8,7 +8,7 @@ public static class DBInit
     {
         using var serviceScope = app.ApplicationServices.CreateScope();
         ForumDbContext context = serviceScope.ServiceProvider.GetRequiredService<ForumDbContext>();
-        //context.Database.EnsureDeleted();
+        context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
 
         if (!context.Categories.Any())
@@ -31,9 +31,37 @@ public static class DBInit
             context.SaveChanges();
         }
 
-      
-  
+        if (!context.Rooms.Any())
+        {
+            var rooms = new List<Room>
+            {
+                new Room { RoomName = "Fotball", CategoryId= 1 },
+                new Room { RoomName = "operatingsystem", CategoryId= 2},
+               
+
+            };
+            context.AddRange(rooms);
+            context.SaveChanges();
         }
+
+        if (!context.Topics.Any())
+        {
+            var topics = new List<Topic>
+            {
+                new Topic { TopicName = "Liverpool", RoomId= 1 },
+                new Topic { TopicName = "Linux", RoomId= 2},
+               
+            };
+            context.AddRange(topics);
+            context.SaveChanges();
+        }
+
+
+
+
+
+
     }
+}
 
 
