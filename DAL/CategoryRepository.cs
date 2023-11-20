@@ -38,7 +38,7 @@ public class CategoryRepository : ICategoryRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[CategoryRepository] categories FindAsync(id) failed when GetCategoryById for CategoryId {CategoryId:0000}, error message: {e}", id, e.Message);
+            _logger.LogError("[CategoryRepository] categories FindAsync(id) failed when GetCategoryById for CategoryId {CategoryId}, error message: {e}", id, e.Message);
             return null;
         }
 
@@ -54,7 +54,7 @@ public class CategoryRepository : ICategoryRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[CategoryRepository] category creation failed for category {@category}, error message: {e}", category, e.Message);
+            _logger.LogError("[CategoryRepository] category creation failed for item {@category}, error message: {e}", category, e.Message);
             return false;
         }
     }
@@ -69,7 +69,7 @@ public class CategoryRepository : ICategoryRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[CategoryRepository] category FindAsync(id) failed when updating the CategoryId {CategoryId:0000}, error message: {e}", category, e.Message);
+            _logger.LogError("[CategoryRepository] category failed when updating the Category {@category}, error message: {e}", category.CategoryId, e.Message);
             return false;
         }
 
@@ -82,7 +82,7 @@ public class CategoryRepository : ICategoryRepository
             var category = await _db.Categories.FindAsync(id);
             if (category == null)
             {
-                _logger.LogError("[CategoryRepository] category not found for the CategoryId {CategoryId:0000}", id);
+                _logger.LogError("[CategoryRepository] category not found for the CategoryId {CategoryId}", id);
                 return false;
             }
 
@@ -92,7 +92,7 @@ public class CategoryRepository : ICategoryRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[CategoryRepository] category deletion failed for the CategoryId {CategoryId:0000}, error message: {e}", id, e.Message);
+            _logger.LogError("[CategoryRepository] category deletion failed for the CategoryId {CategoryId}, error message: {e}", id, e.Message);
             return false;
         }
     }

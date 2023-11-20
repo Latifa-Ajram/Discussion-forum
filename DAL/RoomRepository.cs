@@ -107,7 +107,7 @@ public class RoomRepository : IRoomRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[RoomRepository] room FindAsync(id) failed when updating the RoomId {TopicId}, error message: {e}", room, e.Message);
+            _logger.LogError("[RoomRepository] update room(room) failed when updating the Room {@room}, error message: {e}", room.RoomId, e.Message);
             return false;
         }
     }
