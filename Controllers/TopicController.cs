@@ -12,10 +12,12 @@ public class TopicController : Controller
 {
     private readonly ITopicRepository _topicRepository;
     private readonly ILogger<TopicController> _logger;
+    private readonly IRoomRepository _roomRepository;
 
-    public TopicController(ITopicRepository topicRepository, ILogger<TopicController> logger)
+    public TopicController(ITopicRepository topicRepository, IRoomRepository roomRepository ,ILogger<TopicController> logger)
     {
         _topicRepository = topicRepository;
+        _roomRepository = roomRepository;
         _logger = logger;
     }
 
@@ -75,6 +77,28 @@ public class TopicController : Controller
             return StatusCode(500, "An error occurred.");
         }
     }
+
+    //Method to get a list of topics based on the given room.
+    [HttpGet("byRoomId/{id}")]
+    public async Task<List<Topic>> GetTopicsByRoomId(int Id)
+    {
+        try
+        {
+            Room room = await _roomRepository.GetRoomById(Id);
+            if (room == null)
+            {
+                return null;
+            }
+            return room.Topics; //Return the topics of the given room.
+        }
+        catch (Exception e)
+        {
+            //log an error if it can not find id and then returns null
+            _logger.LogError("[TopicController]  FindAsync(id) failed when _roomRepository.GetRoomById(id) for RoomId {RoomId}, error message: {e}", Id, e.Message);
+            return null;
+        }
+    }
+
     [HttpPut("update/{id}")]
     public async Task<IActionResult> Update(Topic updatedTopic)
     {

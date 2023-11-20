@@ -30,7 +30,7 @@
     <tr *ngFor="let category of filteredCategorys">
       <td>{{ category.CategoryId }}</td>
       <!---Trying to link the categoryName to the details page with the category Id to know which data to fetch and load (rooms)-->
-      <td><a [routerLink]="['../rooms/', category.CategoryId]">{{ category.CategoryName }}</a></td>
+      <td><a [routerLink]="['/rooms/', category.CategoryId]">{{ category.CategoryName }}</a></td>
       <!--<a asp-controller="Category" asp-action="CategoryDetails" asp-route-Id="@category.CategoryId">@category.CategoryName</a>-->
 
 

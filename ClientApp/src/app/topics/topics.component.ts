@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ITopic } from './topic';
-
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from './topics.service';
+
 @Component({
   selector: 'app-topics-component',
   templateUrl: './topics.component.html',
@@ -16,7 +16,8 @@ export class TopicsComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _topicService: TopicService) { }
+    private _topicService: TopicService,
+    private _route: ActivatedRoute){ }
 
   private _listFilter: string = '';
   get listFilter(): string {
@@ -55,6 +56,14 @@ export class TopicsComponent implements OnInit {
       );
   }
 
+  getTopicsByRoomId(roomId: number): void{
+    this._topicService.getTopicsByRoomId(roomId).subscribe(data => {
+      console.log('All', JSON.stringify(data));
+      this.topics = data;
+      this.filteredTopics = this.topics;
+    });
+  }
+
   filteredTopics: ITopic[] = this.topics;
 
   performFilter(filterBy: string): ITopic[] {
@@ -63,13 +72,21 @@ export class TopicsComponent implements OnInit {
       topic.TopicName.toLocaleLowerCase().includes(filterBy));
   }
 
-
-
   navigateToTopicform() {
     this._router.navigate(['/topicform']);
   }
 
   ngOnInit(): void {
-    this.getTopics();
+    this._route.params.subscribe(params => {
+      if (params['id'] == -1) {
+        console.log("KOMMER I IF STATEMENT");
+        this.getTopics();
+      }
+      else {
+        console.log("KOMMER I ELSE");
+        this.getTopicsByRoomId(+params['id'])
+      }
+    });
+    
   }
 }

@@ -47,8 +47,6 @@ export class RoomsComponent implements OnInit {
         }
     }
 
-    //getRoomsByCategoryId()
-
     getRooms(): void {
         this._roomService.getRooms().subscribe(data => {
             console.log('All', JSON.stringify(data));

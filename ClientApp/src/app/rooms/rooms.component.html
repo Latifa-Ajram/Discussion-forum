@@ -27,7 +27,7 @@
   <tbody>
     <tr *ngFor="let room of filteredRooms">
       <td>{{ room.RoomId }}</td>
-      <td>{{ room.RoomName }}</td>
+      <td><a [routerLink]="['/topics/', room.RoomId]">{{ room.RoomName }}</a></td>
       <td>
         <a [routerLink]="['/roomform', 'edit', room.RoomId]">Update</a>
         <a class="delete-link" (click)="deleteRoom(room)">Delete</a>

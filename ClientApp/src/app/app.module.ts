@@ -42,6 +42,7 @@ import { TopicformComponent } from './topics/topicform.component';
       { path: 'roomform', component: RoomformComponent }, // Add the Roomform route
       { path: 'roomform/:mode/:id', component: RoomformComponent }, // Add the Roomform with mode and id route
       { path: 'topics', component: TopicsComponent },
+      { path: 'topics/:id', component: TopicsComponent },
       { path: 'topicform', component: TopicformComponent },
       { path: 'topicform/:mode/:id', component: TopicformComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },

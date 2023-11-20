@@ -27,6 +27,12 @@ export class TopicService {
     return this._http.get(url);
   }
 
+  getTopicsByRoomId(roomId: number): Observable<any> {
+    const url = `${this.baseUrl}/byRoomId/${roomId}`
+    console.log("Kommer hti i TopicSeervices");
+    return this._http.get(url);
+  }
+
   updateTopic(topicId: number, newTopic: any): Observable<any> {
     const url = `${this.baseUrl}/update/${topicId}`;
     newTopic.topicId = topicId;
