@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ForumAngularVersion.Models
 {
-    public class comment
+    public class Comment
     {
         [JsonPropertyName("CommentId")]
         public int CommentId { get; set; } //PK

@@ -8,6 +8,9 @@ namespace ForumAngularVersion.Models
         [JsonPropertyName("PostId")]
         public int PostId { get; set; }
 
+        [JsonPropertyName("TopicId")]
+        public int TopicId { get; set; } //FK
+
         [JsonPropertyName("PostName")]
         public string PostName { get; set; } = string.Empty;
 

@@ -26,6 +26,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\comments\NewFile.txt" />
+    <None Remove="ClientApp\src\app\posts\NewFile.txt" />
+    <None Remove="ClientApp\src\app\posts\post.component.html" />
+    <None Remove="ClientApp\src\app\posts\postdetails.component.html" />
+    <None Remove="ClientApp\src\app\posts\postform.component.html" />
+    <None Remove="Controllers\NewFile.txt" />
+    <None Remove="Controllers\PostController" />
+    <None Remove="DAL\NewFile.txt" />
+    <None Remove="DAL\PostRe" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\src\assets\images\" />
   </ItemGroup>
 

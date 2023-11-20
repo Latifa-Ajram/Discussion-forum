@@ -37,7 +37,8 @@ import { TopicformComponent } from './topics/topicform.component';
       { path: 'categorys', component: CategorysComponent },
       { path: 'categoryform', component: CategoryformComponent },
       { path: 'categoryform/:mode/:id', component: CategoryformComponent },
-      { path: 'rooms', component: RoomsComponent }, // Add the Rooms route
+      { path: 'rooms/', component: RoomsComponent },
+      { path: 'rooms/:id', component: RoomsComponent },
       { path: 'roomform', component: RoomformComponent }, // Add the Roomform route
       { path: 'roomform/:mode/:id', component: RoomformComponent }, // Add the Roomform with mode and id route
       { path: 'topics', component: TopicsComponent },

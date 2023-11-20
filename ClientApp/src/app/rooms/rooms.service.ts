@@ -21,9 +21,12 @@ export class RoomService {
     const createUrl = 'api/room/create';
     return this._http.post<any>(createUrl, newRoom);
   }
- 
 
-
+  //Bruker forleøpig base url, men må endre  
+    getRoomsByCategoryId(categoryId: number): Observable<IRoom[]> {
+    const url = `${this.baseUrl}/byCategoryId/${categoryId}`;
+    return this._http.get<IRoom[]>(url);
+  }
 
   getRoomById(roomId: number): Observable<IRoom> {
     const url = `${this.baseUrl}/${roomId}`;

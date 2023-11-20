@@ -12,12 +12,14 @@ public class RoomController : Controller
 
 {
     private readonly IRoomRepository _roomRepository;
+    private readonly ICategoryRepository _categoryRepository;
     private readonly ILogger<RoomController> _logger;
 
 
-    public RoomController(IRoomRepository roomRepository, ILogger<RoomController> logger)
+    public RoomController(IRoomRepository roomRepository, ICategoryRepository categoryRepository, ILogger<RoomController> logger)
     {
         _roomRepository = roomRepository;
+        _categoryRepository = categoryRepository;
         _logger = logger;
     }
     [HttpGet]
@@ -53,11 +55,11 @@ public class RoomController : Controller
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetRoomById(int id)
+    public async Task<IActionResult> GetRoomById(int Id)
     {
         try
         {
-            var room = await _roomRepository.GetRoomById(id);
+            var room = await _roomRepository.GetRoomById(Id);
 
             if (room == null)
             {
@@ -69,10 +71,32 @@ public class RoomController : Controller
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while getting room with ID {Id}", id);
+            _logger.LogError(ex, "An error occurred while getting room with ID {Id}", Id);
             return StatusCode(500, "An error occurred.");
         }
     }
+
+    //Method to get a list of rooms based on the given category.
+    [HttpGet("byCategoryId/{id}")]
+    public async Task<List<Room>> GetRoomsByCategoryId(int Id)
+    {
+        try
+        {
+            Category category = await _categoryRepository.GetCategoryById(Id); //Find a category by it's id
+            if (category == null)
+            {
+                return null;
+            }
+            return category.Rooms; //Return the rooms of the given category.
+        }
+        catch (Exception e)
+        {
+            //log an error if it can not find id and then returns null
+            _logger.LogError("[RoomRepository]  FindAsync(id) failed when GetItemById for CategoryId {CategoryId}, error message: {e}", Id, e.Message);
+            return null;
+        }
+    }
+
     [HttpPut("update/{id}")]
     public async Task<IActionResult> Update(Room updatedRoom)
     {
@@ -94,18 +118,15 @@ public class RoomController : Controller
     }
 
     [HttpDelete("delete/{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int Id)
     {
-        bool returnOk = await _roomRepository.Delete(id);
+        bool returnOk = await _roomRepository.Delete(Id);
         if (!returnOk)
         {
-            _logger.LogError("[RoomController] Room deletion failed for the RoomgoryId {CategoryId:0000}", id);
+            _logger.LogError("[RoomController] Room deletion failed for the RoomgoryId {CategoryId:0000}", Id);
             return BadRequest("Room deletion failed");
         }
-        var response = new { success = true, message = "Room " + id.ToString() + " deletion succesfully" };
+        var response = new { success = true, message = "Room " + Id.ToString() + " deletion succesfully" };
         return Ok(response);
     }
-
 }
-
-

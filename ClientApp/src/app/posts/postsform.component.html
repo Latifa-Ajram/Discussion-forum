@@ -1,0 +1,14 @@
+﻿<h2>{{ isEditMode ? 'Update' : 'Create' }} Post</h2>
+
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="postName">Name:</label>
+        <input type="text" id="topicName" formControlName="postName" class="form-control" />
+    </div>
+
+    <button class='btn btn-primary' type="submit" [disabled]="postForm.invalid">
+        {{ isEditMode ? 'Update' : 'Create' }} Post
+    </button>
+    <button class='btn btn-secondary' (click)="backToPosts()">Cancel</button>
+</form>
+
