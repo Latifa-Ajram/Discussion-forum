@@ -102,7 +102,7 @@ public class TopicRepository : ITopicRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[TopicRepository] topic FindAsync(id) failed when updating the TopicId {TopicId:0000}, error message: {e}", topic, e.Message);
+            _logger.LogError("[TopicRepository] topic update(topic) failed when updating the Topic {@topic}, error message: {e}", topic.TopicId, e.Message);
             return false;
         }
        
