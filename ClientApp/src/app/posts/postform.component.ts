@@ -39,7 +39,7 @@ export class PostformComponent {
                 .subscribe(response => {
                     if (response.success) {
                         console.log(response.message);
-                        this._router.navigate(['/posts']);
+                        this._router.navigate(['/posts', -1]);
                     }
                     else {
                         console.log('Post update failed');
@@ -51,7 +51,7 @@ export class PostformComponent {
                 .subscribe(response => {
                     if (response.success) {
                         console.log(response.message);
-                        this._router.navigate(['/posts']);
+                        this._router.navigate(['/posts', -1]);
                     }
                     else {
                         console.log('Post creation failed');
@@ -62,7 +62,7 @@ export class PostformComponent {
 
 
     backToPosts() {
-        this._router.navigate(['/posts']);
+        this._router.navigate(['/posts', -1]);
     }
 
     ngOnInit(): void {

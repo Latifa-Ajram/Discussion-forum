@@ -73,7 +73,7 @@ export class TopicsComponent implements OnInit {
   }
 
   navigateToTopicform() {
-    this._router.navigate(['/topicform']);
+    this._router.navigate(['/topicform', -1]);
   }
 
   ngOnInit(): void {

@@ -66,7 +66,7 @@ export class CommentformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/comments']);
+            this._router.navigate(['/comments', -1]);
           }
           else {
             console.log('Comment update failed');
@@ -78,7 +78,7 @@ export class CommentformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/comments']);
+            this._router.navigate(['/comments', -1]);
           }
           else {
             console.log('Comment creation failed');
@@ -88,7 +88,7 @@ export class CommentformComponent {
   }
 
   backToComments() {
-    this._router.navigate(['/comments']);
+    this._router.navigate(['/comments', -1]);
   }
 
 
