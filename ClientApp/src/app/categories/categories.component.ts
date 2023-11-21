@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ICategory } from './category';
 import { Router } from '@angular/router';
-import { CategoryService } from './categorys.service';
+import { Categorieservice } from './Categories.service';
 
 @Component({
-  selector: 'app-categorys-component',
-  templateUrl: './categorys.component.html',
-  styleUrls: ['./categorys.component.css']
+  selector: 'app-Categories-component',
+  templateUrl: './Categories.component.html',
+  styleUrls: ['./Categories.component.css']
 })
 
-export class CategorysComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
   viewTitle: string = 'Categories';
   private _listfilter: string = "";
 
-  categorys: ICategory[] = [];
+  Categories: ICategory[] = [];
 
   constructor(
     private _router: Router,
-    private _categoryService: CategoryService) { }
+    private _Categorieservice: Categorieservice) { }
 
   
   get listFilter(): string {
@@ -26,16 +26,16 @@ export class CategorysComponent implements OnInit {
   set listFilter(value: string) {
     this._listfilter = value;
     console.log('Listfilter setMethod: ', value);
-    this.filteredCategorys = this.performFilter(value);
+    this.filteredCategories = this.performFilter(value);
   }
 
   deleteCategory(category: ICategory): void {
     const confirmDelete = confirm(`Are you sure you want to delete "${category.CategoryName}"?`);
     if (confirmDelete) {
-      this._categoryService.deleteCategory(category.CategoryId).subscribe((response) => {
+      this._Categorieservice.deleteCategory(category.CategoryId).subscribe((response) => {
         if (response.success) {
           console.log(response.message);
-          this.filteredCategorys = this.filteredCategorys.filter(c => c !== category);
+          this.filteredCategories = this.filteredCategories.filter(c => c !== category);
         }
       },
         (error) => {
@@ -45,18 +45,18 @@ export class CategorysComponent implements OnInit {
     }
   }
 
-  getCategorys(): void {
-    this._categoryService.getCategorys().subscribe(data => {
+  getCategories(): void {
+    this._Categorieservice.getCategories().subscribe(data => {
       console.log('All', JSON.stringify(data));
-      this.categorys = data;
-      this.filteredCategorys = this.categorys;
+      this.Categories = data;
+      this.filteredCategories = this.Categories;
     });
   }
 
-  filteredCategorys: ICategory[] = this.categorys;
+  filteredCategories: ICategory[] = this.Categories;
   performFilter(filterBy: string): ICategory[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.categorys.filter((category: ICategory) =>
+    return this.Categories.filter((category: ICategory) =>
       category.CategoryName.toLocaleLowerCase().includes(filterBy));
   }
 
@@ -66,6 +66,6 @@ export class CategorysComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('CategoryComponent created');
-    this.getCategorys();
+    this.getCategories();
   }
 }

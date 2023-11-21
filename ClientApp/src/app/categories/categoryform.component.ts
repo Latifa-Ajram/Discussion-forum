@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryService } from './categorys.service';
+import { Categorieservice } from './Categories.service';
 
 @Component({
-  selector: "app-categorys-categoryform",
+  selector: "app-Categories-categoryform",
   templateUrl: "./categoryform.component.html"
 })
 
@@ -15,7 +15,7 @@ export class CategoryformComponent {
   categoryId: number = -1;
 
 
-  constructor(private _formbuilder: FormBuilder, private _router: Router, private _route: ActivatedRoute, private _categoryService: CategoryService) {
+  constructor(private _formbuilder: FormBuilder, private _router: Router, private _route: ActivatedRoute, private _Categorieservice: Categorieservice) {
     this.categoryForm = _formbuilder.group({
       categoryName: ['', Validators.required]
     });
@@ -28,10 +28,10 @@ export class CategoryformComponent {
     const newCategory = this.categoryForm.value;
 
     if (this.isEditMode) {
-      this._categoryService.updateCategory(this.categoryId, newCategory).subscribe(response => {
+      this._Categorieservice.updateCategory(this.categoryId, newCategory).subscribe(response => {
         if (response.success) {
           console.log(response.message);
-          this._router.navigate(['/categorys']);
+          this._router.navigate(['/Categories']);
         }
         else {
           console.log('Category update failed');
@@ -39,10 +39,10 @@ export class CategoryformComponent {
       });
     }
     else {
-      this._categoryService.createCategory(newCategory).subscribe(response => {
+      this._Categorieservice.createCategory(newCategory).subscribe(response => {
             if (response.success) {
               console.log(response.message);
-              this._router.navigate(['/categorys']);
+              this._router.navigate(['/Categories']);
             }
             else {
               console.log('Category creation failed');
@@ -53,7 +53,7 @@ export class CategoryformComponent {
   }
 
   backToCategories() {
-    this._router.navigate(['/categorys']);
+    this._router.navigate(['/Categories']);
   }
 
   ngOnInit(): void {
@@ -70,7 +70,7 @@ export class CategoryformComponent {
   }
 
   loadCategoryForEdit(categoryId: number) {
-    this._categoryService.getCategoryById(categoryId).subscribe((category: any) => {
+    this._Categorieservice.getCategoryById(categoryId).subscribe((category: any) => {
       console.log('Category retrieved: ' + category);
       this.categoryForm.patchValue({
         categoryName: category.CategoryName

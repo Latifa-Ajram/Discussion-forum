@@ -7,8 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CategorysComponent } from './categorys/categorys.component';
-import { CategoryformComponent } from './categorys/categoryform.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryformComponent } from './categories/categoryform.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { RoomformComponent } from './rooms/roomform.component';
 import { TopicsComponent } from './topics/topics.component';
@@ -20,7 +20,7 @@ import { TopicformComponent } from './topics/topicform.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CategorysComponent,
+    CategoriesComponent,
     CategoryformComponent,
     RoomsComponent,
     RoomformComponent,
@@ -34,7 +34,7 @@ import { TopicformComponent } from './topics/topicform.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'categorys', component: CategorysComponent },
+      { path: 'Categories', component: CategoriesComponent },
       { path: 'categoryform', component: CategoryformComponent },
       { path: 'categoryform/:mode/:id', component: CategoryformComponent },
       { path: 'rooms/', component: RoomsComponent },

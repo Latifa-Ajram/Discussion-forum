@@ -7,13 +7,13 @@ import { ICategory } from './category';
   providedIn: 'root'
 })
 
-export class CategoryService {
+export class Categorieservice {
 
   private baseUrl = 'api/category/';
 
   constructor(private _http: HttpClient) { }
 
-  getCategorys(): Observable<any> {
+  getCategories(): Observable<any> {
     return this._http.get<ICategory[]>(this.baseUrl);
   }
 
