@@ -5,10 +5,14 @@
         <label for="postTitle">Title:</label>
         <input type="text" id="postTitle" formControlName="postTitle" class="form-control" />
     </div>
-
+    <!--
+        <div class="form-group">
+            <label for="commentDescription">Comment:</label>
+            <textarea class="form-control" id="commentDescription" formControlName="commentDescription" class="form-control" rows="5" />
+        </div>
+        -->
     <button class='btn btn-primary' type="submit" [disabled]="postForm.invalid">
         {{ isEditMode ? 'Update' : 'Create' }} Post
     </button>
     <button class='btn btn-secondary' (click)="backToPosts()">Cancel</button>
 </form>
-
