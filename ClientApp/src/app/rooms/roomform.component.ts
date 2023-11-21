@@ -13,8 +13,7 @@ export class RoomformComponent implements OnInit {
   roomForm: FormGroup;
   isEditMode: boolean = false;
   roomId: number = -1;
-  roomName: string = "";
-  categoryId: number = -1
+  categoryId: number = -1;
   categories: any[] = [];
 
   constructor(
@@ -49,24 +48,21 @@ export class RoomformComponent implements OnInit {
     });
   }
  
-
   onCategoryChange(event: any) {
     const selectedCategoryId = event.target.value;
     this.roomForm.get('categoryId')?.setValue(selectedCategoryId);
   }
 
-
-
   loadRoomForEdit(roomId: number) {
     this._roomService.getRoomById(roomId).subscribe((room: any) => {
       console.log('Room retrieved: ' + room);
       console.log('RoomName:' + room.RoomName);
+      console.log('RoomId:' + room.RoomId);
+      console.log('CategoryId' + room.CategoryId);
       this.roomForm.patchValue({
         roomName: room.RoomName,
         categoryId: room.CategoryId
       })
-      this.roomName = room.RooomName;
-      this.categoryId = room.CategoryId;
     },
      error => {
       console.error('Error loading room for Edit', error);
@@ -86,7 +82,7 @@ export class RoomformComponent implements OnInit {
       this._roomService.updateRoom(this.roomId, newRoom).subscribe(response => {
         if (response.success) {
           console.log(response.message);
-          this._router.navigate(['/rooms', -1]);
+          this._router.navigate(['/rooms', this.categoryId]);
         } else {
           console.log('Room update failed');
         }
@@ -96,7 +92,7 @@ export class RoomformComponent implements OnInit {
        this._roomService.createRoom(newRoom).subscribe(response => {
         if (response.success) {
           console.log(response.message);
-          this._router.navigate(['/rooms', -1]);
+          this._router.navigate(['/rooms', this.categoryId]);
         } else {
           console.log('Room creation failed');
         }

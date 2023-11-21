@@ -9,11 +9,13 @@ namespace ForumAngularVersion.Controllers;
 public class PostController : Controller
 {
     private readonly IPostRepository _postRepository;
+    private readonly ITopicRepository _topicRepository;
     private readonly ILogger<PostController> _logger;
 
-    public PostController(IPostRepository postRepository, ILogger<PostController> logger)
+    public PostController(IPostRepository postRepository, ITopicRepository topicRepository ,ILogger<PostController> logger)
     {
         _postRepository = postRepository;
+        _topicRepository = topicRepository;
         _logger = logger;
     }
 
@@ -48,6 +50,27 @@ public class PostController : Controller
         {
             _logger.LogError(ex, "An error occurred while getting post with ID {Id}", id);
             return StatusCode(500, "An error occurred.");
+        }
+    }
+
+    //Method to get a list of posts based on the given topic.
+    [HttpGet("byTopicId/{id}")]
+    public async Task<List<Post>> GetPostsByTopicId(int Id)
+    {
+        try
+        {
+            Topic topic = await _topicRepository.GetTopicById(Id);
+            if (topic == null)
+            {
+                return null;
+            }
+            return topic.Posts; //Return the posts of the given topic.
+        }
+        catch (Exception e)
+        {
+            //log an error if it can not find id and then returns null
+            _logger.LogError("[PostController]  FindAsync(id) failed when _topicRepository.GetTopicById(id) for TopicId {TopicId}, error message: {e}", Id, e.Message);
+            return null;
         }
     }
 

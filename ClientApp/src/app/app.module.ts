@@ -15,6 +15,8 @@ import { TopicsComponent } from './topics/topics.component';
 import { TopicformComponent } from './topics/topicform.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostformComponent } from './posts/postform.component';
+import { CommentsComponent } from './comments/comments.component';
+import { CommentformComponent } from './comments/commentform.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { PostformComponent } from './posts/postform.component';
     TopicsComponent,
     TopicformComponent,
     PostsComponent,
-    PostformComponent
+    PostformComponent,
+    CommentsComponent,
+    CommentformComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,8 +54,12 @@ import { PostformComponent } from './posts/postform.component';
       { path: 'topicform', component: TopicformComponent },
       { path: 'topicform/:mode/:id', component: TopicformComponent },
       { path: 'posts', component: PostsComponent },
+      { path: 'posts/:id', component: PostsComponent },
       { path: 'postform', component: PostformComponent },
       { path: 'postform/:mode/:id', component: PostformComponent },
+      { path: 'comments', component: CommentsComponent },
+      { path: 'commentform', component: CommentformComponent },
+      { path: 'commentform/:mode/:id', component: CommentformComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ])
   ],

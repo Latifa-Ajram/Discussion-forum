@@ -66,7 +66,6 @@ public class RoomController : Controller
                 _logger.LogError("[RoomController] Room id not found while executing _roomRepository.GetRoomById()");
                 return NotFound();
             }
-
             return Ok(room);
         }
         catch (Exception ex)

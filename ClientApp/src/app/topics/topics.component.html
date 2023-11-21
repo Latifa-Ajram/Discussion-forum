@@ -30,7 +30,7 @@
   <tbody>
     <tr *ngFor='let topic of filteredTopics'>
       <td>{{ topic.TopicId }}</td>
-      <td>{{ topic.TopicName }}</td>
+      <td><a [routerLink]="['/posts/', topic.TopicId]"> {{ topic.TopicName }} </a></td>
       <td>
         <a [routerLink]="['/topicform', 'edit', topic.TopicId]">Update</a> 
         <a class="delete-link" (click)="deleteTopic(topic)">Delete</a>

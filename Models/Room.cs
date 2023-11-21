@@ -10,6 +10,7 @@ namespace ForumAngularVersion.Models
         [JsonPropertyName("RoomName")]
         public string RoomName { get; set; } = string.Empty;
 
+        [JsonPropertyName("CategoryId")]
         public int CategoryId { get; set; } //FK
         // Navigaiton property: 
 

@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { IRoom } from './room'; // Import the IRoom interface
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,11 +8,10 @@ import { RoomService } from './rooms.service'; // Import the RoomService
     templateUrl: './rooms.component.html',
     styleUrls: ['./rooms.component.css']
 })
-
+    
 export class RoomsComponent implements OnInit {
     viewTitle: string = 'Rooms';
     private _listfilter: string = "";
-
     rooms: IRoom[] = [];
 
     constructor(

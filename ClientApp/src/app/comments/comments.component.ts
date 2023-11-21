@@ -1,1 +1,74 @@
-﻿
+import { Component, OnInit } from '@angular/core';
+import { IComment } from './comment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommetnService } from './comments.service';
+
+@Component({
+  selector: 'app-comments-component',
+  templateUrl: './comments.component.html',
+  styleUrls: ['./comments.component.css']
+})
+
+export class CommentsComponent implements OnInit {
+
+    viewTitle: string = 'Comment';
+    private _listfilter: string = "";
+
+    comments: IComment[] = [];
+
+    constructor(
+        private _router: Router,
+        private _postService: CommetnService,
+        private _route: ActivatedRoute
+    ) { }
+
+    get listFilter(): string {
+        return this._listfilter;
+    }
+
+    set listFilter(value: string) {
+        this._listfilter = value;
+        console.log('In setter:', value);
+        this.filteredComments = this.performFilter(value);
+    }
+
+    filteredComments: IComment[] = this.comments;
+
+    performFilter(filterBy: string): IComment[] {
+        filterBy = filterBy.toLocaleLowerCase();
+        return this.comments.filter((comment: IComment) =>
+            comment.CommentDescription.toLocaleLowerCase().includes(filterBy));
+    }
+    
+    deleteComment(comment: IComment): void {
+        const confirmDelete = confirm(`Are you sure you want to delete "${comment.CommentDescription}"?`);
+        if (confirmDelete) {
+            this._postService.deletePost(comment.CommentId)
+                .subscribe(
+                    (response) => {
+                        if (response.success) {
+                            console.log(response.message);
+                            this.filteredComments = this.filteredComments.filter(i => i !== comment);
+                        }
+                    },
+                    (error) => {
+                        console.error('Error deleting comment:', error);
+                    });
+        }
+    }
+
+
+    getComments(): void {
+        this._postService.getComment()
+            .subscribe(data => {
+                console.log('All', JSON.stringify(data));
+                this.comments = data;
+                this.filteredComments = this.comments;
+            }
+            );
+    }
+    ngOnInit(): void {
+      console.log('CommentComponent created');
+      this.getComments();
+    }
+}

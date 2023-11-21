@@ -121,7 +121,7 @@ public static class DBInit
                 new Comment { CommentDescription = "No", PostId= 5 },
                 new Comment { CommentDescription = "Yes, it's 2023", PostId= 6 },
                 new Comment { CommentDescription = "Shut up", PostId= 7 },
-                new Comment{CommentDescription ="The latest news is that Israel has launched an attack on two airports in Syria according to Syrian state media.",PostId= 8,CommentTime=DateTime.Now,UserName="Petter"},
+                new Comment{CommentDescription ="The latest news is that Israel has launched an attack on two airports in Syria according to Syrian state media.",PostId= 8},
 
             };
             context.AddRange(comments);

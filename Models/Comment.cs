@@ -11,18 +11,18 @@ namespace ForumAngularVersion.Models
         [JsonPropertyName("PostId")]
         public int PostId { get; set; } //FK
 
-        [JsonPropertyName("UserName")]
-        public string? UserName { get; set; } //FK
+        //[JsonPropertyName("UserName")]
+        //  public string? UserName { get; set; } //FK
 
         [Required]
         [MaxLength(10000)] // Example: maximum length to 10000 characters
         [JsonPropertyName("CommentDescription")]
         public string CommentDescription { get; set; }
 
-        [JsonPropertyName("CommentTime")]
-        public DateTime CommentTime { get; set; } // Time of creation
+       // [JsonPropertyName("CommentTime")]
+       // public DateTime CommentTime { get; set; } // Time of creation
 
 
-        public virtual Post? Post { get; set; } // Virtual enables lazy loading.
+       // public virtual Post? Post { get; set; } // Virtual enables lazy loading.
     }
 }

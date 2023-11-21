@@ -27,7 +27,7 @@ export class PostService {
     }
 
     getPostsByTopicId(topicId: number): Observable<any> {
-      const url = `${this.baseUrl}/byRoomId/${topicId}`;
+      const url = `${this.baseUrl}/byTopicId/${topicId}`;
       return this._http.get(url);
     }
 

@@ -61,6 +61,15 @@ export class PostsComponent implements OnInit {
       );
   }
 
+  getPostsByTopicId(id: number): void {
+    this._postService.getPostsByTopicId(id)
+      .subscribe(data => {
+        console.log('All', JSON.stringify(data));
+        this.posts = data;
+        this.filteredPosts = this.posts;
+      }
+      );
+  }
   filteredPosts: IPost[] = this.posts;
 
   performFilter(filterBy: string): IPost[] {
@@ -71,6 +80,15 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
       console.log('PostComponent created');
-      this.getPosts();
+      this._route.params.subscribe(params => {
+      if (params['id'] == -1) {
+        console.log("KOMMER I IF STATEMENT");
+        this.getPosts();
+      }
+      else {
+        console.log("KOMMER I ELSE");
+        this.getPostsByTopicId(+params['id']);
+      }
+    });
   }
 }

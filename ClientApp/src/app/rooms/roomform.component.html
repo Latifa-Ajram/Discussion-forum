@@ -2,7 +2,7 @@
 
 <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="categoryId">Category:</label>
+      <label for="categoryId">{{ isEditMode ? 'Change category:' : 'Category' }}</label>
     <select id="categoryId" formControlName="categoryId" class="form-control" (change)="onCategoryChange($event)">
       <option *ngFor="let category of categories" [value]="category.CategoryId">{{ category.CategoryName }}</option>
     </select>
@@ -13,13 +13,8 @@
     <input type="text" id="roomName" formControlName="roomName" class="form-control" />
   </div>
 
-  <!-- Hidden field for CategoryId -->
-  <input type="hidden" formControlName="categoryId">
-
   <button class="btn-primary btn" type="submit">
     {{ isEditMode ? 'Update' : 'Create' }} Room
   </button>
-
   <button class="btn btn-secondary" (click)="backToRooms()">Cancel</button>
 </form>
-

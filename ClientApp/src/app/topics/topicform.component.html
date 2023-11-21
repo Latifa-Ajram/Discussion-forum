@@ -6,6 +6,8 @@
     <input type="text" id="topicName" formControlName="topicName" class="form-control" />
   </div>
 
+  <input type="hidden" formControlName="roomId"/>
+
   <button class='btn btn-primary' type="submit" [disabled]="topicForm.invalid">
     {{ isEditMode ? 'Update' : 'Create' }} Topic
   </button>

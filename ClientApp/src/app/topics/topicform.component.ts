@@ -21,8 +21,8 @@ export class TopicformComponent {
   )
   {
     this.topicForm = _formbuilder.group({
-      topicName: ['', Validators.required]
-      //HER MANGLER DET FOR RoomId må bevares!
+      topicName: ['', Validators.required],
+      roomId: [null, Validators.required]
     });
   }
 
@@ -35,7 +35,7 @@ export class TopicformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/topics']);
+            this._router.navigate(['/topics', -1]);
           }
           else {
             console.log('Topic update failed');
@@ -47,7 +47,7 @@ export class TopicformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/topics']);
+            this._router.navigate(['/topics', -1]);
           }
           else {
             console.log('Topic creation failed');
@@ -56,9 +56,8 @@ export class TopicformComponent {
     }
   }
 
-
   backToTopics() {
-    this._router.navigate(['/topics']);
+    this._router.navigate(['/topics', -1]);
   }
 
   ngOnInit(): void {
@@ -68,25 +67,24 @@ export class TopicformComponent {
       } else if (params['mode'] === 'edit') {
         this.isEditMode = true; // Edit mode
         this.topicId = +params['id']; // Convert to number
-        this.loadItemForEdit(this.topicId);
+        this.loadTopicForEdit(this.topicId);
       }
     });
   }
 
-  loadItemForEdit(topicId: number) {
+    loadTopicForEdit(topicId: number) {
     this._topicService.getTopicById(topicId)
       .subscribe(
         (topic: any) => {
           console.log('retrived topic: ', topic);
           this.topicForm.patchValue({
-            topicName: topic.TopicName
-           
+            topicName: topic.TopicName,
+            roomId: topic.RoomId
           });
         },
         (error: any) => {
-          console.error('Error loading item for edit:', error);
+          console.error('Error loading topic for edit:', error);
         }
       );
   }
 }
-
