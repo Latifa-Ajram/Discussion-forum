@@ -58,6 +58,7 @@ import { CommentformComponent } from './comments/commentform.component';
       { path: 'postform', component: PostformComponent },
       { path: 'postform/:mode/:id', component: PostformComponent },
       { path: 'comments', component: CommentsComponent },
+      { path: 'comments/:id', component: CommentsComponent },
       { path: 'commentform', component: CommentformComponent },
       { path: 'commentform/:mode/:id', component: CommentformComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },

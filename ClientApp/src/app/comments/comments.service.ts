@@ -8,30 +8,39 @@ import { IComment } from './comment'; // Import the IComment interface
     providedIn: 'root'
 })
 
-export class CommetnService {
+export class CommentService {
 
-    private baseUrl = 'api/comment/';
+  private baseUrl = 'api/comment/';
 
-    constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
-    getComment(): Observable<IComment[]> {
-        return this._http.get<IComment[]>(this.baseUrl);
-    }
+  getComment(): Observable<IComment[]> {
+      return this._http.get<IComment[]>(this.baseUrl);
+  }
 
-    createComment(newComment: IComment): Observable<any> {
-        const createUrl = 'api/post/create';
-        return this._http.post<any>(createUrl, newComment);
-    }
+  createComment(newComment: IComment): Observable<any> {
+      const createUrl = 'api/post/create';
+      return this._http.post<any>(createUrl, newComment);
+  }
 
+  getCommentById(commentId: number): Observable<any> {
+    const url = `${this.baseUrl}/${commentId}`;
+    return this._http.get(url);
+  }
 
-    updateComment(commentId: number, newComment: any): Observable<any> {
-        const url = `${this.baseUrl}/update/${commentId}`;
-        newComment.commentId = commentId;
-        return this._http.put<any>(url, newComment);
-    }
+  getCommentsByPostId(postId: number): Observable<any> {
+    const url = `${this.baseUrl}/byPostId/${postId}`;
+    return this._http.get(url);
+  }
 
-    deletePost(commentId: number): Observable<any> {
-        const url = `${this.baseUrl}/delete/${commentId}`;
-        return this._http.delete(url);
-    }
+  updateComment(commentId: number, newComment: any): Observable<any> {
+      const url = `${this.baseUrl}/update/${commentId}`;
+      newComment.commentId = commentId;
+      return this._http.put<any>(url, newComment);
+  }
+
+  deletePost(commentId: number): Observable<any> {
+      const url = `${this.baseUrl}/delete/${commentId}`;
+      return this._http.delete(url);
+  }
 }

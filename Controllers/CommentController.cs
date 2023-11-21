@@ -14,9 +14,10 @@ public class CommentController : Controller
     private readonly IPostRepository _postRepository;
     private readonly ILogger<CommentController> _logger;
 
-    public CommentController(ICommentRepository commentRepository, ILogger<CommentController> logger)
+    public CommentController(ICommentRepository commentRepository, IPostRepository postRepository ,ILogger<CommentController> logger)
     {
         _commentRepository = commentRepository;
+        _postRepository = postRepository;   
         _logger = logger;
     }
     [HttpGet]
@@ -43,10 +44,26 @@ public class CommentController : Controller
         return Ok(category);
     }
 
-
-
-
-  
+    //Method to get a list of comments based on the given post.
+    [HttpGet("byPostId/{id}")]
+    public async Task<List<Comment>> GetCommentsByPostId(int Id)
+    {
+        try
+        {
+            Post post = await _postRepository.GetPostById(Id);
+            if (post == null)
+            {
+                return null;
+            }
+            return post.Comments; //Return the posts of the given topic.
+        }
+        catch (Exception e)
+        {
+            //log an error if it can not find id and then returns null
+            _logger.LogError("[CommentController]  FindAsync(id) failed when _postRepository.GetPostById(id) for PostId {PostId}, error message: {e}", Id, e.Message);
+            return null;
+        }
+    }
 
     [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] Comment newComment)

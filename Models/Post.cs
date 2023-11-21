@@ -15,8 +15,8 @@ namespace ForumAngularVersion.Models
         [JsonPropertyName("PostTitle")]
         public string PostTitle { get; set; }
 
-       // [JsonPropertyName("comments")]
-       // public virtual List<Comment>? Comments { get; set; }
+        [JsonPropertyName("Comments")]
+        public virtual List<Comment>? Comments { get; set; }
 
         // [JsonPropertyName("UserName")] // Serialize as "UserName" in JSON
         // public string? UserName { get; set; } // Foreign Key

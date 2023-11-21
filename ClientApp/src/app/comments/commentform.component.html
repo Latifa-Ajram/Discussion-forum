@@ -1,3 +1,15 @@
+<h2>{{ isEditMode ? 'Update' : 'Create' }} Comment</h2>
+
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="commentDescription">Description:</label>
+    <input type="text" id="commentDescription" formControlName="commentDescription" class="form-control" />
+  </div>
+  <button class='btn btn-primary' type="submit" [disabled]="commentForm.invalid">
+    {{ isEditMode ? 'Update' : 'Create' }} Comment
+  </button>
+  <button class='btn btn-secondary' (click)="backToComments()">Cancel</button>
+</form>
 
 
 

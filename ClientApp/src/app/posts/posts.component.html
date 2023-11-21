@@ -27,7 +27,7 @@
     <tbody>
         <tr *ngFor="let post of filteredPosts">
             <td>{{ post.PostId }}</td>
-            <td>{{ post.PostTitle }}</td>
+            <td><a routerLink="['/comments/', post.PostId]"> {{ post.PostTitle }} </a></td>
             <td>
                 <a [routerLink]="['/postform', 'edit', post.PostId]">Update</a>
                 <a class="delete-link" (click)="deletePost(post)">Delete</a>

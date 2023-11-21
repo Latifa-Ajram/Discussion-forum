@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IComment } from './comment';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommetnService } from './comments.service';
+import { CommentService } from './comments.service';
 
 @Component({
   selector: 'app-comments-component',
@@ -18,7 +18,7 @@ export class CommentsComponent implements OnInit {
 
     constructor(
         private _router: Router,
-        private _postService: CommetnService,
+        private _commentService: CommentService,
         private _route: ActivatedRoute
     ) { }
 
@@ -43,7 +43,7 @@ export class CommentsComponent implements OnInit {
     deleteComment(comment: IComment): void {
         const confirmDelete = confirm(`Are you sure you want to delete "${comment.CommentDescription}"?`);
         if (confirmDelete) {
-            this._postService.deletePost(comment.CommentId)
+            this._commentService.deletePost(comment.CommentId)
                 .subscribe(
                     (response) => {
                         if (response.success) {
@@ -57,9 +57,19 @@ export class CommentsComponent implements OnInit {
         }
     }
 
+  getCommentsByPostId(id: number): void {
+    this._commentService.getCommentsByPostId(id)
+      .subscribe(data => {
+        console.log('All', JSON.stringify(data));
+        this.comments = data;
+        this.filteredComments = this.comments;
+      }
+      );
+  }
+
 
     getComments(): void {
-        this._postService.getComment()
+        this._commentService.getComment()
             .subscribe(data => {
                 console.log('All', JSON.stringify(data));
                 this.comments = data;
@@ -69,6 +79,15 @@ export class CommentsComponent implements OnInit {
     }
     ngOnInit(): void {
       console.log('CommentComponent created');
-      this.getComments();
+      this._route.params.subscribe(params => {
+        if (params['id'] == -1) {
+          console.log("KOMMER I IF STATEMENT");
+          this.getComments();
+        }
+        else {
+          console.log("KOMMER I ELSE");
+          this.getCommentsByPostId(+params['id']);
+        }
+      });
     }
 }
