@@ -29,7 +29,29 @@ public class PostController : Controller
         return Ok(posts);
     }
 
-      [HttpPost("create")]
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetPostById(int id)
+    {
+        try
+        {
+            var post = await _postRepository.GetPostById(id);
+
+            if (post == null)
+            {
+                _logger.LogError("[PostController] post id not found while executing _postRepository.GetPostById()");
+                return NotFound();
+            }
+
+            return Ok(post);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while getting post with ID {Id}", id);
+            return StatusCode(500, "An error occurred.");
+        }
+    }
+
+    [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] Post newPost) {
        if(newPost == null)
         {
@@ -38,7 +60,7 @@ public class PostController : Controller
        bool returnOK = await _postRepository.Create(newPost);
         if(returnOK)
         {
-            var response = new { success = true, message = "Post " + newPost.PostName + " created successfully" };
+            var response = new { success = true, message = "Post " + newPost.PostTitle + " created successfully" };
             return Ok(response);
         }
         else
@@ -58,7 +80,7 @@ public class PostController : Controller
         bool returnOk = await _postRepository.Update(updatedPost);
         if (returnOk)
         {
-            var response = new { success = true, message = "Post " + updatedPost.PostName + " updated successfully" };
+            var response = new { success = true, message = "Post " + updatedPost.PostTitle + " updated successfully" };
             return Ok(response);
         }
         else

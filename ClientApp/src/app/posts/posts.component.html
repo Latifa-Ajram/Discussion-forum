@@ -1,4 +1,4 @@
-﻿<!-- The title of the page which displays the viewTitle object (a string) that is defined in its TypeScript-file -->
+<!-- The title of the page which displays the viewTitle object (a string) that is defined in its TypeScript-file -->
 <h1 id="tableLabel">{{ viewTitle }}</h1>
 
 <!-- Creating the input to write into the filtering event -->
@@ -19,23 +19,23 @@
 <table class="table table-striped" aria-labelledby="tableLabel">
     <thead>
         <tr>
-            <th>Room Id</th>
+            <th>Post Id</th>
             <th>Name</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let room of filteredRooms">
+        <tr *ngFor="let post of filteredPosts">
             <td>{{ post.PostId }}</td>
-            <td>{{ post.PostName }}</td>
+            <td>{{ post.PostTitle }}</td>
             <td>
-                <a [routerLink]="['/roomform', 'edit', post.PostId]">Update</a>
+                <a [routerLink]="['/postform', 'edit', post.PostId]">Update</a>
                 <a class="delete-link" (click)="deletePost(post)">Delete</a>
             </td>
         </tr>
     </tbody>
 </table>
 
-<!-- Two buttons for navigating to create a new room and edit an existing room -->
-<button class="btn btn-primary" [routerLink]="['/postorm', 'create', -1]">Create New Post</button>
+<!-- Two buttons for navigating to create a new post and edit an existing post -->
+<button class="btn btn-primary" [routerLink]="['/postform', 'create', -1]">Create New Post</button>
 <button class="btn btn-secondary" [routerLink]="['/postform', 'edit', -1]">Edit Post</button>

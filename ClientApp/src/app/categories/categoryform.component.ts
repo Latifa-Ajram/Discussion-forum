@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Categorieservice } from './Categories.service';
+import { Categorieservice } from './categories.service';
 
 @Component({
   selector: "app-Categories-categoryform",

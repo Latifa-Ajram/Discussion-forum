@@ -10,7 +10,7 @@ import { TopicService } from './topics.service';
 })
 
 export class TopicsComponent implements OnInit {
-  viewTitle: string = 'Table';
+  viewTitle: string = 'Topic';
 
   topics: ITopic[] = [];
 
@@ -41,7 +41,7 @@ export class TopicsComponent implements OnInit {
             }
           },
           (error) => {
-            console.error('Error deleting item:', error);
+            console.error('Error deleting topic:', error);
           });
     }
   }

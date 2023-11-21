@@ -22,7 +22,7 @@ export class TopicformComponent {
   {
     this.topicForm = _formbuilder.group({
       topicName: ['', Validators.required]
-     
+      //HER MANGLER DET FOR RoomId må bevares!
     });
   }
 
@@ -74,7 +74,7 @@ export class TopicformComponent {
   }
 
   loadItemForEdit(topicId: number) {
-    this._topicService.getItemById(topicId)
+    this._topicService.getTopicById(topicId)
       .subscribe(
         (topic: any) => {
           console.log('retrived topic: ', topic);

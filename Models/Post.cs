@@ -11,20 +11,17 @@ namespace ForumAngularVersion.Models
         [JsonPropertyName("TopicId")]
         public int TopicId { get; set; } //FK
 
-        [JsonPropertyName("PostName")]
-        public string PostName { get; set; } = string.Empty;
-
-        [JsonPropertyName("UserName")] // Serialize as "UserName" in JSON
-        public string? UserName { get; set; } // Foreign Key
-
         [Required]
         [JsonPropertyName("PostTitle")]
         public string PostTitle { get; set; }
 
-        [JsonPropertyName("PostTime")]
-        public DateTime PostTime { get; set; }
+       // [JsonPropertyName("UserName")] // Serialize as "UserName" in JSON
+       // public string? UserName { get; set; } // Foreign Key
 
-        public virtual Topic? Topic  { get; set; } 
+       // [JsonPropertyName("PostTime")]
+       // public DateTime PostTime { get; set; }
+
+       // public virtual Topic? Topic  { get; set; } 
 
       //  public virtual List<Comment>? Comments { get; set; }
 

@@ -13,6 +13,8 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { RoomformComponent } from './rooms/roomform.component';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicformComponent } from './topics/topicform.component';
+import { PostsComponent } from './posts/posts.component';
+import { PostformComponent } from './posts/postform.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { TopicformComponent } from './topics/topicform.component';
     RoomsComponent,
     RoomformComponent,
     TopicsComponent,
-    TopicformComponent
+    TopicformComponent,
+    PostsComponent,
+    PostformComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,6 +49,9 @@ import { TopicformComponent } from './topics/topicform.component';
       { path: 'topics/:id', component: TopicsComponent },
       { path: 'topicform', component: TopicformComponent },
       { path: 'topicform/:mode/:id', component: TopicformComponent },
+      { path: 'posts', component: PostsComponent },
+      { path: 'postform', component: PostformComponent },
+      { path: 'postform/:mode/:id', component: PostformComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ])
   ],

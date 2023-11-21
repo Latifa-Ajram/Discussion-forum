@@ -22,14 +22,13 @@ export class TopicService {
     return this._http.post<any>(createUrl, newTopic);
   }
 
-  getItemById(topicId: number): Observable<any> {
+  getTopicById(topicId: number): Observable<any> {
     const url = `${this.baseUrl}/${topicId}`;
     return this._http.get(url);
   }
 
   getTopicsByRoomId(roomId: number): Observable<any> {
     const url = `${this.baseUrl}/byRoomId/${roomId}`
-    console.log("Kommer hti i TopicSeervices");
     return this._http.get(url);
   }
 

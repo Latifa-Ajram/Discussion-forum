@@ -102,8 +102,7 @@ public static class DBInit
                 new Post { PostTitle = "Should I switch to Linux", TopicId= 2 },
                 new Post { PostTitle = "Linux for gaming?", TopicId= 2 },
                 new Post { PostTitle = "I switched back to windows from Linux, AMA", TopicId= 2 },
-                new Post {PostTitle="The war between Palestine and Israel",TopicId=6,
-               PostTime = DateTime.Now},
+                new Post {PostTitle="The war between Palestine and Israel",TopicId=6 },
 
             };
             context.AddRange(posts);

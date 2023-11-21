@@ -1,4 +1,5 @@
-﻿export interface IPost {
-    PostId: number;
-    PostName: string;
+export interface IPost {
+  PostId: number;
+  PostTitle: string;
+  TopicId: number; //fk
 }
