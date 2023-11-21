@@ -34,7 +34,7 @@ public class RoomController : Controller
         return Ok(room);
     }
 
-    [HttpPost]
+    [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] Room newRoom)
     {
         if (newRoom== null)

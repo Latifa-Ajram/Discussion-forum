@@ -23,8 +23,8 @@ export class RoomformComponent {
     private _roomService: RoomService // Inject the RoomService
   ) {
     this.roomForm = _formbuilder.group({
-      roomName: ['', Validators.required]
-      
+      roomName: ['', Validators.required],
+       categoryId: [1, Validators.required]//  CategoryId 1 for å teste, men Id må oppdateres!
     });
   }
 

@@ -7,6 +7,9 @@
     <input type="text" id="roomName" formControlName="roomName" class="form-control" />
   </div>
 
+  <!-- Skjult felt for CategoryId -->
+  <input type="hidden" formControlName="categoryId">
+
   <button class="btn-primary btn" type="submit" [disabled]="roomForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Room</button>
 
   <button class="btn btn-secondary" (click)="backToRooms()">Cancel</button>
