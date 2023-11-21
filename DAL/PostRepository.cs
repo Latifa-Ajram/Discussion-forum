@@ -27,7 +27,7 @@ public class PostRepository : IPostRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[PostRepository] items ToListAsync() failed when GetAll(), error message: {e}", e.Message);// Log an error if the operation fails and return null.
+            _logger.LogError("[PostRepository] Post.ToListAsync() failed when GetAll(), error message: {e}", e.Message);// Log an error if the operation fails and return null.
             return null;
         }
 
@@ -43,7 +43,7 @@ public class PostRepository : IPostRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[PostRepository]  FindAsync(id) failed when GetItemById for PostId {PostId:0000}, error message: {e}", id, e.Message);
+            _logger.LogError("[PostRepository]  Posts.FindAsync(id) failed when GetItemById for PostId {PostId:0000}, error message: {e}", id, e.Message);
             return null;
 
         }
@@ -99,7 +99,7 @@ public class PostRepository : IPostRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[PostRepository] podt update(id) failed when updating the PostId {PostId:0000}, error message: {e}", post, e.Message);
+            _logger.LogError("[PostRepository] post update(id) failed when updating the PostId {PostId:0000}, error message: {e}", post, e.Message);
             return false;
         }
     }

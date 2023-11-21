@@ -1,6 +1,7 @@
 ﻿using ForumAngularVersion.DAL;
 using Microsoft.EntityFrameworkCore;
 using ForumAngularVersion.Models;
+using Castle.Core.Logging;
 
 namespace ForumAngularVersion.DAL;
 
@@ -24,11 +25,28 @@ public class TopicRepository : ITopicRepository
 
     public async Task<int?> GetRoomId(int id)
     {
-        // Try to find and get the topic based on its ID.
-        var topic = await _db.Topics.FindAsync(id);
+        try
+        {
+            // Try to find and get the topic based on its ID.
+            var topic = await _db.Topics.FindAsync(id);
+            
+            if(topic == null)
+            {
+                _logger.LogError("[TopicRepository] GetRoomId failed when retrieving topic with id: {id}", id);
+                return null;
+            }
+
+            return topic.RoomId;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("[TopicRepository] GetRoomId failed when executing _db.Topics.FindAsync(id), error message: {e}", e.Message);
+            return null;
+        }
+        
 
         // Return the RoomId associated with the topic.
-        return topic.RoomId;
+        
     }
 
 
@@ -62,7 +80,7 @@ public class TopicRepository : ITopicRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[TopicryRepository] topic FindAsync(id) failed when GetItemById for TopicId {TopicId:0000}, error message: {e}", id, e.Message);
+            _logger.LogError("[TopicryRepository] topic FindAsync(id) failed when GetTopicById for TopicId {TopicId:0000}, error message: {e}", id, e.Message);
             return null;
         }
        

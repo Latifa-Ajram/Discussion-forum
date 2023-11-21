@@ -76,12 +76,12 @@ public class CommentController : Controller
         
         if (returnOK)
         {
-            var response = new { success = true, message = "Room " + newComment.CommentDescription + " created successfully" };
+            var response = new { success = true, message = "Comment " + newComment.CommentDescription + " created successfully" };
             return Ok(response);
         }
         else
         {
-            var response = new { success = false, message = "Room creation failed" };
+            var response = new { success = false, message = "Comment creation failed" };
             return Ok(response);
         }
     }

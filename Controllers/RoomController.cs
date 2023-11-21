@@ -91,7 +91,7 @@ public class RoomController : Controller
         catch (Exception e)
         {
             //log an error if it can not find id and then returns null
-            _logger.LogError("[RoomRepository]  FindAsync(id) failed when GetItemById for CategoryId {CategoryId}, error message: {e}", Id, e.Message);
+            _logger.LogError("[RoomController] FindAsync(id) failed when _categoryRepository,GetCategoryById(id) for CategoryId {CategoryId}, error message: {e}", Id, e.Message);
             return null;
         }
     }

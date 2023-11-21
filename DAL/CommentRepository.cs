@@ -44,8 +44,7 @@ public class CommentRepository : ICommentRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("[CommentRepository] Comment FindAsync(id) failed when GetItemById " +
-                "for CommentId {CommentId:0000}, error message: [e} ", id, e.Message);
+            _logger.LogError("[CommentRepository] Comment FindAsync(id) failed when GetCommentById for CommentId {CommentId:0000}, error message: [e} ", id, e.Message);
             return null;
         }
 
@@ -99,7 +98,7 @@ public class CommentRepository : ICommentRepository
         catch (Exception e)
         {
 
-            _logger.LogError("[CommenRepository] commen deletion failed for the CommentId {CommentId:0000}, error message: {e}", id, e.Message);
+            _logger.LogError("[CommenRepository] comment deletion failed for the CommentId {CommentId:0000}, error message: {e}", id, e.Message);
             return false;
 
         }

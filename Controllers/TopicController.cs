@@ -28,7 +28,7 @@ public class TopicController : Controller
         var topics = await _topicRepository.GetAll();
         if (topics == null)
         {
-            _logger.LogError("[TopicController] Item list not found while executing _itemRepository.GetAll()");
+            _logger.LogError("[TopicController] Item list not found while executing _topicRepository.GetAll()");
             return NotFound("Topic list not found");
         }
         return Ok(topics);
@@ -39,7 +39,7 @@ public class TopicController : Controller
     {
         if (newTopic == null)
         {
-            return BadRequest("Invalid item data.");
+            return BadRequest("Invalid topic data.");
         }
         //newItem.ItemId = GetNextItemId();
         bool returnOk = await _topicRepository.Create(newTopic);

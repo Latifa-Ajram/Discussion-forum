@@ -30,7 +30,7 @@ public class RoomRepository : IRoomRepository
         catch (Exception e)
         {
 
-            _logger.LogError("[RoomRepository] items ToListAsync() failed when GetAll(), error message: {e}", e.Message);
+            _logger.LogError("[RoomRepository]  Room.ToListAsync() failed when GetAll(), error message: {e}", e.Message);
             return null;
         }
     }
@@ -45,7 +45,7 @@ public class RoomRepository : IRoomRepository
         }
         catch (Exception e)
         {
-            _logger.LogError("Error while retrieving post with ID {id}: {e.Message}", id, e.Message);
+            _logger.LogError("Error while retrieving Room with ID {id}: {e.Message}", id, e.Message);
             return null;
         }
 
@@ -64,7 +64,7 @@ public class RoomRepository : IRoomRepository
         catch (Exception e)
         {
             //log an error if it can not find id and then returns null
-            _logger.LogError("[RoomRepository]  FindAsync(id) failed when GetItemById for CategoryId {CategoryId}, error message: {e}", id, e.Message);
+            _logger.LogError("[RoomRepository]  FindAsync(id) failed when GetCategoryById for CategoryId {CategoryId}, error message: {e}", id, e.Message);
             return null;
 
         }
