@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from './topics.service';
+import { RoomService } from '../rooms/rooms.service';
+import { IRoom } from "../rooms/room";
 
 @Component({
   selector: "app-topics-topicform",
@@ -12,17 +14,20 @@ export class TopicformComponent {
   topicForm: FormGroup;
   isEditMode: boolean = false;
   topicId: number = -1;
+  roomId: number = -1;
+  rooms: IRoom[] = [];
 
   constructor(
     private _formbuilder: FormBuilder,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _topicService: TopicService
+    private _topicService: TopicService,
+    private _roomService: RoomService
   )
   {
     this.topicForm = _formbuilder.group({
       topicName: ['', Validators.required],
-      roomId: [null, Validators.required]
+      roomId: [null, Validators.required],
     });
   }
 
@@ -35,7 +40,7 @@ export class TopicformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/topics', -1]);
+            this._router.navigate(['/topics', this.roomId]);
           }
           else {
             console.log('Topic update failed');
@@ -47,7 +52,7 @@ export class TopicformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/topics', -1]);
+            this._router.navigate(['/topics', this.roomId]);
           }
           else {
             console.log('Topic creation failed');
@@ -70,6 +75,18 @@ export class TopicformComponent {
         this.loadTopicForEdit(this.topicId);
       }
     });
+    this.fetchRooms();
+  }
+
+  fetchRooms() {
+    this._roomService.getRooms().subscribe(rooms => {
+      this.rooms = rooms;
+    });
+  }
+
+  onRoomChange(event: any) {
+    const selectedRoomId = event.target.value;
+    this.topicForm.get('roomId')?.setValue(selectedRoomId);
   }
 
     loadTopicForEdit(topicId: number) {
