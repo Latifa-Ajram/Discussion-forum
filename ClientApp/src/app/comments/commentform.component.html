@@ -5,7 +5,7 @@
     <label for="commentDescription">Description:</label>
     <input type="text" id="commentDescription" formControlName="commentDescription" class="form-control" />
   </div>
-  <button class='btn btn-primary' type="submit" [disabled]="commentForm.invalid">
+  <button class='btn btn-primary' type="submit">
     {{ isEditMode ? 'Update' : 'Create' }} Comment
   </button>
   <button class='btn btn-secondary' (click)="backToComments()">Cancel</button>

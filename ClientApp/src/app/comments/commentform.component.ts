@@ -15,6 +15,7 @@ export class CommentformComponent {
   commentForm: FormGroup;
   isEditMode: boolean = false;
   commentId: number = -1;
+  postId: number = -1;
 
   constructor(
     private _formbuilder: FormBuilder,
@@ -50,6 +51,7 @@ export class CommentformComponent {
             commentDescription: comment.CommentDescription,
             postId: comment.PostId
           });
+          this.postId = comment.PostId;
         },
         (error: any) => {
           console.error('Error loading comment for edit:', error);
@@ -66,7 +68,7 @@ export class CommentformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/comments', -1]);
+            this._router.navigate(['/comments', this.postId]);
           }
           else {
             console.log('Comment update failed');
@@ -78,7 +80,7 @@ export class CommentformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/comments', -1]);
+            this._router.navigate(['/comments', this.postId]);
           }
           else {
             console.log('Comment creation failed');
@@ -88,7 +90,7 @@ export class CommentformComponent {
   }
 
   backToComments() {
-    this._router.navigate(['/comments', -1]);
+    this._router.navigate(['/comments', this.postId]);
   }
 
 

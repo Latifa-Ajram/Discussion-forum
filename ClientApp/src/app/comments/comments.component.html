@@ -36,6 +36,6 @@
     </tbody>
 </table>
 
-<!-- Two buttons for navigating to create a new post and edit an existing post -->
-<button class="btn btn-primary" [routerLink]="['/commentform', 'create', -1]">Create New Comment</button>
-<button class="btn btn-secondary" [routerLink]="['/commentform', 'edit', -1]">Edit comment</button>
+<!-- A button that calls for a click event method inside the corresponding Typescript-file -->
+<button class="btn btn-primary" (click)="createNewComment()">Create New Comment</button>
+

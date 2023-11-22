@@ -42,7 +42,7 @@ export class RoomformComponent implements OnInit {
     });
     this.fetchCategories();
   }
-  fetchCategories() {
+  fetchCategories(): void {
     this._categoryService.getCategories().subscribe(categories => {
       this.categories = categories;
     });

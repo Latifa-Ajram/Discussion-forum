@@ -78,7 +78,7 @@ export class TopicformComponent {
     this.fetchRooms();
   }
 
-  fetchRooms() {
+  fetchRooms(): void {
     this._roomService.getRooms().subscribe(rooms => {
       this.rooms = rooms;
     });
@@ -98,6 +98,7 @@ export class TopicformComponent {
             topicName: topic.TopicName,
             roomId: topic.RoomId
           });
+          this.roomId = topic.RoomId;
         },
         (error: any) => {
           console.error('Error loading topic for edit:', error);
