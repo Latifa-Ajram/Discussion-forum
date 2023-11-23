@@ -3,39 +3,38 @@
 
 <!-- Creating the input to write into the filtering event -->
 <div class="row">
-    <div class="col-md-2">Filter by:</div>
-    <div class="col-md-4">
-        <input type="text" [(ngModel)]="listFilter" />
-    </div>
+  <div class="col-md-2">Filter by:</div>
+  <div class="col-md-4">
+    <input type="text" [(ngModel)]="listFilter" />
+  </div>
 </div>
 
 <!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
 <div class="row">
-    <div class="col-md-6">
-        <h4>Filtered by: {{ listFilter }}</h4>
-    </div>
+  <div class="col-md-6">
+    <h4>Filtered by: {{ listFilter }}</h4>
+  </div>
 </div>
 
 <table class="table table-striped" aria-labelledby="tableLabel">
-    <thead>
-        <tr>
-            <th>Room Id</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let room of filteredRooms">
-            <td>{{ room.RoomId }}</td>
-            <td><a [routerLink]="['/topics/', room.RoomId]">{{ room.RoomName }}</a></td>
-            <td>
-                <a [routerLink]="['/roomform', 'edit', room.RoomId]">Update</a>
-                <a class="delete-link" (click)="deleteRoom(room)">Delete</a>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Room Id</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let room of filteredRooms">
+      <td>{{ room.RoomId }}</td>
+      <td><a [routerLink]="['/topics/', room.RoomId]">{{ room.RoomName }}</a></td>
+      <td>
+        <a class="update-link" (click)="updateSelectedRoom(room.RoomId)">Update</a>
+        <a class="delete-link" (click)="deleteRoom(room)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-    <!-- Two buttons for navigating to create a new room and edit an existing room -->
-    <button class="btn btn-primary" [routerLink]="['/roomform', 'create', -1]">Create New Room</button>
-    <button class="btn btn-secondary" [routerLink]="['/roomform', 'edit', -1]">Create New Room</button>
+<!-- A button for navigating to create a new room, the [routerLink] passes the url, the mode, and the id-->
+<button class="btn btn-primary" (click)="createNewRoom()">Create New Room</button>

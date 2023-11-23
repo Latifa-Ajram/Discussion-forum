@@ -57,6 +57,7 @@ export class CategoryformComponent {
   }
 
   ngOnInit(): void {
+
     this._route.params.subscribe(params => {
       if (params['mode'] === 'create') {
         this.isEditMode = false; //create mode

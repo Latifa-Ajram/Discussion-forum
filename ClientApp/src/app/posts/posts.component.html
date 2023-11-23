@@ -3,39 +3,39 @@
 
 <!-- Creating the input to write into the filtering event -->
 <div class="row">
-    <div class="col-md-2">Filter by:</div>
-    <div class="col-md-4">
-        <input type="text" [(ngModel)]="listFilter" />
-    </div>
+  <div class="col-md-2">Filter by:</div>
+  <div class="col-md-4">
+    <input type="text" [(ngModel)]="listFilter" />
+  </div>
 </div>
 
 <!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
 <div class="row">
-    <div class="col-md-6">
-        <h4>Filtered by: {{ listFilter }}</h4>
-    </div>
+  <div class="col-md-6">
+    <h4>Filtered by: {{ listFilter }}</h4>
+  </div>
 </div>
 
 <table class="table table-striped" aria-labelledby="tableLabel">
-    <thead>
-        <tr>
-            <th>Post Id</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let post of filteredPosts">
-            <td>{{ post.PostId }}</td>
-            <td><a [routerLink]="['/comments/', post.PostId]"> {{ post.PostTitle }} </a></td>
-            <td>
-                <a [routerLink]="['/postform', 'edit', post.PostId]">Update</a>
-                <a class="delete-link" (click)="deletePost(post)">Delete</a>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Post Id</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of filteredPosts">
+      <td>{{ post.PostId }}</td>
+      <td><a [routerLink]="['/comments/', post.PostId]"> {{ post.PostTitle }} </a></td>
+      <td>
+        <a [routerLink]="['/postform', 'edit', post.PostId]">Update</a>
+        <a class="delete-link" (click)="deletePost(post)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-<!-- Two buttons for navigating to create a new post and edit an existing post -->
+<!-- A button for navigating to create a new post, the [routerLink] passes the url, the mode, and the id-->
 <button class="btn btn-primary" [routerLink]="['/postform', 'create', -1]">Create New Post</button>
-<button class="btn btn-secondary" [routerLink]="['/postform', 'edit', -1]">Edit Post</button>
+

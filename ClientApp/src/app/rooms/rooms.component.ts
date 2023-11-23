@@ -10,76 +10,86 @@ import { RoomService } from './rooms.service'; // Import the RoomService
 })
     
 export class RoomsComponent implements OnInit {
-    viewTitle: string = 'Rooms';
-    private _listfilter: string = "";
-    rooms: IRoom[] = [];
+  viewTitle: string = 'Rooms';
+  private _listfilter: string = "";
+  categoryId: number = -1;
+  rooms: IRoom[] = [];
 
-    constructor(
-        private _router: Router,
-        private _roomService: RoomService,
-        private _route: ActivatedRoute
-    ) { }
+  constructor(
+      private _router: Router,
+      private _roomService: RoomService,
+      private _route: ActivatedRoute
+  ) { }
 
-    get listFilter(): string {
-        return this._listfilter;
-    }
-    set listFilter(value: string) {
-        this._listfilter = value;
-        console.log('Listfilter setMethod: ', value);
-        this.filteredRooms = this.performFilter(value);
-    }
+  get listFilter(): string {
+      return this._listfilter;
+  }
+  set listFilter(value: string) {
+      this._listfilter = value;
+      console.log('Listfilter setMethod: ', value);
+      this.filteredRooms = this.performFilter(value);
+  }
 
-    deleteRoom(room: IRoom): void {
-        const confirmDelete = confirm(`Are you sure you want to delete "${room.RoomName}"?`);
-        if (confirmDelete) {
-            this._roomService.deleteRoom(room.RoomId).subscribe((response) => {
-                if (response.success) {
-                    console.log(response.message);
-                    this.filteredRooms = this.filteredRooms.filter(r => r !== room);
-                }
-            },
-                (error) => {
-                    console.error('Error deleting room: ', error);
-                }
-            );
-        }
-    }
+  deleteRoom(room: IRoom): void {
+      const confirmDelete = confirm(`Are you sure you want to delete "${room.RoomName}"?`);
+      if (confirmDelete) {
+          this._roomService.deleteRoom(room.RoomId).subscribe((response) => {
+              if (response.success) {
+                  console.log(response.message);
+                  this.filteredRooms = this.filteredRooms.filter(r => r !== room);
+              }
+          },
+              (error) => {
+                  console.error('Error deleting room: ', error);
+              }
+          );
+      }
+  }
 
-    getRooms(): void {
-        this._roomService.getRooms().subscribe(data => {
-            console.log('All', JSON.stringify(data));
-            this.rooms = data;
-            this.filteredRooms = this.rooms;
-        });
-    }
+  createNewRoom() {
+    this._router.navigate(['/roomform', 'create', this.categoryId]);
+  }
 
-    getRoomsByCategoryId(id: number): void {
-        this._roomService.getRoomsByCategoryId(id).subscribe(data => {
-            console.log('All', JSON.stringify(data));
-            this.rooms = data;
-            this.filteredRooms = this.rooms;
-        })
-    }
+  updateSelectedRoom(roomId: number) {
+    this._router.navigate(['/roomform', 'edit', this.categoryId, roomId])
+  }
 
-    filteredRooms: IRoom[] = this.rooms;
-    performFilter(filterBy: string): IRoom[] {
-        filterBy = filterBy.toLocaleLowerCase();
-        return this.rooms.filter((room: IRoom) =>
-            room.RoomName.toLocaleLowerCase().includes(filterBy));
-    }
+  getRooms(): void {
+      this._roomService.getRooms().subscribe(data => {
+          console.log('All', JSON.stringify(data));
+          this.rooms = data;
+          this.filteredRooms = this.rooms;
+      });
+  }
 
-    navigateToRoomform() {
-        this._router.navigate(['/roomform']);
-    }
+  getRoomsByCategoryId(id: number): void {
+      this._roomService.getRoomsByCategoryId(id).subscribe(data => {
+          console.log('All', JSON.stringify(data));
+          this.rooms = data;
+          this.filteredRooms = this.rooms;
+      })
+  }
 
-    ngOnInit(): void {
-        this._route.params.subscribe(params => {
-          if (params['id'] == -1) {
-                this.getRooms();
-            }
-            else {
-            this.getRoomsByCategoryId(+params['id']);
-            }
-        });
-    }
+  filteredRooms: IRoom[] = this.rooms;
+  performFilter(filterBy: string): IRoom[] {
+      filterBy = filterBy.toLocaleLowerCase();
+      return this.rooms.filter((room: IRoom) =>
+          room.RoomName.toLocaleLowerCase().includes(filterBy));
+  }
+
+  navigateToRoomform() {
+      this._router.navigate(['/roomform']);
+  }
+
+  ngOnInit(): void {
+      this._route.params.subscribe(params => {
+        if (params['id'] == -1) {
+              this.getRooms();
+          }
+          else {
+          this.getRoomsByCategoryId(+params['id']);
+          this.categoryId = +params['id'];
+          }
+      });
+  }
 }

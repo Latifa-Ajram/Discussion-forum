@@ -32,7 +32,7 @@
       <td>{{ topic.TopicId }}</td>
       <td><a [routerLink]="['/posts/', topic.TopicId]"> {{ topic.TopicName }} </a></td>
       <td>
-        <a [routerLink]="['/topicform', 'edit', topic.TopicId]">Update</a> 
+        <a [routerLink]="['/topicform', 'edit', topic.TopicId]">Update</a>
         <a class="delete-link" (click)="deleteTopic(topic)">Delete</a>
       </td>
 
@@ -40,6 +40,5 @@
   </tbody>
 </table>
 
-<!--<app-topics-topicform></app-topics-topicform>-->
+<!-- A button for navigating to create a new topic, the [routerLink] passes the url, the mode, and the id-->
 <button class='btn btn-primary' (click)="navigateToTopicform()">Create New Topic</button>
-<button class='btn btn-secondary' routerLink="/topicform">Create New Topic</button>

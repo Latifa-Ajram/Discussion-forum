@@ -48,7 +48,8 @@ import { CommentformComponent } from './comments/commentform.component';
       { path: 'rooms/', component: RoomsComponent },
       { path: 'rooms/:id', component: RoomsComponent },
       { path: 'roomform', component: RoomformComponent }, // Add the Roomform route
-      { path: 'roomform/:mode/:id', component: RoomformComponent }, // Add the Roomform with mode and id route
+      { path: 'roomform/:mode/:categoryId', component: RoomformComponent }, // Add the Roomform with mode and id route
+      { path: 'roomform/:mode/:categoryId/:roomId', component: RoomformComponent },
       { path: 'topics', component: TopicsComponent },
       { path: 'topics/:id', component: TopicsComponent },
       { path: 'topicform', component: TopicformComponent },

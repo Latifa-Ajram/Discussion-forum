@@ -30,17 +30,24 @@ export class RoomformComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchCategories();
+
     this._route.params.subscribe(params => {
       if (params['mode'] === 'create') {
         this.isEditMode = false;
-       
+        this.categoryId = +params['categoryId']; //If the user came from a category to create a new room, then the id is not -1 and the category in the form is set by defualt, if not, it is -1.
+        console.log("Dette er dataen, categoryId: " + this.categoryId);
+        this.roomForm.patchValue({
+          categoryId: this.categoryId
+        })
       } else if (params['mode'] === 'edit') {
         this.isEditMode = true;
-        this.roomId = +params['id'];
+        this.categoryId = +params['categoryId'];
+        this.roomId = +params['roomId'];
+        console.log("Dette er dataen, categoryId: " + this.categoryId + ", roomId: " + this.roomId);
         this.loadRoomForEdit(this.roomId);
       }
     });
-    this.fetchCategories();
   }
   fetchCategories(): void {
     this._categoryService.getCategories().subscribe(categories => {
@@ -101,7 +108,7 @@ export class RoomformComponent implements OnInit {
   }
 
   backToRooms() {
-    this._router.navigate(['/rooms', -1]);
+    this._router.navigate(['/rooms', this.categoryId]);
   }
 }
 

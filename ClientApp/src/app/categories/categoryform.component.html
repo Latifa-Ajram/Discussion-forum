@@ -4,6 +4,9 @@
   <div class="form-group">
     <label for="categoryName">Name:</label>
     <input type="text" id="categoryName" formControlName="categoryName" class="form-control" />
+    <div *ngIf="categoryForm.get('categoryName')?.hasError('required')">
+      Category-name is required.
+    </div>
   </div>
 
   <button class="btn-primary btn" type="submit" [disabled]="categoryForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Category</button>
