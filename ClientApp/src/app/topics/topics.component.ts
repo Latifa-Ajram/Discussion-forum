@@ -11,7 +11,7 @@ import { TopicService } from './topics.service';
 
 export class TopicsComponent implements OnInit {
   viewTitle: string = 'Topic';
-
+  roomId: number = -1;
   topics: ITopic[] = [];
 
   constructor(
@@ -73,7 +73,11 @@ export class TopicsComponent implements OnInit {
   }
 
   navigateToTopicform() {
-    this._router.navigate(['/topicform']);
+    this._router.navigate(['/topicform', 'create', this.roomId]);
+  }
+
+  updateSelectedTopic(topicId: number) {
+    this._router.navigate(['/topicform', 'edit', this.roomId, topicId]);
   }
 
   ngOnInit(): void {
@@ -85,6 +89,7 @@ export class TopicsComponent implements OnInit {
       else {
         console.log("KOMMER I ELSE");
         this.getTopicsByRoomId(+params['id'])
+        this.roomId = +params['id'];
       }
     });
     

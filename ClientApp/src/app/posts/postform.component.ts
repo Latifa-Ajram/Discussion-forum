@@ -4,10 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from './posts.service';
 import { TopicService } from '../topics/topics.service';
 import { ITopic } from "../topics/topic";
+import { idValidator } from '../services/IDValidator';
 
 @Component({
-    selector: "app-posts-postform",
-    templateUrl: "./postform.component.html"
+  selector: "app-posts-postform",
+  templateUrl: "./postform.component.html",
+  styleUrls: ['./posts.component.css']
 })
 export class PostformComponent {
 
@@ -25,9 +27,9 @@ export class PostformComponent {
       private _topicService: TopicService
   ) {
       this.postForm = _formbuilder.group({
-          postTitle: ['', Validators.required],
-          topicId: [null, Validators.required],
-          commentDescription: ['', Validators.required]
+        postTitle: ['', Validators.required],
+        topicId: [-1, [idValidator()]],
+        commentDescription: ['', Validators.required]
       });
   }
 
@@ -62,20 +64,28 @@ export class PostformComponent {
   }
 
   backToPosts() {
-      this._router.navigate(['/posts', -1]);
+    this._router.navigate(['/posts', this.topicId]);
   }
 
   ngOnInit(): void {
-      this._route.params.subscribe(params => {
-          if (params['mode'] === 'create') {
-              this.isEditMode = false; // Create mode
-          } else if (params['mode'] === 'edit') {
-              this.isEditMode = true; // Edit mode
-              this.postId = +params['id']; // Convert to number
-              this.loadPostForEdit(this.postId);
-          }
-      });
     this.fetchTopics();
+
+    this._route.params.subscribe(params => {
+        if (params['mode'] === 'create') {
+          this.isEditMode = false; // Create mode
+          this.topicId = +params['topicId'];
+          this.postForm.patchValue({
+            topicId: this.topicId
+          });
+        }
+        else if (params['mode'] === 'edit') {
+          this.isEditMode = true; // Edit mode
+          this.topicId = +params['topicId'];
+          this.postId = +params['postId']; // Convert to number
+          this.loadPostForEdit(this.postId);
+        }
+    });
+    
   }
 
   fetchTopics(): void {
@@ -98,7 +108,6 @@ export class PostformComponent {
                       postTitle: post.PostTitle,
                       topicId: post.TopicId
                   });
-              this.topicId = post.TopicId;
               },
               (error: any) => {
                   console.error('Error loading post for edit:', error);

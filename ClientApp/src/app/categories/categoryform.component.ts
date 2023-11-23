@@ -5,7 +5,8 @@ import { Categorieservice } from './categories.service';
 
 @Component({
   selector: "app-Categories-categoryform",
-  templateUrl: "./categoryform.component.html"
+  templateUrl: "./categoryform.component.html",
+  styleUrls: ['./Categories.component.css']
 })
 
 export class CategoryformComponent {

@@ -7,3 +7,13 @@ thead {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.update-link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.warning {
+  color: red;
+}

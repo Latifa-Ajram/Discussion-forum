@@ -7,7 +7,8 @@ import { idValidator } from '../services/IDValidator';
 
 @Component({
   selector: "app-rooms-roomform",
-  templateUrl: "./roomform.component.html"
+  templateUrl: "./roomform.component.html",
+  styleUrls: ['./rooms.component.css']
 })
 export class RoomformComponent implements OnInit {
 
@@ -37,7 +38,6 @@ export class RoomformComponent implements OnInit {
       if (params['mode'] === 'create') {
         this.isEditMode = false;
         this.categoryId = +params['categoryId']; //If the user came from a category to create a new room, then the id is not -1 and the category in the form is set by defualt, if not, it is -1.
-        console.log("Dette er dataen, categoryId: " + this.categoryId);
         this.roomForm.patchValue({
           categoryId: this.categoryId
         })

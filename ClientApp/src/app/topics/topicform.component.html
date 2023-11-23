@@ -6,14 +6,20 @@
     <select id="rooomId" formControlName="roomId" class="form-control" (change)="onRoomChange($event)">
       <option *ngFor="let room of rooms" [value]="room.RoomId">{{ room.RoomName }}</option>
     </select>
+    <div class="warning" *ngIf="topicForm.get('roomId')?.hasError('required')">
+      A Room is required.
+    </div>
   </div>
 
   <div class="form-group">
     <label for="topicName">Name:</label>
     <input type="text" id="topicName" formControlName="topicName" class="form-control" />
+    <div class="warning" *ngIf="topicForm.get('topicName')?.hasError('required')">
+      Topic-name is required.
+    </div>
   </div>
 
-  <button class='btn btn-primary' type="submit">
+  <button class='btn btn-primary' type="submit" [disabled]="topicForm.invalid">
     {{ isEditMode ? 'Update' : 'Create' }} Topic
   </button>
   <button class='btn btn-secondary' (click)="backToTopics()">Cancel</button>

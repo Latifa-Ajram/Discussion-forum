@@ -29,7 +29,7 @@
       <td>{{ post.PostId }}</td>
       <td><a [routerLink]="['/comments/', post.PostId]"> {{ post.PostTitle }} </a></td>
       <td>
-        <a [routerLink]="['/postform', 'edit', post.PostId]">Update</a>
+        <a class="update-link" (click)="updateSelectedPost(post.PostId)">Update</a>
         <a class="delete-link" (click)="deletePost(post)">Delete</a>
       </td>
     </tr>
@@ -37,5 +37,5 @@
 </table>
 
 <!-- A button for navigating to create a new post, the [routerLink] passes the url, the mode, and the id-->
-<button class="btn btn-primary" [routerLink]="['/postform', 'create', -1]">Create New Post</button>
+<button class="btn btn-primary" (click)="createNewPost()">Create New Post</button>
 

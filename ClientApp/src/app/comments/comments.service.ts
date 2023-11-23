@@ -19,7 +19,8 @@ export class CommentService {
   }
 
   createComment(newComment: IComment): Observable<any> {
-      const createUrl = 'api/post/create';
+    const createUrl = 'api/comment/create';
+    console.log("Dette er newComment i service: " + newComment.PostId + " , data: " + newComment.CommentDescription);
       return this._http.post<any>(createUrl, newComment);
   }
 

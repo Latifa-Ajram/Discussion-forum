@@ -13,7 +13,6 @@ export class CommentsComponent implements OnInit {
 
   viewTitle: string = 'Comment';
   private _listfilter: string = "";
-
   comments: IComment[] = [];
   postId: number = -1;
 
@@ -60,7 +59,6 @@ export class CommentsComponent implements OnInit {
   }
 
   getCommentsByPostId(id: number): void {
-    this.postId = id;
     this._commentService.getCommentsByPostId(id)
       .subscribe(data => {
         console.log('All', JSON.stringify(data));
@@ -82,7 +80,11 @@ export class CommentsComponent implements OnInit {
   }
 
   createNewComment() {
-    this._router.navigate(['/comments', this.postId]);
+    this._router.navigate(['/commentform','create' ,this.postId]);
+  }
+
+  updateSelectedComment(commentId: number) {
+    this._router.navigate(['/commentform', 'edit', this.postId, commentId]);
   }
 
   ngOnInit(): void {
@@ -95,6 +97,7 @@ export class CommentsComponent implements OnInit {
       else {
         console.log("KOMMER I ELSE");
         this.getCommentsByPostId(+params['id']);
+        this.postId = +params['id'];
       }
     });
   }

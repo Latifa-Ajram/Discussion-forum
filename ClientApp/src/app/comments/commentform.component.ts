@@ -3,12 +3,15 @@ import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from './comments.service';
 import { PostService } from '../posts/posts.service';
+import { idValidator } from '../services/IDValidator';
+
 
 
 
 @Component({
   selector: "app-comments-commentform",
-  templateUrl: "./commentform.component.html"
+  templateUrl: "./commentform.component.html",
+  styleUrls: ['./comments.component.css']
 })
 export class CommentformComponent {
 
@@ -25,8 +28,8 @@ export class CommentformComponent {
     private _postService: PostService
   ) {
     this.commentForm = _formbuilder.group({
-      postId: [null, Validators.required],
-      commentDescription: ['', Validators.required]
+      commentDescription: ['', Validators.required],
+      postId: [-1, [idValidator()]]
     });
   }
 
@@ -34,9 +37,15 @@ export class CommentformComponent {
     this._route.params.subscribe(params => {
       if (params['mode'] === 'create') {
         this.isEditMode = false; // Create mode
-      } else if (params['mode'] === 'edit') {
+        this.postId = +params['postId'];
+        this.commentForm.patchValue({
+          postId: this.postId
+        });
+      }
+      else if (params['mode'] === 'edit') {
         this.isEditMode = true; // Edit mode
-        this.commentId = +params['id']; // Convert to number
+        this.postId = +params['postId'];
+        this.commentId = +params['commentId']; // Convert to number
         this.loadCommentForEdit(this.commentId);
       }
     });
@@ -51,7 +60,6 @@ export class CommentformComponent {
             commentDescription: comment.CommentDescription,
             postId: comment.PostId
           });
-          this.postId = comment.PostId;
         },
         (error: any) => {
           console.error('Error loading comment for edit:', error);

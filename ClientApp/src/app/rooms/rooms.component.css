@@ -14,3 +14,7 @@ thead{
   text-decoration: underline;
   cursor: pointer;
 }
+
+.warning{
+    color:red;
+}

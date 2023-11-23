@@ -6,7 +6,7 @@
     <select id="categoryId" formControlName="categoryId" class="form-control" (change)="onCategoryChange($event)">
       <option *ngFor="let category of categories" [value]="category.CategoryId">{{ category.CategoryName }}</option>
     </select>
-    <div *ngIf="roomForm.get('categoryId')?.hasError('required')">
+    <div class="warning" *ngIf="roomForm.get('categoryId')?.hasError('required')">
       A category is required.
     </div>
   </div>
@@ -14,7 +14,7 @@
   <div class="form-group">
     <label for="roomName">Name:</label>
     <input type="text" id="roomName" formControlName="roomName" class="form-control" />
-    <div *ngIf="roomForm.get('roomName')?.hasError('required')">
+    <div class="warning" *ngIf="roomForm.get('roomName')?.hasError('required')">
       Room-name is required.
     </div>
   </div>

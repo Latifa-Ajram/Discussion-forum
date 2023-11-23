@@ -4,10 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from './topics.service';
 import { RoomService } from '../rooms/rooms.service';
 import { IRoom } from "../rooms/room";
+import { idValidator } from '../services/IDValidator';
 
 @Component({
   selector: "app-topics-topicform",
-  templateUrl: "./topicform.component.html"
+  templateUrl: "./topicform.component.html",
+  styleUrls: ['./topics.component.css']
 })
 export class TopicformComponent {
 
@@ -27,8 +29,8 @@ export class TopicformComponent {
   {
     this.topicForm = _formbuilder.group({
       topicName: ['', Validators.required],
-      roomId: [null, Validators.required],
-    });
+      roomId: [-1, [idValidator()]]
+    })
   }
 
   onSubmit() {
@@ -62,20 +64,26 @@ export class TopicformComponent {
   }
 
   backToTopics() {
-    this._router.navigate(['/topics', -1]);
+    this._router.navigate(['/topics', this.roomId]);
   }
 
   ngOnInit(): void {
+    this.fetchRooms();
+
     this._route.params.subscribe(params => {
       if (params['mode'] === 'create') {
         this.isEditMode = false; // Create mode
+        this.roomId = +params['roomId'];
+        this.topicForm.patchValue({
+          roomId: this.roomId
+        });
       } else if (params['mode'] === 'edit') {
         this.isEditMode = true; // Edit mode
-        this.topicId = +params['id']; // Convert to number
+        this.roomId = +params['roomId'];
+        this.topicId = +params['topicId']; // Convert to number
         this.loadTopicForEdit(this.topicId);
       }
     });
-    this.fetchRooms();
   }
 
   fetchRooms(): void {
@@ -98,7 +106,6 @@ export class TopicformComponent {
             topicName: topic.TopicName,
             roomId: topic.RoomId
           });
-          this.roomId = topic.RoomId;
         },
         (error: any) => {
           console.error('Error loading topic for edit:', error);

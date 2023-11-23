@@ -13,7 +13,7 @@ import { PostService } from './posts.service';
 export class PostsComponent implements OnInit {
   viewTitle: string = 'Post';
   private _listfilter: string = "";
-
+  private topicId: number = -1;
   posts: IPost[] = [];
     
   constructor(
@@ -49,7 +49,13 @@ export class PostsComponent implements OnInit {
     }
   }
   
+  updateSelectedPost(postId: number) {
+    this._router.navigate(['/postform', 'edit', this.topicId, postId]);
+  }
 
+  createNewPost() {
+    this._router.navigate(['/postform', 'create', this.topicId])
+  }
 
   getPosts(): void {
     this._postService.getPosts()
@@ -88,6 +94,7 @@ export class PostsComponent implements OnInit {
       else {
         console.log("KOMMER I ELSE");
         this.getPostsByTopicId(+params['id']);
+        this.topicId = +params['id'];
       }
     });
   }

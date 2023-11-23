@@ -29,7 +29,7 @@
             <td>{{ comment.CommentId }}</td>
             <td>{{ comment.CommentDescription }}</td>
             <td>
-                <a [routerLink]="['/commentform', 'edit', comment.CommentId]">Update</a>
+                <a class="update-link" (click)="updateSelectedComment(comment.CommentId)">Update</a>
                 <a class="delete-link" (click)="deleteComment(comment)">Delete</a>
             </td>
         </tr>
