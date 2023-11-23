@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoomService } from './rooms.service';
 import { Categorieservice } from '../categories/categories.service';
+import { idValidator } from '../services/IDValidator';
 
 @Component({
   selector: "app-rooms-roomform",
@@ -25,7 +26,7 @@ export class RoomformComponent implements OnInit {
   ) {
     this.roomForm = this._formbuilder.group({
       roomName: ['', Validators.required],
-      categoryId: [null, Validators.required] // Set to zero until categories are retrieved
+      categoryId: [-1, [idValidator()]] // Set to zero until categories are retrieved
     });
   }
 
