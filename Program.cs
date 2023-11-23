@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ForumDbContext>(options => {
         builder.Configuration["ConnectionStrings:ItemDbContextConnection"]);
 });
 
+//Defining that the repository services is needed thorughout the applications lifetime:
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ITopicRepository, TopicRepository>();

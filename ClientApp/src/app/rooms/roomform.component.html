@@ -1,11 +1,17 @@
+<!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set with: Room-->
 <h2>{{ isEditMode ? 'Update' : 'Create' }} Room</h2>
 
+<!-- A Form-group with a corresponding on click event that invokes the method "onSubmit()" in typescript-file-->
 <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
+    <!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set: Change Category or Category-->
     <label for="categoryId">{{ isEditMode ? 'Change category:' : 'Category' }}</label>
+    <!-- This select is connected to the variable "categoryId" inside the typescript file. Adittonialy it has an onChange event that passes an event when it changes. -->
     <select id="categoryId" formControlName="categoryId" class="form-control" (change)="onCategoryChange($event)">
+      <!-- This option lists out a list of all caetgories, and stores the value of the id. The id is used inside the formvalidation in the typescript-file -->
       <option *ngFor="let category of categories" [value]="category.CategoryId">{{ category.CategoryName }}</option>
     </select>
+    <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
     <div class="warning" *ngIf="roomForm.get('categoryId')?.hasError('required')">
       A category is required.
     </div>
@@ -13,13 +19,17 @@
 
   <div class="form-group">
     <label for="roomName">Name:</label>
+    <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "roomName" in the typescript-file-->
     <input type="text" id="roomName" formControlName="roomName" class="form-control" />
+    <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
     <div class="warning" *ngIf="roomForm.get('roomName')?.hasError('required')">
       Room-name is required.
     </div>
   </div>
 
+  <!-- A button that is of type "submit", which means that it is connected to a form and inputs. Otherwise the button is disabled until the form is valid/accepted.-->
   <button class="btn-primary btn" type="submit" [disabled]="roomForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Room </button>
 
+  <!--A button that invokes the on clicke event "backToRooms" inside the typescript-file-->
   <button class="btn btn-secondary" (click)="backToRooms()">Cancel</button>
 </form>

@@ -1,11 +1,17 @@
+<!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set with: Topic-->
 <h2>{{ isEditMode ? 'Update' : 'Create' }} Topic</h2>
 
+<!-- A Form-group with a corresponding on click event that invokes the method "onSubmit()" in typescript-file-->
 <form [formGroup]="topicForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
+    <!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set: Change Room or Room-->
     <label for="roomId">{{ isEditMode ? 'Change Room:' : 'Room' }}</label>
+    <!-- This select is connected to the variable "roomId" inside the typescript file. Adittonialy it has an onChange event that passes an event when it changes. -->
     <select id="rooomId" formControlName="roomId" class="form-control" (change)="onRoomChange($event)">
+      <!-- This option lists out a list of all rooms, and stores the value of the id. The id is used inside the formvalidation in the typescript-file -->
       <option *ngFor="let room of rooms" [value]="room.RoomId">{{ room.RoomName }}</option>
     </select>
+    <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
     <div class="warning" *ngIf="topicForm.get('roomId')?.hasError('required')">
       A Room is required.
     </div>
@@ -13,15 +19,17 @@
 
   <div class="form-group">
     <label for="topicName">Name:</label>
+    <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "topicName" in the typescript-file-->
     <input type="text" id="topicName" formControlName="topicName" class="form-control" />
+    <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
     <div class="warning" *ngIf="topicForm.get('topicName')?.hasError('required')">
       Topic-name is required.
     </div>
   </div>
 
-  <button class='btn btn-primary' type="submit" [disabled]="topicForm.invalid">
-    {{ isEditMode ? 'Update' : 'Create' }} Topic
-  </button>
+  <!-- A button that is of type "submit", which means that it is connected to a form and inputs. Otherwise the button is disabled until the form is valid/accepted.-->
+  <button class='btn btn-primary' type="submit" [disabled]="topicForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Topic </button>
+  <!--A button that invokes the on clicke event "backToTopics" inside the typescript-file-->
   <button class='btn btn-secondary' (click)="backToTopics()">Cancel</button>
 </form>
 

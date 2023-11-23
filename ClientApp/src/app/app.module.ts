@@ -41,14 +41,16 @@ import { CommentformComponent } from './comments/commentform.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
+      //Here we have defined the routing paths and what they should consist of. If the used url in the application matches one of these paths,
+      //then it will route them to that place:
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'categories', component: CategoriesComponent },
       { path: 'categoryform', component: CategoryformComponent },
       { path: 'categoryform/:mode/:id', component: CategoryformComponent },
       { path: 'rooms', component: RoomsComponent },
       { path: 'rooms/:id', component: RoomsComponent },
-      { path: 'roomform', component: RoomformComponent }, // Add the Roomform route
-      { path: 'roomform/:mode/:categoryId', component: RoomformComponent }, // Add the Roomform with mode and id route
+      { path: 'roomform', component: RoomformComponent }, 
+      { path: 'roomform/:mode/:categoryId', component: RoomformComponent }, 
       { path: 'roomform/:mode/:categoryId/:roomId', component: RoomformComponent },
       { path: 'topics', component: TopicsComponent },
       { path: 'topics/:id', component: TopicsComponent },

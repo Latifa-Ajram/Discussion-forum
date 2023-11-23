@@ -1,22 +1,26 @@
+<!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set with: Comment-->
 <h2>{{ isEditMode ? 'Update' : 'Create' }} Comment</h2>
 
+<!-- A Form-group with a corresponding on click event that invokes the method "onSubmit()" in typescript-file-->
 <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
 
   <div class="form-group">
 
     <label for="commentDescription">Description:</label>
+    <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "commentDescription" in the typescript-file-->
     <input type="text" id="commentDescription" formControlName="commentDescription" class="form-control" />
-
+    <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
     <div class="warning" *ngIf="commentForm.get('commentDescription')?.hasError('required')">
       A Comment description is required.
     </div>
-
+    <!-- When we pass the form, we want to make sure that the current postId for the comment is passed along. No comment cant exist without a post ...-->
     <input type="hidden" id="postId" formControlName="postId" />
 
   </div>
-
+  <!-- A button that is of type "submit", which means that it is connected to a form and inputs. Otherwise the button is disabled until the form is valid/accepted.-->
   <button class='btn btn-primary' type="submit" [disabled]="commentForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Comment </button>
 
+  <!--A button that invokes the on clicke event "backToComments" inside the typescript-file-->
   <button class='btn btn-secondary' (click)="backToComments()">Cancel</button>
 
 </form>

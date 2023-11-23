@@ -16,6 +16,7 @@
   </div>
 </div>
 
+<!-- Creating a table to show the roominformation inside-->
 <table class="table table-striped" aria-labelledby="tableLabel">
   <thead>
     <tr>
@@ -25,16 +26,21 @@
     </tr>
   </thead>
   <tbody>
+    <!--Listing out all the filtered rooms:-->
     <tr *ngFor="let room of filteredRooms">
       <td>{{ room.RoomId }}</td>
+      <!---Trying to link the roomName to the topic page with the roomId to know which data to fetch and load (rooms)-->
       <td><a [routerLink]="['/topics/', room.RoomId]">{{ room.RoomName }}</a></td>
       <td>
+        <!-- Two different links: One to update the chosen room, the other one to delete it.-->
+        <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
         <a class="update-link" (click)="updateSelectedRoom(room.RoomId)">Update</a>
+        <!-- This delete field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
         <a class="delete-link" (click)="deleteRoom(room)">Delete</a>
       </td>
     </tr>
   </tbody>
 </table>
 
-<!-- A button for navigating to create a new room, the [routerLink] passes the url, the mode, and the id-->
+<!-- A button for navigating to create a new room, when clicked, the named method is invoked in the typescript-file-->
 <button class="btn btn-primary" (click)="createNewRoom()">Create New Room</button>

@@ -14,12 +14,13 @@ import { idValidator } from '../services/IDValidator';
   styleUrls: ['./comments.component.css']
 })
 export class CommentformComponent {
-
+  //Variables:
   commentForm: FormGroup;
   isEditMode: boolean = false;
   commentId: number = -1;
   postId: number = -1;
 
+   //Initilizing imported services and the form we are using inside the view in order to populate it:
   constructor(
     private _formbuilder: FormBuilder,
     private _router: Router,
@@ -33,17 +34,20 @@ export class CommentformComponent {
     });
   }
 
+  //A method invoked when the class is initialized.
+  //Depending on the params different data is set. If the mode is create we patch the post Id to set the current post we are trying create a comment for.
+  //If the parameters is like "edit", then we also set the data by getting the specific comment:
   ngOnInit(): void {
-    this._route.params.subscribe(params => {
+    this._route.params.subscribe(params => {// Create mode
       if (params['mode'] === 'create') {
-        this.isEditMode = false; // Create mode
-        this.postId = +params['postId'];
+        this.isEditMode = false; 
+        this.postId = +params['postId']; //This can never be -1 like in the other pages. This is beacuse to create a comment you have to have entered via a post, and not the nav-bar.
         this.commentForm.patchValue({
           postId: this.postId
         });
       }
-      else if (params['mode'] === 'edit') {
-        this.isEditMode = true; // Edit mode
+      else if (params['mode'] === 'edit') {// Edit mode
+        this.isEditMode = true; 
         this.postId = +params['postId'];
         this.commentId = +params['commentId']; // Convert to number
         this.loadCommentForEdit(this.commentId);
@@ -51,6 +55,8 @@ export class CommentformComponent {
     });
   }
 
+  //Method that takes in a comment id, uses the service to invoke the getCommentById and subscribes for the callback. When the data returns,
+  //it is patched into the form, but if it fails, then data is logged instead:
   loadCommentForEdit(commentId: number) {
     this._commentService.getCommentById(commentId)
       .subscribe(
@@ -67,6 +73,10 @@ export class CommentformComponent {
       );
   }
 
+  //This method is invoked when the submit button is clicked via the eventcall from the form. The forms values are retrieved and set inside the newComment object.
+  //If this was an edit of a existing comment, then we invoke the updateComment method from the service and subscribe for a callback.
+  //If not, then we invoke the createComment from the service and subscribe for the callback from it. If they succeed,
+  //then we are passed back to the list of all comments of the current chosen post:
   onSubmit() {
     console.log("CommentCreate form submitted:");
     console.log(this.commentForm);
@@ -97,6 +107,7 @@ export class CommentformComponent {
     }
   }
 
+   //A method connected to a button that routes us back to comments
   backToComments() {
     this._router.navigate(['/comments', this.postId]);
   }

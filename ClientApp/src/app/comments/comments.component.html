@@ -3,37 +3,42 @@
 
 <!-- Creating the input to write into the filtering event -->
 <div class="row">
-    <div class="col-md-2">Filter by:</div>
-    <div class="col-md-4">
-        <input type="text" [(ngModel)]="listFilter" />
-    </div>
+  <div class="col-md-2">Filter by:</div>
+  <div class="col-md-4">
+    <input type="text" [(ngModel)]="listFilter" />
+  </div>
 </div>
 
 <!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
 <div class="row">
-    <div class="col-md-6">
-        <h4>Filtered by: {{ listFilter }}</h4>
-    </div>
+  <div class="col-md-6">
+    <h4>Filtered by: {{ listFilter }}</h4>
+  </div>
 </div>
 
+<!-- Creating a table to show the commentinformation inside-->
 <table class="table table-striped" aria-labelledby="tableLabel">
-    <thead>
-        <tr>
-            <th>Comment Id</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let comment of filteredComments">
-            <td>{{ comment.CommentId }}</td>
-            <td>{{ comment.CommentDescription }}</td>
-            <td>
-                <a class="update-link" (click)="updateSelectedComment(comment.CommentId)">Update</a>
-                <a class="delete-link" (click)="deleteComment(comment)">Delete</a>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Comment Id</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!--Listing out all the filtered comments:-->
+    <tr *ngFor="let comment of filteredComments">
+      <td>{{ comment.CommentId }}</td>
+      <td>{{ comment.CommentDescription }}</td>
+      <td>
+        <!-- Two different links: One to update the chosen comment, the other one to delete it.-->
+        <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
+        <a class="update-link" (click)="updateSelectedComment(comment.CommentId)">Update</a>
+        <!-- This delete field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
+        <a class="delete-link" (click)="deleteComment(comment)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- A button that calls for a click event method: createNewComment() inside the corresponding Typescript-file: cooments.component.ts, this will route the user to a new page -->

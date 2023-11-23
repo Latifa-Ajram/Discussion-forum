@@ -1,6 +1,7 @@
-
+<!--The title of the page which displays the viewTitle object (a string) that is defined in its TypeScript-file-->
 <h1 id="tableLabel">{{viewTitle}}</h1>
 
+<!-- Creating the input to write into the filtering event -->
 <div class='row'>
   <div class='col-md-2'>Filter by:</div>
   <div class='col-md-4'>
@@ -9,12 +10,14 @@
   </div>
 </div>
 
+<!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
 <div class='row'>
   <div class='col-md-6'>
     <h4>Filtered by: {{listFilter}}</h4>
   </div>
 </div>
 
+<!-- Creating a table to show the topicinformation inside-->
 <table class='table table-striped' aria-labelledby="tableLabel">
   <thead>
     <tr>
@@ -24,11 +27,16 @@
     </tr>
   </thead>
   <tbody>
+    <!--Listing out all the filtered topics:-->
     <tr *ngFor='let topic of filteredTopics'>
       <td>{{ topic.TopicId }}</td>
+      <!---Trying to link the topicName to the post page with the topic Id to know which data to fetch and load (topics)-->
       <td><a [routerLink]="['/posts/', topic.TopicId]"> {{ topic.TopicName }} </a></td>
       <td>
+        <!-- Two different links: One to update the chosen topic, the other one to delete it.-->
+        <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
         <a class="update-link" (click)="updateSelectedTopic(topic.TopicId)">Update</a>
+        <!-- This delete field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
         <a class="delete-link" (click)="deleteTopic(topic)">Delete</a>
       </td>
 
@@ -36,5 +44,5 @@
   </tbody>
 </table>
 
-<!-- A button for navigating to create a new topic, the [routerLink] passes the url, the mode, and the id-->
+<!-- A button for navigating to create a new topic, when clicked the described method is invoked in the typescript file.-->
 <button class='btn btn-primary' (click)="navigateToTopicform()">Create New Topic</button>

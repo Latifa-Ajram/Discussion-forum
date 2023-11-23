@@ -1,8 +1,6 @@
 <!--The title of the page which displays the viewTitle object (a string) that is defined in its TypeScript-file-->
 <h1 id="tableLabel"> {{viewTitle}} </h1>
 
-<!--<button class="btn-primary btn" (click)="getCategories()">Get Categories</button> -->
-
 <!-- Creating the input to write into the filtering event -->
 <div class="row">
   <div class="col-md-2">Filter by:</div>
@@ -18,6 +16,7 @@
   </div>
 </div>
 
+<!-- Creating a table to show the categoryinformation inside-->
 <table class="table table-striped" aria-labelledby="tableLabel">
   <thead>
     <tr>
@@ -27,15 +26,16 @@
     </tr>
   </thead>
   <tbody>
+    <!--Listing out all the filtered categories:-->
     <tr *ngFor="let category of filteredCategories">
       <td>{{ category.CategoryId }}</td>
-      <!---Trying to link the categoryName to the details page with the category Id to know which data to fetch and load (rooms)-->
+      <!---Trying to link the categoryName to the rooms page with the category Id to know which data to fetch and load (rooms)-->
       <td><a [routerLink]="['/rooms/', category.CategoryId]">{{ category.CategoryName }}</a></td>
-      <!--<a asp-controller="Category" asp-action="CategoryDetails" asp-route-Id="@category.CategoryId">@category.CategoryName</a>-->
-
-
       <td>
+        <!-- Two different links: One to update the chosen category, the other one to delete it.-->
+        <!--This link routs the user if clicked to the described location. It also passes along two type of data: a string and a number-->
         <a [routerLink]="['/categoryform', 'edit', category.CategoryId]"> Update </a>
+        <!-- This delete field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
         <a class="delete-link" (click)="deleteCategory(category)"> Delete </a>
       </td>
     </tr>

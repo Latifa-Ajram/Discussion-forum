@@ -12,13 +12,14 @@ import { idValidator } from '../services/IDValidator';
   styleUrls: ['./topics.component.css']
 })
 export class TopicformComponent {
-
+  //Variables:
   topicForm: FormGroup;
   isEditMode: boolean = false;
   topicId: number = -1;
   roomId: number = -1;
   rooms: IRoom[] = [];
 
+   //Initilizing imported services and the form we are using inside the view in order to populate it:
   constructor(
     private _formbuilder: FormBuilder,
     private _router: Router,
@@ -33,6 +34,9 @@ export class TopicformComponent {
     })
   }
 
+  //This method is invoked when the submit button is clicked via the eventcall from the form. The forms values are retrieved and set inside the newTopic object.
+  //If this was an edit of a existing topic, then we invoke the updateTopic method from the service and subscribe for a callback.
+  //If not, then we invoke the createTopic from the service and subscribe for the callback from it. If they succeed, then we are passed back to the list of all topics:
   onSubmit() {
     console.log("TopicCreate form submitted:");
     console.log(this.topicForm);
@@ -63,40 +67,49 @@ export class TopicformComponent {
     }
   }
 
+  //A method connected to a button that routes us back to topics
   backToTopics() {
     this._router.navigate(['/topics', this.roomId]);
   }
 
+
+  //A method invoked when the class is initialized. First we call for a method to fetch all rooms to populate them in the selcet option
+  //Depending on the params different data is set. If the mode is create we patch the room Id to set the current room we are trying create a topic inside.
+  //If the parameters is like "edit", then we also set the data by getting the specific topic:
   ngOnInit(): void {
     this.fetchRooms();
 
     this._route.params.subscribe(params => {
-      if (params['mode'] === 'create') {
-        this.isEditMode = false; // Create mode
-        this.roomId = +params['roomId'];
+      if (params['mode'] === 'create') {// Create mode
+        this.isEditMode = false; 
+        this.roomId = +params['roomId']; //If the user came from a room to create a new topic, then the id is not -1 and the room in the form is set by defualt, if not, it is -1.
         this.topicForm.patchValue({
           roomId: this.roomId
         });
-      } else if (params['mode'] === 'edit') {
-        this.isEditMode = true; // Edit mode
-        this.roomId = +params['roomId'];
+      } else if (params['mode'] === 'edit') {// Edit mode
+        this.isEditMode = true;
+        this.roomId = +params['roomId'];// Convert to number
         this.topicId = +params['topicId']; // Convert to number
         this.loadTopicForEdit(this.topicId);
       }
     });
   }
 
+  //Using the service to invoke the getRooms() and subscribe for a callback. When the rooms are retrieved they are populated into the list:
   fetchRooms(): void {
     this._roomService.getRooms().subscribe(rooms => {
       this.rooms = rooms;
     });
   }
 
+  //A method invoked on event change in the HTML-page. We retrieve the current set value and set the text based on the id-value:
   onRoomChange(event: any) {
     const selectedRoomId = event.target.value;
     this.topicForm.get('roomId')?.setValue(selectedRoomId);
   }
 
+  //Method that takes in a topic id, uses the service to invoke the getTopicById and subscribes for the callback. When the data returns,
+  //it is patched into the form, but if it fails, then data is logged instead:
     loadTopicForEdit(topicId: number) {
     this._topicService.getTopicById(topicId)
       .subscribe(

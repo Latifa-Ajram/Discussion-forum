@@ -1,7 +1,8 @@
-import { ITopic} from '../topics/topic';
+import { ITopic } from '../topics/topic';
+//A defined interface for the class Room:
 export interface IRoom {
   RoomId: number;
   RoomName: string;
-  CategoryId: number; // Include CategoryId in the interface
+  CategoryId: number;
   topic?: ITopic[];
 }
