@@ -2,45 +2,57 @@
 <h1 id="tableLabel"> {{viewTitle}} </h1>
 
 <!-- Creating the input to write into the filtering event -->
-<div class="row">
-  <div class="col-md-2">Filter by:</div>
-  <div class="col-md-4">
-    <input type="text" [(ngModel)]="listFilter" />
+
+<div class="container">
+  <div>
+    <div class="col-md-2">Filter by:</div>
+    <div class="col-md-4">
+      <input type="text" placeholder="Serach"
+             style="width:450px;padding:2px 20px;margin:10px 0px;height:30px;"
+             [(ngModel)]="listFilter" />
+
+    </div>
+
+    <!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
+    <div>
+
+      <h6>Filtered by: {{listFilter}}</h6>
+
+    </div>
+
   </div>
-</div>
 
-<!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
-<div class="row">
-  <div class="col-md-6">
-    <h4>Filtered by: {{listFilter}}</h4>
+
+
+
+  <!-- Creating a table to show the categoryinformation inside-->
+  <!--<table class="table table-striped" aria-labelledby="tableLabel">-->
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <!--<th>Category Id</th>-->
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--Listing out all the filtered categories:-->
+      <tr *ngFor="let category of filteredCategories">
+        <!--<td>{{ category.CategoryId }}</td>-->
+        <!---Trying to link the categoryName to the rooms page with the category Id to know which data to fetch and load (rooms)-->
+        <td><a [routerLink]="['/rooms/', category.CategoryId]">{{ category.CategoryName }}</a></td>
+        <td>
+          <!-- Two different links: One to update the chosen category, the other one to delete it.-->
+          <!--This link routs the user if clicked to the described location. It also passes along two type of data: a string and a number-->
+          <a [routerLink]="['/categoryform', 'edit', category.CategoryId]" class="btn btn-sm btn-info mr-2"> Update </a>
+          <!-- This delete field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
+          <a class="delete-link" (click)="deleteCategory(category)" class="btn btn-sm btn-danger"> Delete </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- A button for navigating to create a new category, the [routerLink] passes the url, the mode, and the id-->
+  <div class="text-right my-4">
+    <button class="btn btn-success" [routerLink]="['/categoryform', 'create', -1]">Create New Category</button>
   </div>
-</div>
-
-<!-- Creating a table to show the categoryinformation inside-->
-<table class="table table-striped" aria-labelledby="tableLabel">
-  <thead>
-    <tr>
-      <th>Category Id</th>
-      <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!--Listing out all the filtered categories:-->
-    <tr *ngFor="let category of filteredCategories">
-      <td>{{ category.CategoryId }}</td>
-      <!---Trying to link the categoryName to the rooms page with the category Id to know which data to fetch and load (rooms)-->
-      <td><a [routerLink]="['/rooms/', category.CategoryId]">{{ category.CategoryName }}</a></td>
-      <td>
-        <!-- Two different links: One to update the chosen category, the other one to delete it.-->
-        <!--This link routs the user if clicked to the described location. It also passes along two type of data: a string and a number-->
-        <a [routerLink]="['/categoryform', 'edit', category.CategoryId]"> Update </a>
-        <!-- This delete field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
-        <a class="delete-link" (click)="deleteCategory(category)"> Delete </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- A button for navigating to create a new category, the [routerLink] passes the url, the mode, and the id-->
-<button class="btn btn-primary" [routerLink]="['/categoryform', 'create', -1]">Create New Category</button>

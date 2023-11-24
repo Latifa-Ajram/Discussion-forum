@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryformComponent } from './categories/categoryform.component';
@@ -23,6 +24,7 @@ import { CommentformComponent } from './comments/commentform.component';
   declarations: [
     AppComponent,
     NavMenuComponent,
+    FooterComponent,
     HomeComponent,
     CategoriesComponent,
     CategoryformComponent,
