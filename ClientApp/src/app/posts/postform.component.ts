@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from './posts.service';
@@ -11,7 +11,7 @@ import { idValidator } from '../services/IDValidator';
   templateUrl: "./postform.component.html",
   styleUrls: ['./posts.component.css']
 })
-export class PostformComponent {
+export class PostformComponent implements OnInit {
   //Variables:
   postForm: FormGroup;
   isEditMode: boolean = false;

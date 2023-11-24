@@ -27,12 +27,12 @@
     </div>
   </div>
 
-  <!--
-      <div class="form-group">
-          <label for="commentDescription">Comment:</label>
-          <textarea class="form-control" id="commentDescription" formControlName="commentDescription" class="form-control" rows="5" />
-      </div>
-      -->
+
+  <div class="form-group">
+    <label for="commentDescription">Comment:</label>
+    <textarea class="form-control" id="commentDescription" formControlName="commentDescription" rows="5"></textarea>
+  </div>
+
 
   <!-- A button that is of type "submit", which means that it is connected to a form and inputs. Otherwise the button is disabled until the form is valid/accepted.-->
   <button class='btn btn-primary' type="submit" [disabled]="postForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Post </button>
