@@ -1,16 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+
+
+body {
+  font-family: 'Mulish', sans-serif;
+  background-color: aliceblue;
+}
+
 a {
-  color: #0366d6;
+  text-decoration: none;
 }
 
-code {
-  color: #e01a76;
+h1 {
+  text-align: center;
+  margin-top: 40px;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+thead {
+  margin-top: 20px;
 }

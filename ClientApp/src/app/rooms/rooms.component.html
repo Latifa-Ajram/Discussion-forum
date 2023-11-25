@@ -2,45 +2,53 @@
 <h1 id="tableLabel">{{ viewTitle }}</h1>
 
 <!-- Creating the input to write into the filtering event -->
-<div class="row">
-  <div class="col-md-2">Filter by:</div>
-  <div class="col-md-4">
-    <input type="text" [(ngModel)]="listFilter" />
+
+<div class="container">
+  <div>
+    <div class="col-md-2">Filter by:</div>
+    <div class="col-md-4">
+      <input type="text" placeholder="Serach"
+             style="width:450px;padding:2px 20px;margin:10px 0px;height:30px;"
+             [(ngModel)]="listFilter" />
+
+    </div>
+
+    <!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
+    <div>
+
+      <h6>Filtered by: {{listFilter}}</h6>
+
+    </div>
+
   </div>
-</div>
 
-<!-- The output from the filtering event, showing which word or letter the view is currently filtered on -->
-<div class="row">
-  <div class="col-md-6">
-    <h4>Filtered by: {{ listFilter }}</h4>
+  <!-- Creating a table to show the roominformation inside-->
+  <table class="table table-striped" aria-labelledby="tableLabel">
+    <thead>
+      <tr>
+        <!--<th>Room Id</th>-->
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--Listing out all the filtered rooms:-->
+      <tr *ngFor="let room of filteredRooms">
+        <!--<td>{{ room.RoomId }}</td>-->
+        <!---Trying to link the roomName to the topic page with the roomId to know which data to fetch and load (rooms)-->
+        <td><a [routerLink]="['/topics/', room.RoomId]">{{ room.RoomName }}</a></td>
+        <td>
+          <!-- Two different links: One to update the chosen room, the other one to delete it.-->
+          <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
+          <a class="update-link" (click)="updateSelectedRoom(room.RoomId)" class="btn btn-sm btn-info mr-2">Update</a>
+          <!-- This delete field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
+          <a class="delete-link" (click)="deleteRoom(room)" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- A button for navigating to create a new room, when clicked, the named method is invoked in the typescript-file-->
+  <div class="text-right my-4">
+    <button class="btn btn-success" (click)="createNewRoom()">Create New Room</button>
   </div>
-</div>
-
-<!-- Creating a table to show the roominformation inside-->
-<table class="table table-striped" aria-labelledby="tableLabel">
-  <thead>
-    <tr>
-      <th>Room Id</th>
-      <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!--Listing out all the filtered rooms:-->
-    <tr *ngFor="let room of filteredRooms">
-      <td>{{ room.RoomId }}</td>
-      <!---Trying to link the roomName to the topic page with the roomId to know which data to fetch and load (rooms)-->
-      <td><a [routerLink]="['/topics/', room.RoomId]">{{ room.RoomName }}</a></td>
-      <td>
-        <!-- Two different links: One to update the chosen room, the other one to delete it.-->
-        <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
-        <a class="update-link" (click)="updateSelectedRoom(room.RoomId)">Update</a>
-        <!-- This delete field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
-        <a class="delete-link" (click)="deleteRoom(room)">Delete</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- A button for navigating to create a new room, when clicked, the named method is invoked in the typescript-file-->
-<button class="btn btn-primary" (click)="createNewRoom()">Create New Room</button>

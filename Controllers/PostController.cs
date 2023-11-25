@@ -9,13 +9,14 @@ namespace ForumAngularVersion.Controllers;
 public class PostController : Controller
 {
     private readonly IPostRepository _postRepository;
-    private readonly ICommentRepository _commentRepository; //We need this so that we can create a comment when we create a post.
     private readonly ITopicRepository _topicRepository;
+    private readonly ICommentRepository _commentRepository;
     private readonly ILogger<PostController> _logger;
 
-    public PostController(IPostRepository postRepository, ITopicRepository topicRepository ,ILogger<PostController> logger)
+    public PostController(IPostRepository postRepository, ICommentRepository commentRepository, ITopicRepository topicRepository ,ILogger<PostController> logger)
     {
         _postRepository = postRepository;
+        _commentRepository = commentRepository;
         _topicRepository = topicRepository;
         _logger = logger;
     }
@@ -81,9 +82,8 @@ public class PostController : Controller
         {
             return BadRequest("Invalid Post data");
         }
-        bool PostreturnOK = await _postRepository.Create(newPost);
-        bool CommenreturnOk = await _commentRepository.Create(newComment);
-        if (PostreturnOK || CommenreturnOk)
+       bool returnOK = await _postRepository.Create(newPost);
+        if(returnOK)
         {
             var response = new { success = true, message = "Post " + newPost.PostTitle + " created successfully" };
             return Ok(response);

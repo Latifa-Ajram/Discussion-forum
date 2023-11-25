@@ -1,0 +1,20 @@
+/* Footer Styles */
+
+/* Style social media buttons */
+.btn.btn-social {
+  color: var(--light);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 35px;
+  transition: 0.3s;
+}
+
+/* Style copyright information */
+.copyright {
+  padding-top: 9px;
+}
+
+/* Style contact title and logo */
+.contact-title, .logo {
+  font-size: 20px;
+  font-weight: bold;
+}
