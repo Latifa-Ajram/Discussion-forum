@@ -87,7 +87,7 @@ public class PostController : Controller
 
         Comment comment = new Comment();
         comment.PostId = newPost.PostId;
-        comment.CommentDescription = newPost.commentdDescription;
+        //comment.CommentDescription = newPost.commentdDescription;
 
 
         bool returnOk2 = await _commentRepository.Create(comment);
