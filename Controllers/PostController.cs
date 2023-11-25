@@ -13,7 +13,7 @@ public class PostController : Controller
     private readonly ICommentRepository _commentRepository;
     private readonly ILogger<PostController> _logger;
 
-    public PostController(IPostRepository postRepository, ICommentRepository commentRepository, ITopicRepository topicRepository ,ILogger<PostController> logger)
+    public PostController(IPostRepository postRepository, ICommentRepository commentRepository, ITopicRepository topicRepository, ILogger<PostController> logger)
     {
         _postRepository = postRepository;
         _commentRepository = commentRepository;
@@ -77,13 +77,22 @@ public class PostController : Controller
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> Create([FromBody] Post newPost) {
-       if(newPost == null)
+    public async Task<IActionResult> Create([FromBody] Post newPost)
+    {
+        if (newPost == null)
         {
             return BadRequest("Invalid Post data");
         }
-       bool returnOK = await _postRepository.Create(newPost);
-        if(returnOK)
+        bool returnOK = await _postRepository.Create(newPost);
+
+        Comment comment = new Comment();
+        comment.PostId = newPost.PostId;
+        comment.CommentDescription = newPost.commentdDescription;
+
+
+        bool returnOk2 = await _commentRepository.Create(comment);
+
+        if (returnOK)
         {
             var response = new { success = true, message = "Post " + newPost.PostTitle + " created successfully" };
             return Ok(response);

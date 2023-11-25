@@ -21,50 +21,50 @@ export class PostformComponent implements OnInit {
 
   //Initilizing imported services and the form we are using inside the view in order to populate it:
   constructor(
-      private _formbuilder: FormBuilder,
-      private _router: Router,
-      private _route: ActivatedRoute,
-      private _postService: PostService,
-      private _topicService: TopicService
+    private _formbuilder: FormBuilder,
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _postService: PostService,
+    private _topicService: TopicService
   ) {
-      this.postForm = _formbuilder.group({
-        postTitle: ['', Validators.required],
-        topicId: [-1, [idValidator()]],
-        commentDescription: ['', Validators.required]
-      });
+    //We only use commentDescription when creating a post (not when updating), there is a check for this under onInit.
+    this.postForm = _formbuilder.group({
+      postTitle: ['', Validators.required],
+      topicId: [-1, [idValidator()]]
+    });
   }
 
   //This method is invoked when the submit button is clicked via the eventcall from the form. The forms values are retrieved and set inside the newPost object.
   //If this was an edit of a existing post, then we invoke the updatePost method from the service and subscribe for a callback.
   //If not, then we invoke the createPost from the service and subscribe for the callback from it. If they succeed, then we are passed back to the list of all Posts:
   onSubmit() {
-      console.log("PostCreate form submitted:");
-      console.log(this.postForm);
-      const newPost = this.postForm.value;
-      if (this.isEditMode) {
-          this._postService.updatePost(this.postId, newPost)
-              .subscribe(response => {
-                  if (response.success) {
-                    console.log(response.message);
-                    this._router.navigate(['/posts', this.topicId]);
-                  }
-                  else {
-                      console.log('Post update failed');
-                  }
-              });
-      }
-      else {
-          this._postService.createPost(newPost)
-              .subscribe(response => {
-                  if (response.success) {
-                    console.log(response.message);
-                    this._router.navigate(['/posts', this.topicId]);
-                  }
-                  else {
-                      console.log('Post creation failed');
-                  }
-              });
-      }
+    console.log("PostCreate form submitted:");
+    console.log(this.postForm.value);
+    const newPost = this.postForm.value;
+    if (this.isEditMode) {
+      this._postService.updatePost(this.postId, newPost)
+        .subscribe(response => {
+          if (response.success) {
+            console.log(response.message);
+            this._router.navigate(['/posts', this.topicId]);
+          }
+          else {
+            console.log('Post update failed');
+          }
+        });
+    }
+    else {
+      this._postService.createPost(newPost)
+        .subscribe(response => {
+          if (response.success) {
+            console.log(response.message);
+            this._router.navigate(['/posts', this.topicId]);
+          }
+          else {
+            console.log('Post creation failed');
+          }
+        });
+    }
   }
 
   //A method connected to a button that routes us back to posts
@@ -79,21 +79,21 @@ export class PostformComponent implements OnInit {
     this.fetchTopics();
 
     this._route.params.subscribe(params => {
-        if (params['mode'] === 'create') {// Create mode
-          this.isEditMode = false; 
-          this.topicId = +params['topicId']; //If the user came from a topic to create a new post, then the id is not -1 and the topic in the form is set by defualt, if not, it is -1.
-          this.postForm.patchValue({
-            topicId: this.topicId
-          });
-        }
-        else if (params['mode'] === 'edit') {// Edit mode
-          this.isEditMode = true; 
-          this.topicId = +params['topicId'];// Convert to number
-          this.postId = +params['postId']; // Convert to number
-          this.loadPostForEdit(this.postId);
-        }
+      if (params['mode'] === 'create') {// Create mode
+        this.isEditMode = false;
+        this.postForm.addControl('commentDescription', new FormControl('', Validators.required));
+        this.topicId = +params['topicId']; //If the user came from a topic to create a new post, then the id is not -1 and the topic in the form is set by defualt, if not, it is -1.
+        this.postForm.patchValue({
+          topicId: this.topicId
+        });
+      }
+      else if (params['mode'] === 'edit') {// Edit mode
+        this.isEditMode = true;
+        this.topicId = +params['topicId'];// Convert to number
+        this.postId = +params['postId']; // Convert to number
+        this.loadPostForEdit(this.postId);
+      }
     });
-    
   }
 
   //Using the service to invoke the getTopics() and subscribe for a callback. When the topics are retrieved they are populated into the list:
@@ -112,19 +112,19 @@ export class PostformComponent implements OnInit {
   //Method that takes in a post id, uses the service to invoke the getPostById and subscribes for the callback. When the data returns,
   //it is patched into the form, but if it fails, then data is logged instead:
   loadPostForEdit(postId: number) {
-      this._postService.getPostById(postId)
-          .subscribe(
-              (post: any) => {
-                  console.log('retrived post: ', post);
-                  this.postForm.patchValue({
-                      postTitle: post.PostTitle,
-                      topicId: post.TopicId
-                  });
-              },
-              (error: any) => {
-                  console.error('Error loading post for edit:', error);
-              }
-          );
+    this._postService.getPostById(postId)
+      .subscribe(
+        (post: any) => {
+          console.log('retrived post: ', post);
+          this.postForm.patchValue({
+            postTitle: post.PostTitle,
+            topicId: post.TopicId
+          });
+        },
+        (error: any) => {
+          console.error('Error loading post for edit:', error);
+        }
+      );
   }
 }
 

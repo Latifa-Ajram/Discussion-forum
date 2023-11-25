@@ -27,8 +27,8 @@
     </div>
   </div>
 
-
-  <div class="form-group">
+  <!--Form for creating a commen for the post, only used when creating and not when updating a post.-->
+  <div *ngIf="!isEditMode" class="form-group">
     <label for="commentDescription">Comment:</label>
     <textarea class="form-control" id="commentDescription" formControlName="commentDescription" rows="5"></textarea>
   </div>
