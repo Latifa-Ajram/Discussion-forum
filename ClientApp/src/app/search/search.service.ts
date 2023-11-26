@@ -12,6 +12,7 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   search(query: string): Observable<ISearch> {
-    return this.http.get<ISearch>(`${this.apiUrl}?searchTerm=${query}`);
+    const encodedQuery = encodeURIComponent(query);
+    return this.http.get<ISearch>(`${this.apiUrl}?searchTerm=${encodedQuery}`);
   }
 }
