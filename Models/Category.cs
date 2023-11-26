@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace ForumAngularVersion.Models
 {
@@ -8,6 +9,7 @@ namespace ForumAngularVersion.Models
         public int CategoryId { get; set; }
 
         [JsonPropertyName("CategoryName")]
+        [RegularExpression(@"^[a-zA-ZæøåÆØÅ,. \-]{2,35}$")]
         public string CategoryName { get; set; } = string.Empty;
 
         [JsonPropertyName("rooms")]

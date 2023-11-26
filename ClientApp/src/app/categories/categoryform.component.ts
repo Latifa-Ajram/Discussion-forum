@@ -20,7 +20,7 @@ export class CategoryformComponent {
   //Initilizing imported services and the form we are using inside the view in order to populate it:
   constructor(private _formbuilder: FormBuilder, private _router: Router, private _route: ActivatedRoute, private _Categorieservice: Categorieservice) {
     this.categoryForm = _formbuilder.group({
-      categoryName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
+      categoryName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(35)]]
     });
   }
 
@@ -100,9 +100,9 @@ export class CategoryformComponent {
       if (userInput.hasError('required')) {
         return 'Category name is required.';
       } else if (userInput.hasError('minlength')) {
-        return 'Category name must be at least 3 characters.';
+        return 'Category name must be at least 2 characters.';
       } else if (userInput.hasError('maxlength')) {
-        return 'Category name must have less than 50 characters.';
+        return 'Category name must have less than 35 characters.';
       }
     }
     return ''; //returns a empty string if there are no errors.

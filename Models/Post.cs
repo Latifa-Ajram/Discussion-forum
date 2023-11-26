@@ -13,6 +13,7 @@ namespace ForumAngularVersion.Models
 
         [Required]
         [JsonPropertyName("PostTitle")]
+        [RegularExpression(@"^[a-zA-ZæøåÆØÅ,. \-]{2,35}$")]
         public string PostTitle { get; set; }
 
         [JsonPropertyName("Comments")]

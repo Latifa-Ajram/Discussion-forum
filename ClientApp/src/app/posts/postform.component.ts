@@ -29,8 +29,8 @@ export class PostformComponent implements OnInit {
   ) {
     //We only use commentDescription when creating a post (not when updating), there is a check for this under onInit.
     this.postForm = _formbuilder.group({
-      postTitle: ['', Validators.required],
-      topicId: [-1, [idValidator()]]
+      postTitle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
+        topicId: [-1, [idValidator()]]
     });
   }
 
@@ -126,5 +126,19 @@ export class PostformComponent implements OnInit {
           console.error('Error loading post for edit:', error);
         }
       );
+  }
+
+  get postTitleErrorMessage(): string {
+    const userInput = this.postForm.get('postTitle');
+    if (userInput) {
+      if (userInput.hasError('required')) {
+        return 'Post title is required.';
+      } else if (userInput.hasError('minlength')) {
+        return 'The post title must be at least 2 characters.';
+      } else if (userInput.hasError('maxlength')) {
+        return 'The post title must be less than 35 characters.';
+      }
+    }
+    return ''; //returns a empty string if there are no errors.
   }
 }

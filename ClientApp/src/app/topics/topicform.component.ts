@@ -29,7 +29,7 @@ export class TopicformComponent {
   )
   {
     this.topicForm = _formbuilder.group({
-      topicName: ['', Validators.required],
+      topicName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
       roomId: [-1, [idValidator()]]
     })
   }
@@ -124,5 +124,20 @@ export class TopicformComponent {
           console.error('Error loading topic for edit:', error);
         }
       );
+  }
+
+  //A method to create a custom error message for topic.
+  get topicNameErrorMessage(): string {
+    const userInput = this.topicForm.get('topicName');
+    if (userInput) {
+      if (userInput.hasError('required')) {
+        return 'Topic name is required.';
+      } else if (userInput.hasError('minlength')) {
+        return 'Topic name must be at least 2 characters.';
+      } else if (userInput.hasError('maxlength')) {
+        return 'Topic name must have less than 35 characters.';
+      }
+    }
+    return ''; //returns a empty string if there are no errors.
   }
 }

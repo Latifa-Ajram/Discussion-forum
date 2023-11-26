@@ -22,8 +22,8 @@
     <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "postTitle" in the typescript-file-->
     <input type="text" id="postTitle" formControlName="postTitle" class="form-control" />
     <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
-    <div class="warning" *ngIf="postForm.get('postTitle')?.hasError('required')">
-      Post-Title is required.
+    <div class="warning" *ngIf="postForm.get('postTitle')?.errors">
+      {{postTitleErrorMessage}}
     </div>
   </div>
 

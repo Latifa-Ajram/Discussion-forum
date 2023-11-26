@@ -26,7 +26,7 @@ export class CommentformComponent {
     private _postService: PostService
   ) {
     this.commentForm = _formbuilder.group({
-      commentDescription: ['', Validators.required],
+      commentDescription: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10000)]],
       postId: [-1, [idValidator()]]
     });
   }
@@ -107,6 +107,21 @@ export class CommentformComponent {
    //A method connected to a button that routes us back to comments
   backToComments() {
     this._router.navigate(['/comments', this.postId]);
+  }
+
+  //A method to return a custom error message to the html.
+  get commentDescriptionErrorMessage(): string {
+    const userInput = this.commentForm.get('commentDescription');
+    if (userInput) {
+      if (userInput.hasError('required')) {
+        return 'Comment description is required.';
+      } else if (userInput.hasError('minlength')) {
+        return 'Comment description must be at least 2 characters.';
+      } else if (userInput.hasError('maxlength')) {
+        return 'Comment description must have less than 10000 characters.';
+      }
+    }
+    return ''; //returns a empty string if there are no errors.
   }
 }
 

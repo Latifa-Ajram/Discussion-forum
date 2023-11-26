@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace ForumAngularVersion.Models
@@ -9,6 +10,7 @@ namespace ForumAngularVersion.Models
         public int TopicId { get; set; }
 
         [JsonPropertyName("TopicName")]
+        [RegularExpression(@"^[a-zA-ZæøåÆØÅ,. \-]{2,35}$")]
         public string TopicName { get; set; } = string.Empty;
 
         [JsonPropertyName("RoomId")]

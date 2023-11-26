@@ -10,8 +10,8 @@
     <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "commentDescription" in the typescript-file-->
     <textarea class="form-control" id="commentDescription" formControlName="commentDescription" rows="5"></textarea>
     <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
-    <div class="warning" *ngIf="commentForm.get('commentDescription')?.hasError('required')">
-      A Comment description is required.
+    <div class="warning" *ngIf="commentForm.get('commentDescription')?.errors">
+      {{commentDescriptionErrorMessage}}
     </div>
     <!-- When we pass the form, we want to make sure that the current postId for the comment is passed along. No comment cant exist without a post ...-->
     <input type="hidden" id="postId" formControlName="postId" />

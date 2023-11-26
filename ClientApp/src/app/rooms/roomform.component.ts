@@ -27,7 +27,7 @@ export class RoomformComponent implements OnInit {
     private _roomService: RoomService
   ) {
     this.roomForm = this._formbuilder.group({
-      roomName: ['', Validators.required],
+      roomName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
       categoryId: [-1, [idValidator()]] 
     });
   }
@@ -118,5 +118,21 @@ export class RoomformComponent implements OnInit {
   backToRooms() {
     this._router.navigate(['/rooms', this.categoryId]);
   }
+
+  //A method to create a custom error message for room.
+  get roomNameErrorMessage(): string {
+    const userInput = this.roomForm.get('roomName');
+    if (userInput) {
+      if (userInput.hasError('required')) {
+        return 'Room name is required.';
+      } else if (userInput.hasError('minlength')) {
+        return 'Room name must be at least 2 characters.';
+      } else if (userInput.hasError('maxlength')) {
+        return 'Room name must have less than 35 characters.';
+      }
+    }
+    return ''; //returns a empty string if there are no errors.
+  }
+
 }
 
