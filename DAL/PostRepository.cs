@@ -69,17 +69,16 @@ public class PostRepository : IPostRepository
     //Mehtod to create a new post
     public async Task<bool> Create(Post post)
     {
-         try
+        try
         {
             _db.Posts.Add(post);
             await _db.SaveChangesAsync();
             return true; // Indicate success
-
         }
         catch (Exception e)
         {
             _logger.LogError("[PostRepository] post creation failed for post {@post}, error message: {e}", post, e.Message);
-            return true; // Indicate success
+            return false;
         }
     }
 

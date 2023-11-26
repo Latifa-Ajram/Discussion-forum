@@ -59,6 +59,7 @@ export class PostformComponent implements OnInit {
           if (response.success) {
             console.log(response.message);
             this._router.navigate(['/posts', this.topicId]);
+
           }
           else {
             console.log('Post creation failed');
@@ -81,7 +82,7 @@ export class PostformComponent implements OnInit {
     this._route.params.subscribe(params => {
       if (params['mode'] === 'create') {// Create mode
         this.isEditMode = false;
-        this.postForm.addControl('commentDescription', new FormControl('', Validators.required));
+        //this.postForm.addControl('commentDescription', new FormControl('', Validators.required));
         this.topicId = +params['topicId']; //If the user came from a topic to create a new post, then the id is not -1 and the topic in the form is set by defualt, if not, it is -1.
         this.postForm.patchValue({
           topicId: this.topicId
@@ -127,4 +128,3 @@ export class PostformComponent implements OnInit {
       );
   }
 }
-

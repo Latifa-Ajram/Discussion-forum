@@ -5,9 +5,6 @@ import { CommentService } from './comments.service';
 import { PostService } from '../posts/posts.service';
 import { idValidator } from '../services/IDValidator';
 
-
-
-
 @Component({
   selector: "app-comments-commentform",
   templateUrl: "./commentform.component.html",
@@ -98,7 +95,7 @@ export class CommentformComponent {
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
-            this._router.navigate(['/comments', this.postId]);
+            this._router.navigate(['/comments', this.postId]); //Returns to .../comment/postId on successfull comment creation
           }
           else {
             console.log('Comment creation failed');
@@ -111,8 +108,6 @@ export class CommentformComponent {
   backToComments() {
     this._router.navigate(['/comments', this.postId]);
   }
-
-
 }
 
 

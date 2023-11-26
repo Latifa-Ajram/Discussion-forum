@@ -4,6 +4,5 @@ export interface IPost {
   PostId: number;
   PostTitle: string;
   TopicId: number; //fk
-  CommentDescription: string;
   Comments?: IComment[];
 }

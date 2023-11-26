@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categorieservice } from './categories.service';
+import { User } from 'oidc-client';
 
 @Component({
   selector: "app-Categories-categoryform",
@@ -19,14 +20,14 @@ export class CategoryformComponent {
   //Initilizing imported services and the form we are using inside the view in order to populate it:
   constructor(private _formbuilder: FormBuilder, private _router: Router, private _route: ActivatedRoute, private _Categorieservice: Categorieservice) {
     this.categoryForm = _formbuilder.group({
-      categoryName: ['', Validators.required]
+      categoryName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
     });
   }
 
   //This method is invoked when the submit button is clicked via the eventcall from the form. The forms values are retrieved and set inside the newCategory object.
   //If this was an edit of a existing category, then we invoke the updateCategory method from the service and subscribe for a callback.
   //If not, then we invoke the createCategory from the service and subscribe for the callback from it. If they succeed, then we are passed back to the list of all categories:
-  onSubmit(){
+  onSubmit() {
     console.log("CategoryCreate form submitted");
     console.log(this.categoryForm);
 
@@ -45,16 +46,16 @@ export class CategoryformComponent {
     }
     else {
       this._Categorieservice.createCategory(newCategory).subscribe(response => {
-            if (response.success) {
-              console.log(response.message);
-              this._router.navigate(['/Categories']);
-            }
-            else {
-              console.log('Category creation failed');
-            }
-          });
+        if (response.success) {
+          console.log(response.message);
+          this._router.navigate(['/Categories']);
+        }
+        else {
+          console.log('Category creation failed');
+        }
+      });
     }
-    
+
   }
 
   //A method connected to a button that routes us back to categories
@@ -91,4 +92,20 @@ export class CategoryformComponent {
       }
     );
   }
+
+  //Method to return a spesific error message to the html based on which error is present.
+  get categoryFormErrorMessage(): string {
+    const userInput = this.categoryForm.get('categoryName');
+    if (userInput) {
+      if (userInput.hasError('required')) {
+        return 'Category name is required.';
+      } else if (userInput.hasError('minlength')) {
+        return 'Category name must be at least 3 characters.';
+      } else if (userInput.hasError('maxlength')) {
+        return 'Category name must have less than 50 characters.';
+      }
+    }
+    return ''; //returns a empty string if there are no errors.
+  }
 }
+
