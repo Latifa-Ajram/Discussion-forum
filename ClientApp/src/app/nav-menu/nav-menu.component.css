@@ -19,3 +19,56 @@ html {
 .navbar.navbar-expand-md {
   max-height: 50px; /* Adjust the maximum height of the navbar as needed */
 }
+
+
+/*NAVBAR*/
+/* Define styles for the navbar */
+.navbar.navbar-expand-md {
+  max-height: 50px; /* Adjust the maximum height of the navbar as needed */
+}
+
+.header-text {
+  font-size: 40px;
+  color: inherit; /* Style the header text and ensure it inherits the color */
+}
+
+  .header-text:hover {
+    color: inherit; /* Define styles for the header text when hovered over */
+  }
+
+/* Remove text decoration from links */
+a {
+  text-decoration: none;
+}
+
+/* Style the main navigation link and the logout button */
+.main-nav-link.nav-cta, #logout {
+  font-size: 20px;
+  color: inherit;
+}
+
+#logout {
+  padding: 0.5rem 2rem;
+  border-radius: 3px;
+}
+
+/* Style navigation links for a cleaner look */
+.main-nav-link.nav-ct:link,
+.main-nav-link.nav-ct:visited {
+  padding: 0.5rem 2rem;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #000080;
+}
+
+.main-nav-link.nav-ct:hover,
+.main-nav-link.nav-ct:hover {
+  background-color: #6082B6; /* Change background color on hover */
+}
+/**Navigation in topic room and categoyr*/
+.navigation-link {
+  /* Use the default text color */
+  text-decoration: none;
+  font-size: 15px;
+  color: #0047AB;
+}
