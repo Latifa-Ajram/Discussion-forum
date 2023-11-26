@@ -55,3 +55,49 @@ ul.list-unstyled li p {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+
+
+/* CATEGORY SECTION Styles */
+
+/* Style category columns */
+.col-category {
+  padding: 7px;
+  text-align: center;
+  color: white;
+  margin: 6px; /* Space between categories */
+  background-color: #4682B4;
+  width: 80%;
+  font-weight: bold;
+}
+
+  /* Change category text color on hover */
+  .col-category:hover {
+    color: #fff;
+  }
+
+/* Add border style */
+.border-box {
+  border: 1px solid #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Style headings (h2) within categories */
+h2 {
+  font-weight: bold;
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+  h2 a {
+    text-decoration: none;
+    color: white;
+  }
+
+    h2 a:hover {
+      text-decoration: none; /* Fjern understrekningen på hover */
+      color: white; /* Behold samme farge på hover */
+    }
+
+/* Our Chosen Ones Section Styles */

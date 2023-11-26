@@ -83,6 +83,8 @@ public class PostController : Controller
         {
             return BadRequest("Invalid Post data");
         }
+        // Set the PostTime property to the current time
+        newPost.PostTime = DateTime.Now;
         bool returnOK = await _postRepository.Create(newPost);
 
         Comment comment = new Comment();

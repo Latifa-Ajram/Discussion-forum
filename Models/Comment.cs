@@ -19,8 +19,8 @@ namespace ForumAngularVersion.Models
         [JsonPropertyName("CommentDescription")]
         public string CommentDescription { get; set; }
 
-       // [JsonPropertyName("CommentTime")]
-       // public DateTime CommentTime { get; set; } // Time of creation
+        [JsonPropertyName("CommentTime")]
+        public DateTime CommentTime { get; set; } // Time of creation
 
 
        // public virtual Post? Post { get; set; } // Virtual enables lazy loading.

@@ -24,10 +24,14 @@ export class HomeComponent implements OnInit {
 
     this.postService.getPosts().subscribe(data => {
       console.log('Received posts:', data);
-      this.posts = data.map(post => ({
-        ...post,
-        formattedTime: this.formatTime(post.PostTime)
-      }));
+
+      // Sort posts based on creation time in descending order (newest first)
+      this.posts = data.sort((a, b) => new Date(b.PostTime).getTime() - new Date(a.PostTime).getTime())
+        .slice(0, 7) // Take the first 6 posts
+        .map(post => ({
+          ...post,
+          formattedTime: this.formatTime(post.PostTime)
+        }));
     });
   }
 
