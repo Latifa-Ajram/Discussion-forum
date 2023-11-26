@@ -1,0 +1,10 @@
+<div class="d-flex">
+  <input class="form-control me-2" type="text" id="searchQuery" [(ngModel)]="query" />
+  <button class="btn btn-primary" (click)="search()">
+    <i class="fas fa-search"></i> <!-- Font Awesome search icon -->
+  </button>
+</div>
+
+<div *ngIf="searchResult">
+  <!-- Display your search results here -->
+</div>

@@ -18,6 +18,8 @@ import { PostsComponent } from './posts/posts.component';
 import { PostformComponent } from './posts/postform.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentformComponent } from './comments/commentform.component';
+import { SearchComponent } from './search/search.component'; // Adjust the path based on your actual structure
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { CommentformComponent } from './comments/commentform.component';
     PostsComponent,
     PostformComponent,
     CommentsComponent,
-    CommentformComponent
+    CommentformComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
