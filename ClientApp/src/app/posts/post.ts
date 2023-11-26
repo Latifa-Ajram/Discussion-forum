@@ -3,6 +3,8 @@ import { IComment } from '../comments/comment';
 export interface IPost {
   PostId: number;
   PostTitle: string;
+  PostTime: Date;
   TopicId: number; //fk
   Comments?: IComment[];
+  formattedTime: string;
 }

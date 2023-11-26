@@ -16,6 +16,9 @@ namespace ForumAngularVersion.Models
         [RegularExpression(@"^[a-zA-ZæøåÆØÅ,. \-]{2,35}$")]
         public string PostTitle { get; set; }
 
+        [JsonPropertyName("PostTime")]
+        public DateTime PostTime { get; set; }
+
         [JsonPropertyName("Comments")]
         public virtual List<Comment>? Comments { get; set; }
 

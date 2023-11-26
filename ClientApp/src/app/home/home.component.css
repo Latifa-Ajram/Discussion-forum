@@ -1,0 +1,57 @@
+body {
+}
+
+/*THIS IS WHAT WE'RE TALKING ABOUT NOW SECTOION styles*/
+
+/* Style the main content area column */
+.col-md-8 {
+  border: 1px solid #e0e0e0;
+  width: 100%;
+  background-color: white;
+}
+
+/* Style the list items */
+.list-unstyled li {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 25px;
+}
+
+/* Style headings (h4) within list items */
+ul.list-unstyled li h4 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Style links (a) within headings */
+.list-unstyled li h4 a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+/* Change link color on hover */
+ul.list-unstyled li h4 a:hover {
+  color: #0056b3;
+}
+
+/* Style timestamps (p) within list items */
+ul.list-unstyled li p {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
+}
+
+/* Define styles for the section title */
+.section-talking-title {
+  padding-bottom: 15px;
+  padding-top: 25px;
+  font-weight: bold;
+}
+
+/* Add a custom line (horizontal rule) between items */
+.custom-line {
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
