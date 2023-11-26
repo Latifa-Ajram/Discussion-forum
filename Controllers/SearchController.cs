@@ -21,7 +21,7 @@ namespace ForumAngularVersion.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("search")]
         public IActionResult Search(string searchTerm)
         {
             try
