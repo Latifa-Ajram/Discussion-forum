@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../posts/posts.service';
 import { IPost } from '../posts/post';
+import { ICategory } from '../categories/category';
+import { Categorieservice } from '../categories/categories.service';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +11,17 @@ import { IPost } from '../posts/post';
 })
 export class HomeComponent implements OnInit {
   posts: IPost[] = [];
+  categories: ICategory[] = [];
 
-
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private categoryService: Categorieservice) { }
 
   ngOnInit(): void {
+    // Hent alle kategorier
+    this.categoryService.getCategories().subscribe((categoryData: ICategory[]) => {
+      console.log('Received categories:', categoryData);
+      this.categories = categoryData;
+    });
+
     this.postService.getPosts().subscribe(data => {
       console.log('Received posts:', data);
       this.posts = data.map(post => ({
