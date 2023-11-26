@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ISearch } from '../search/search';
 
 @Injectable({
@@ -13,6 +14,15 @@ export class SearchService {
 
   search(query: string): Observable<ISearch> {
     const encodedQuery = encodeURIComponent(query);
-    return this.http.get<ISearch>(`${this.apiUrl}?searchTerm=${encodedQuery}`);
+
+    return this.http.get<ISearch>(`${this.apiUrl}?searchTerm=${encodedQuery}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('Error during search:', error);
+    return throwError('Internal Server Error');
   }
 }

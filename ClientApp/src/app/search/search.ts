@@ -3,8 +3,8 @@ import { IPost } from '../posts/post';
 import { ICategory } from '../categories/category';
 
 export interface ISearch {
-  categories?: ICategory[]; // Adjust these types based on your actual data structures
+  Categories?: ICategory[]; // Adjust these types based on your actual data structures
   Comments?: IComment[];
-  Post?: IPost[];
+  Posts?: IPost[];
   
 }

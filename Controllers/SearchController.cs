@@ -1,59 +1,58 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using ForumAngularVersion.DAL;
 using ForumAngularVersion.Models;
-using ForumAngularVersion.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace ForumAngularVersion.Controllers
+[ApiController]
+[Route("api/[controller]")]
+public class SearchController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class SearchController : ControllerBase
+    private readonly ForumDbContext _db;
+    private readonly ILogger<SearchController> _logger;
+
+    public SearchController(ForumDbContext db, ILogger<SearchController> logger)
     {
-        private readonly ForumDbContext _db;
-        private readonly ILogger<SearchController> _logger;
+        _db = db;
+        _logger = logger;
+    }
 
-        public SearchController(ForumDbContext db, ILogger<SearchController> logger)
+    [HttpGet]
+    public IActionResult Search(string searchTerm)
+    {
+        try
         {
-            _db = db;
-            _logger = logger;
+            _logger.LogInformation($"Received search request with term: {searchTerm}");
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                // If the query is empty, return an empty list
+                return Ok(new { Categories = new List<Category>(), Posts = new List<Post>(), Comments = new List<Comment>() });
+            }
+
+            // Your existing code for searching categories, posts, and comments
+
+            var categories = _db.Categories
+      .Where(category => EF.Functions.Like(category.CategoryName, $"%{searchTerm}%"))
+      .ToList();
+
+            var posts = _db.Posts
+                .Where(post => EF.Functions.Like(post.PostTitle, $"%{searchTerm}%"))
+                .ToList();
+            ;
+
+            var comments = _db.Comments
+    .Where(comment => EF.Functions.Like(comment.CommentDescription, $"%{searchTerm}%"))
+    .ToList();
+
+            // Return JSON data
+            return Ok(new { Categories = categories, Posts = posts, Comments = comments });
         }
-
-        [HttpGet("search")]
-        public IActionResult Search(string searchTerm)
+        catch (Exception e)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(searchTerm))
-                {
-                    // If the query is empty, return an empty list
-                    return Ok(new { Categories = new List<Category>(), Posts = new List<Post>(), Comments = new List<Comment>() });
-                }
+            _logger.LogError(e, "An error occurred during the search.");
 
-                // Your existing code for searching categories, posts, and comments
-
-                var categories = _db.Categories
-                    .Where(category => category.CategoryName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-
-                var posts = _db.Posts
-                    .Where(post => post.PostTitle.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-
-                var comments = _db.Comments
-                    .Where(comment => comment.CommentDescription.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-
-                // Return JSON data
-                return Ok(new { Categories = categories, Posts = posts, Comments = comments });
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "An error occurred during the search.");
-                return StatusCode(500, "Internal Server Error");
-            }
+            // Return a more detailed error message
+            return StatusCode(500, $"Internal Server Error: {e.Message}");
         }
     }
 }
