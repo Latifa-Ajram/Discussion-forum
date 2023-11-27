@@ -1,7 +1,8 @@
 // searchform.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router'; // Legg til Router import
+import { SearchService } from '../search/search.service';
 
 @Component({
   selector: 'app-searchform',
@@ -10,8 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SearchformComponent implements OnInit {
   searchResult: any;
+  query: string = '';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private searchService: SearchService, private route: ActivatedRoute, private router: Router) { } // Fjernet det ekstra kommaet
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const resultString = params['searchResult'];
@@ -20,6 +22,16 @@ export class SearchformComponent implements OnInit {
     });
   }
 
+  search(): void {
+    this.searchService.search(this.query).subscribe(
+      result => {
+        console.log('Search result:', result);
+        this.router.navigate(['/search'], { queryParams: { searchResult: JSON.stringify(result) } });
 
-
+      },
+      error => {
+        console.error('Error during search:', error);
+      }
+    );
+  }
 }

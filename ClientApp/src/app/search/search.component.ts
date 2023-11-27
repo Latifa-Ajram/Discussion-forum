@@ -19,6 +19,8 @@ export class SearchComponent {
       result => {
         console.log('Search result:', result);
         this.router.navigate(['/search'], { queryParams: { searchResult: JSON.stringify(result) } });
+        this.query = '';
+
       },
       error => {
         console.error('Error during search:', error);
