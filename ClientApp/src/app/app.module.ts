@@ -19,6 +19,8 @@ import { PostformComponent } from './posts/postform.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentformComponent } from './comments/commentform.component';
 import { SearchComponent } from './search/search.component'; // Adjust the path based on your actual structure
+import { SearchformComponent } from './search/searchform.component'; 
+
 
 
 
@@ -39,6 +41,7 @@ import { SearchComponent } from './search/search.component'; // Adjust the path 
     CommentsComponent,
     CommentformComponent,
     SearchComponent,
+    SearchformComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -72,6 +75,7 @@ import { SearchComponent } from './search/search.component'; // Adjust the path 
       { path: 'commentform', component: CommentformComponent },
       { path: 'commentform/:mode/:postId', component: CommentformComponent },
       { path: 'commentform/:mode/:postId/:commentId', component: CommentformComponent },
+      { path: 'search', component: SearchformComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ])
   ],

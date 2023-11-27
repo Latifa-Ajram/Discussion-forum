@@ -15,10 +15,14 @@ export class SearchService {
   search(query: string): Observable<ISearch> {
     const encodedQuery = encodeURIComponent(query);
 
+    console.log("Du har kommet til seach.service", encodedQuery)
+
     return this.http.get<ISearch>(`${this.apiUrl}?searchTerm=${encodedQuery}`)
+
       .pipe(
         catchError(this.handleError)
-      );
+
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
