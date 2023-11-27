@@ -46,7 +46,7 @@ public class CategoryController : Controller
         else
         {
             var response = new { success = false, message = "Category creation failed" };
-            return Ok(response);
+            return BadRequest("Failed to create category");
         }
     }
 
@@ -78,7 +78,7 @@ public class CategoryController : Controller
         else
         {
             var response = new { success = false, message = "Category update failed" };
-            return Ok(response);
+            return BadRequest(response.message);
         }
     }
 
