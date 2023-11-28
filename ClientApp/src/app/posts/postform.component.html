@@ -1,42 +1,45 @@
 <!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set with: Post-->
-<h2>{{ isEditMode ? 'Update' : 'Create' }} Post</h2>
+<div class="content">
 
-<!-- A Form-group with a corresponding on click event that invokes the method "onSubmit()" in typescript-file-->
-<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set with: Topic-->
-    <label for="topicId">{{ isEditMode ? 'Change Topic:' : 'Topic' }}</label>
-    <!-- This select is connected to the variable "topicId" inside the typescript file. Adittonialy it has an onChange event that passes an event when it changes. -->
-    <select id="topicId" formControlName="topicId" class="form-control" (change)="onTopicChange($event)">
-      <!-- This option lists out a list of all topics, and stores the value of the id. The id is used inside the formvalidation in the typescript-file -->
-      <option *ngFor="let topic of topics" [value]="topic.TopicId">{{ topic.TopicName }}</option>
-    </select>
-    <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
-    <div class="warning" *ngIf="postForm.get('topicId')?.hasError('required')">
-      A Topic is required.
+  <h2>{{ isEditMode ? 'Update' : 'Create' }} Post</h2>
+
+  <!-- A Form-group with a corresponding on click event that invokes the method "onSubmit()" in typescript-file-->
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set with: Topic-->
+      <label for="topicId">{{ isEditMode ? 'Change Topic:' : 'Topic' }}</label>
+      <!-- This select is connected to the variable "topicId" inside the typescript file. Adittonialy it has an onChange event that passes an event when it changes. -->
+      <select id="topicId" formControlName="topicId" class="form-control" (change)="onTopicChange($event)">
+        <!-- This option lists out a list of all topics, and stores the value of the id. The id is used inside the formvalidation in the typescript-file -->
+        <option *ngFor="let topic of topics" [value]="topic.TopicId">{{ topic.TopicName }}</option>
+      </select>
+      <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
+      <div class="warning" *ngIf="postForm.get('topicId')?.hasError('required')">
+        A Topic is required.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="postTitle">Name:</label>
-    <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "postTitle" in the typescript-file-->
-    <input type="text" id="postTitle" formControlName="postTitle" class="form-control" />
-    <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
-    <div class="warning" *ngIf="postForm.get('postTitle')?.errors">
-      {{postTitleErrorMessage}}
+    <div class="form-group">
+      <label for="postTitle">Name:</label>
+      <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "postTitle" in the typescript-file-->
+      <input type="text" id="postTitle" formControlName="postTitle" class="form-control" />
+      <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
+      <div class="warning" *ngIf="postForm.get('postTitle')?.errors">
+        {{postTitleErrorMessage}}
+      </div>
     </div>
-  </div>
 
-  <!--Form for creating a commen for the post, only used when creating and not when updating a post.
-  <div *ngIf="!isEditMode" class="form-group">
-    <label for="commentDescription">Comment:</label>
-    <textarea class="form-control" id="commentDescription" formControlName="commentDescription" rows="5"></textarea>
-  </div>-->
+    <!--Form for creating a commen for the post, only used when creating and not when updating a post.
+    <div *ngIf="!isEditMode" class="form-group">
+      <label for="commentDescription">Comment:</label>
+      <textarea class="form-control" id="commentDescription" formControlName="commentDescription" rows="5"></textarea>
+    </div>-->
+    <!-- A button that is of type "submit", which means that it is connected to a form and inputs. Otherwise the button is disabled until the form is valid/accepted.-->
+    <button class='btn btn-primary' type="submit" [disabled]="postForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Post </button>
+
+    <!--A button that invokes the on clicke event "backToPosts" inside the typescript-file-->
+    <button class='btn btn-secondary' (click)="backToPosts()">Cancel</button>
+  </form>
+</div>
 
 
-  <!-- A button that is of type "submit", which means that it is connected to a form and inputs. Otherwise the button is disabled until the form is valid/accepted.-->
-  <button class='btn btn-primary' type="submit" [disabled]="postForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Post </button>
-
-  <!--A button that invokes the on clicke event "backToPosts" inside the typescript-file-->
-  <button class='btn btn-secondary' (click)="backToPosts()">Cancel</button>
-</form>

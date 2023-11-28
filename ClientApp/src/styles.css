@@ -20,3 +20,7 @@ h1 {
 thead {
   margin-top: 20px;
 }
+
+header.bg-white{
+    background-color:cadetblue;
+}
