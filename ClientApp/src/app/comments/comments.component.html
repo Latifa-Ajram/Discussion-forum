@@ -26,7 +26,7 @@
   <table class="table table-striped" aria-labelledby="tableLabel">
     <thead>
       <tr>
-        <th>Comment Id</th>
+        <!--<th>Comment id</th>-->
         <th>Name</th>
         <th>Actions</th>
       </tr>
@@ -34,7 +34,7 @@
     <tbody>
       <!--Listing out all the filtered comments:-->
       <tr *ngFor="let comment of filteredComments">
-        <td>{{ comment.CommentId }}</td>
+        <!--<td>{{comment.CommentId}}</td>-->
         <td>{{ comment.CommentDescription }}</td>
         <td>
           <!-- Two different links: One to update the chosen comment, the other one to delete it.-->

@@ -26,7 +26,7 @@
   <table class='table table-striped' aria-labelledby="tableLabel">
     <thead>
       <tr>
-        <th>TopicId</th>
+        <!--<th>TopicId</th>-->
         <th>Name</th>
         <th>Actions</th>
       </tr>
@@ -34,7 +34,7 @@
     <tbody>
       <!--Listing out all the filtered topics:-->
       <tr *ngFor='let topic of filteredTopics'>
-        <td>{{ topic.TopicId }}</td>
+        <!--<td>{{ topic.TopicId }}</td>-->
         <!---Trying to link the topicName to the post page with the topic Id to know which data to fetch and load (topics)-->
         <td><a [routerLink]="['/posts/', topic.TopicId]"> {{ topic.TopicName }} </a></td>
         <td>

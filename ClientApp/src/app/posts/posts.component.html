@@ -26,7 +26,7 @@
   <table class="table table-striped" aria-labelledby="tableLabel">
     <thead>
       <tr>
-        <th>Post Id</th>
+        <!--<th>Post Id</th>-->
         <th>Name</th>
         <th>Actions</th>
       </tr>
@@ -34,7 +34,7 @@
     <tbody>
       <!--Listing out all the filtered posts:-->
       <tr *ngFor="let post of filteredPosts">
-        <td>{{ post.PostId }}</td>
+        <!--<td>{{ post.PostId }}</td>-->
         <!---Trying to link the postName to the comment page with the post Id to know which data to fetch and load (post)-->
         <td><a [routerLink]="['/comments/', post.PostId]"> {{ post.PostTitle }} </a></td>
         <td>
