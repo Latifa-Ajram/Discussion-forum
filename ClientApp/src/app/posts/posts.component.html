@@ -37,7 +37,7 @@
         <!--<td>{{ post.PostId }}</td>-->
         <!---Trying to link the postName to the comment page with the post Id to know which data to fetch and load (post)-->
         <td><a [routerLink]="['/comments/', post.PostId]"> {{ post.PostTitle }} </a></td>
-        <td>
+        <td class="actions">
           <!-- Two different links: One to update the chosen post, the other one to delete it.-->
           <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
           <a class="update-link" (click)="updateSelectedPost(post.PostId)" class="btn btn-sm btn-info mr-2">Update</a>

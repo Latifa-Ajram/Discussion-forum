@@ -37,7 +37,7 @@
         <!--<td>{{ topic.TopicId }}</td>-->
         <!---Trying to link the topicName to the post page with the topic Id to know which data to fetch and load (topics)-->
         <td><a [routerLink]="['/posts/', topic.TopicId]"> {{ topic.TopicName }} </a></td>
-        <td>
+        <td class="actions">
           <!-- Two different links: One to update the chosen topic, the other one to delete it.-->
           <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
           <a class="update-link" (click)="updateSelectedTopic(topic.TopicId)" class="btn btn-sm btn-info mr-2">Update</a>

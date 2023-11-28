@@ -37,7 +37,7 @@
         <!--<td>{{ room.RoomId }}</td>-->
         <!---Trying to link the roomName to the topic page with the roomId to know which data to fetch and load (rooms)-->
         <td><a [routerLink]="['/topics/', room.RoomId]">{{ room.RoomName }}</a></td>
-        <td>
+        <td class="actions">
           <!-- Two different links: One to update the chosen room, the other one to delete it.-->
           <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
           <a class="update-link" (click)="updateSelectedRoom(room.RoomId)" class="btn btn-sm btn-info mr-2">Update</a>

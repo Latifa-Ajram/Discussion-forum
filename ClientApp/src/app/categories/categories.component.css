@@ -6,6 +6,11 @@
   padding: 0;
 }
 
+.actions {
+  width: 400px;
+  text-align: center;
+}
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;

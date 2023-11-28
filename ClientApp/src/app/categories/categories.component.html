@@ -38,7 +38,7 @@
         <!--<td>{{ category.CategoryId }}</td>-->
         <!---Trying to link the categoryName to the rooms page with the category Id to know which data to fetch and load (rooms)-->
         <td><a [routerLink]="['/rooms/', category.CategoryId]">{{ category.CategoryName }}</a></td>
-        <td>
+        <td class="actions">
           <!-- Two different links: One to update the chosen category, the other one to delete it.-->
           <!--This link routs the user if clicked to the described location. It also passes along two type of data: a string and a number-->
           <a [routerLink]="['/categoryform', 'edit', category.CategoryId]" class="btn btn-sm btn-info mr-2"> Update </a>

@@ -27,8 +27,5 @@ export class SearchComponent {
       }
     );
   }
-
-
-
-  }
+}
 
