@@ -38,7 +38,7 @@ Category > room > topic > post > you are here
       <tr *ngFor="let comment of filteredComments">
         <!--<td>{{comment.CommentId}}</td>-->
         <td>{{ comment.CommentDescription }}</td>
-        <td>
+        <td class="actions">
           <!-- Two different links: One to update the chosen comment, the other one to delete it.-->
           <!-- This update field is styled, and have a click event on it. When clicked the described method is invoked in the typescript file.-->
           <a class="update-link" (click)="updateSelectedComment(comment.CommentId)" class="btn btn-sm btn-info mr-2">Update</a>
