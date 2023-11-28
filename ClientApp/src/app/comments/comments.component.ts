@@ -109,7 +109,21 @@ export class CommentsComponent implements OnInit {
         console.log("KOMMER I ELSE");
         this.getCommentsByPostId(+params['id']);
         this.postId = +params['id'];
+        this.setPostName(+params['id'])
       }
     });
   }
+
+  // Update the method to fetch the post name.
+  // Awaits an object which we expect contains a string with the property roomName
+  setPostName(id: number): void {
+    this._commentService.getPostNameById(id).subscribe(
+      object => {
+        this.viewTitle = object.postName; // Set the viewTitle to the fetched room name
+        console.log('Object recieved', object);
+      },
+      error => console.error('Error fetching post name: ', error)
+    );
+  }
+
 }

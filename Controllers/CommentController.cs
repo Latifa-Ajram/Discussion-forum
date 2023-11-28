@@ -32,6 +32,27 @@ public class CommentController : Controller
         return Ok(comments);
     }
 
+    //Get postname based on it's id
+    [HttpGet("postName/{id}")]
+    public async Task<IActionResult> GetPostNameById(int Id)
+    {
+        try
+        {
+            var post = await _postRepository.GetPostById(Id);
+            if (post == null)
+            {
+                _logger.LogError($"[CommentController] Post with ID {Id} not found.");
+                return NotFound("Post not found");
+            }
+            return Ok(new { postName = post.PostTitle });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "[CommentController] An error occurred while getting topic name with ID {Id}", Id);
+            return StatusCode(500, "An error occurred.");
+        }
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCommentById(int id)
     {

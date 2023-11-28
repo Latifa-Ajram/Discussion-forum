@@ -39,7 +39,7 @@ public class RoomController : Controller
     {
         if (newRoom== null)
         {
-            return BadRequest("Invalid room data.");
+            return BadRequest("[Roomcontroller] Invalid room data.");
         }
         bool returnOK = await _roomRepository.Create(newRoom);
         if (returnOK)
@@ -54,6 +54,28 @@ public class RoomController : Controller
         }
     }
 
+    //Get categoryname based on it's id
+    [HttpGet("categoryName/{id}")]
+    public async Task<IActionResult> GetCategoryNameById(int Id)
+    {
+        try
+        {
+            var category = await _categoryRepository.GetCategoryById(Id);
+            if (category == null)
+            {
+                _logger.LogError($"[RoomController] Category with ID {Id} not found.");
+                return NotFound("Category not found");
+            }
+            return Ok(new { categoryName = category.CategoryName });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "[RoomController] An error occurred while getting category name with ID {Id}", Id);
+            return StatusCode(500, "An error occurred.");
+        }
+    }
+
+    //Get a spesific room based on a passed number (Id)
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRoomById(int Id)
     {

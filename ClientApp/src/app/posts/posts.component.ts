@@ -110,7 +110,20 @@ export class PostsComponent implements OnInit {
         console.log("KOMMER I ELSE");
         this.getPostsByTopicId(+params['id']);
         this.topicId = +params['id'];
+        this.setTopicName(+params['id'])
       }
     });
+  }
+
+  // Update the method to fetch the category name.
+  // Awaits an object which we expect contains a string with the property topicName
+  setTopicName(id: number): void {
+    this._postService.getTopicNameById(id).subscribe(
+      object => {
+        this.viewTitle = object.topicName; // Set the viewTitle to the fetched category name
+        console.log('Object recieved', object);
+      },
+      error => console.error('Error fetching category name: ', error)
+    );
   }
 }

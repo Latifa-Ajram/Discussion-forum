@@ -51,4 +51,11 @@ export class CommentService {
       const url = `${this.baseUrl}/delete/${commentId}`;
       return this._http.delete(url);
   }
+
+  //Requests an object from the server based on a passed number.
+  //Request an observable with a property roomName which is some string.
+  getPostNameById(postId: number): Observable<{ postName: string }> {
+    const url = `${this.baseUrl}/postName/${postId}`;
+    return this._http.get<{ postName: string }>(url);
+  }
 }

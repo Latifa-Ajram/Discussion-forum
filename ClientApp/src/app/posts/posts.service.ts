@@ -48,5 +48,12 @@ export class PostService {
     deletePost(postId: number): Observable<any> {
       const url = `${this.baseUrl}/delete/${postId}`;
       return this._http.delete(url);
-    }
+  }
+
+  //Requests an object from the server based on a passed number.
+  //Request an observable with a property topicName which is some string.
+  getTopicNameById(topicId: number): Observable<{ topicName: string }> {
+    const url = `${this.baseUrl}/topicName/${topicId}`;
+    return this._http.get<{ topicName: string }>(url);
+  }
 }

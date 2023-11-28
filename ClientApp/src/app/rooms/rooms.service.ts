@@ -50,4 +50,11 @@ export class RoomService {
     const url = `${this.baseUrl}/delete/${roomId}`;
     return this._http.delete(url);
   }
+
+  //Requests an object from the server based on a passed number.
+  //Request an observable with a property categoryName which is some string.
+  getCategoryNameById(categoryId: number): Observable<{ categoryName: string }> {
+    const url = `${this.baseUrl}/categoryName/${categoryId}`;
+    return this._http.get<{ categoryName: string }>(url);
+  }
 }

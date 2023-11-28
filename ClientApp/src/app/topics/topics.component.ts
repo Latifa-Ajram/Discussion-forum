@@ -105,8 +105,20 @@ export class TopicsComponent implements OnInit {
         console.log("KOMMER I ELSE");
         this.getTopicsByRoomId(+params['id'])
         this.roomId = +params['id'];
+        this.setRoomName(+params['id'])
       }
     });
-    
+  }
+
+  // Update the method to fetch the room name.
+  // Awaits an object which we expect contains a string with the property roomName
+  setRoomName(id: number): void {
+    this._topicService.getRoomNameById(id).subscribe(
+      object => {
+        this.viewTitle = object.roomName; // Set the viewTitle to the fetched room name
+        console.log('Object recieved', object);
+      },
+      error => console.error('Error fetching category name: ', error)
+    );
   }
 }

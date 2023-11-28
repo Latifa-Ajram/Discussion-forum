@@ -21,6 +21,27 @@ public class PostController : Controller
         _logger = logger;
     }
 
+    //Get categoryname based on it's id
+    [HttpGet("topicName/{id}")]
+    public async Task<IActionResult> GetTopicNameById(int Id)
+    {
+        try
+        {
+            var topic = await _topicRepository.GetTopicById(Id);
+            if (topic == null)
+            {
+                _logger.LogError($"[TopicController] Topic with ID {Id} not found.");
+                return NotFound("Topic not found");
+            }
+            return Ok(new { topicName = topic.TopicName });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "[TopicController] An error occurred while getting room name with ID {Id}", Id);
+            return StatusCode(500, "An error occurred.");
+        }
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {

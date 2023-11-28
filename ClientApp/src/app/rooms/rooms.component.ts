@@ -11,9 +11,9 @@ import { RoomService } from './rooms.service';
     
 export class RoomsComponent implements OnInit {
   //Variables
-  viewTitle: string = 'Rooms';
   private _listfilter: string = "";
   categoryId: number = -1;
+  viewTitle: string = "Rooms"; //Category name
   rooms: IRoom[] = [];
   filteredRooms: IRoom[] = this.rooms;
 
@@ -95,12 +95,25 @@ export class RoomsComponent implements OnInit {
   ngOnInit(): void {
       this._route.params.subscribe(params => {
         if (params['id'] == -1) {
-              this.getRooms();
+          this.getRooms();
         }
         else {
           this.getRoomsByCategoryId(+params['id']);
           this.categoryId = +params['id'];
+          this.getCategoryName(+params['id'])
         }
       });
+  }
+
+  // Update the method to fetch the category name.
+  // Awaits an object which we expect contains a string with the property categoryName
+  getCategoryName(id: number): void {
+    this._roomService.getCategoryNameById(id).subscribe(
+      object => {
+        this.viewTitle = object.categoryName; // Set the viewTitle to the fetched category name
+        console.log('Object recieved', object);
+      },
+      error => console.error('Error fetching category name: ', error)
+    );
   }
 }

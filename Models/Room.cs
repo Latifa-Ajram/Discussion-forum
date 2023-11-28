@@ -16,7 +16,7 @@ namespace ForumAngularVersion.Models
         public int CategoryId { get; set; } //FK
         // Navigaiton property: 
 
-       // public virtual Category? Category { get; set; } // Can't be zero. Virtual enables lazy loading. 
+        //public virtual Category? Category { get; set; } // Can't be zero. Virtual enables lazy loading. 
     
         public virtual List<Topic>? Topics { get; set; } // One room can have many threads, or zero. ? means it can have zero threads.
     }

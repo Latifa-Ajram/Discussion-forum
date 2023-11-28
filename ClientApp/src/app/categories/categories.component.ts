@@ -21,8 +21,6 @@ export class CategoriesComponent implements OnInit {
     private _router: Router,
     private _Categorieservice: Categorieservice) { }
 
-
-  
   get listFilter(): string {
     return this._listfilter;
   }

@@ -21,7 +21,28 @@ public class TopicController : Controller
         _logger = logger;
     }
 
+    //Get roomname based on it's id
+    [HttpGet("roomName/{id}")]
+    public async Task<IActionResult> GetRoomNameById(int Id)
+    {
+        try
+        {
+            var room = await _roomRepository.GetRoomById(Id);
+            if (room == null)
+            {
+                _logger.LogError($"[TopicController] Room with ID {Id} not found.");
+                return NotFound("Room not found");
+            }
+            return Ok(new { roomName = room.RoomName });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "[TopicController] An error occurred while getting topic name with ID {Id}", Id);
+            return StatusCode(500, "An error occurred.");
+        }
+    }
 
+    //get all topics
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
