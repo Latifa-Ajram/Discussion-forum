@@ -2,6 +2,7 @@
 using ForumAngularVersion.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -29,22 +30,27 @@ public class SearchController : ControllerBase
                 return Ok(new { Categories = new List<Category>(), Posts = new List<Post>(), Comments = new List<Comment>() });
             }
 
-            // Your existing code for searching categories, posts, and comments
 
+            //Searches for categories, posts,comment in the Categories, Post, Comments table where the CategoryName, PostTitle and CommentsDescription
+            //contains the specified search term.
+           // EF.Functions.Like is used for case -insensitive pattern matching. Results are converted to a list.
+
+            // Search for categories containing the search 
             var categories = _db.Categories
-      .Where(category => EF.Functions.Like(category.CategoryName, $"%{searchTerm}%"))
-      .ToList();
+                .Where(category => EF.Functions.Like(category.CategoryName, $"%{searchTerm}%"))
+                .ToList();
 
+            // Search for posts with titles containing the search term 
             var posts = _db.Posts
                 .Where(post => EF.Functions.Like(post.PostTitle, $"%{searchTerm}%"))
                 .ToList();
-            ;
 
+            // Search for comments with descriptions containing the search 
             var comments = _db.Comments
-    .Where(comment => EF.Functions.Like(comment.CommentDescription, $"%{searchTerm}%"))
-    .ToList();
+                .Where(comment => EF.Functions.Like(comment.CommentDescription, $"%{searchTerm}%"))
+                .ToList();
 
-            // Return JSON data
+            // Return the search results in JSON format.
             return Ok(new { Categories = categories, Posts = posts, Comments = comments });
         }
         catch (Exception e)
