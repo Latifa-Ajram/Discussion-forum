@@ -14,7 +14,7 @@
     <h3>Categories</h3>
     <ul>
       <li *ngFor="let category of searchResult.categories">
-        <a [routerLink]="['/categories', category.CategoryId]">{{ category.CategoryName }}</a>
+        <a [routerLink]="['/rooms', category.CategoryId]">{{ category.CategoryName }}</a>
       </li>
     </ul>
   </div>
@@ -23,7 +23,7 @@
     <h3>Posts</h3>
     <ul>
       <li *ngFor="let post of searchResult.posts">
-        <a [routerLink]="['/posts', post.PostId]">{{ post.PostTitle }}</a>
+        <a [routerLink]="['/comments', post.PostId]">{{ post.PostTitle }}</a>
       </li>
     </ul>
   </div>
