@@ -6,5 +6,4 @@ export interface ISearch {
   Categories?: ICategory[]; // Adjust these types based on your actual data structures
   Comments?: IComment[];
   Posts?: IPost[];
-  
 }
