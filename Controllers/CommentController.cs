@@ -103,7 +103,7 @@ public class CommentController : Controller
         else
         {
             var response = new { success = false, message = "Comment creation failed" };
-            return Ok(response);
+            return BadRequest("Comment creation failed");
         }
     }
 
@@ -124,7 +124,8 @@ public class CommentController : Controller
         else
         {
             var response = new { success = false, message = "Comment update failed" };
-            return Ok(response);
+            return BadRequest("Comment update failed");
+
         }
     }
 

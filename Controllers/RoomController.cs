@@ -50,7 +50,7 @@ public class RoomController : Controller
         else
         {
             var response = new { success = false, message = "Room creation failed" };
-            return Ok(response);
+            return BadRequest("Room creation failed");
         }
     }
 
@@ -134,7 +134,7 @@ public class RoomController : Controller
         else
         {
             var response = new { success = false, message = "Room update failed" };
-            return Ok(response);
+            return BadRequest("Room update failed");
         }
     }
 

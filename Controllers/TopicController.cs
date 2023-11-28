@@ -73,7 +73,7 @@ public class TopicController : Controller
         else
         {
             var response = new { success = false, message = "Topic creation failed" };
-            return Ok(response);
+            return BadRequest("Topic create failed");
         }
     }
 
@@ -136,7 +136,7 @@ public class TopicController : Controller
         else
         {
             var response = new { success = false, message = "Topic update failed" };
-            return Ok(response);
+            return BadRequest("Topic update failed");
         }
     }
 

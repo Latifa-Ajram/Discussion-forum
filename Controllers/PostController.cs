@@ -110,10 +110,7 @@ public class PostController : Controller
 
         Comment comment = new Comment();
         comment.PostId = newPost.PostId;
-        //comment.CommentDescription = newPost.commentdDescription;
-
-
-        bool returnOk2 = await _commentRepository.Create(comment);
+   
 
         if (returnOK)
         {
@@ -123,7 +120,7 @@ public class PostController : Controller
         else
         {
             var response = new { success = false, message = "Post creation failed" };
-            return Ok(response);
+            return BadRequest("Post creation failed");
         }
     }
 
@@ -143,7 +140,8 @@ public class PostController : Controller
         else
         {
             var response = new { success = false, message = "Post update failed" };
-            return Ok(response);
+            return BadRequest("Post update failed");
+
         }
     }
 
