@@ -1,21 +1,26 @@
 <!-- Based on the state of the variable "isEditMode" in the typescript-file one of the two words is set with: Category-->
-<h2> {{ isEditMode ? 'Update' : 'Create' }} Category</h2>
 
-<!-- A Form-group with a corresponding on click event that invokes the method "onSubmit()" in typescript-file-->
-<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="categoryName">Name:</label>
-    <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "categoryName" in the typescript-file-->
-    <input type="text" id="categoryName" formControlName="categoryName" class="form-control" />
-    <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
-    <div class="warning" *ngIf="categoryForm.get('categoryName')?.errors">
-      {{categoryFormErrorMessage}}
+<div class="content">
+  <h2> {{ isEditMode ? 'Update' : 'Create' }} Category</h2>
+
+  <!-- A Form-group with a corresponding on click event that invokes the method "onSubmit()" in typescript-file-->
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="categoryName">Name:</label>
+      <!-- This input accepts text and are connected to label above. Furhtermore it is connected to the form, where this is connected to the variable "categoryName" in the typescript-file-->
+      <input type="text" id="categoryName" formControlName="categoryName" class="form-control" />
+      <!-- This div is connected to the formvalidation for the current form. If it is not accepted, then the current text will be shown, otherwise the text will be hidden-->
+      <div class="warning" *ngIf="categoryForm.get('categoryName')?.errors">
+        {{categoryFormErrorMessage}}
+      </div>
     </div>
-  </div>
 
-  <!-- A button that is of type "submit", which means that it is connected to a form and inputs. Otherwise the button is disabled until the form is valid/accepted.-->
-  <button class="btn-primary btn" type="submit" [disabled]="categoryForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Category</button>
+    <!-- A button that is of type "submit", which means that it is connected to a form and inputs. Otherwise the button is disabled until the form is valid/accepted.-->
+    <button class="btn-primary btn" type="submit" [disabled]="categoryForm.invalid"> {{ isEditMode ? 'Update' : 'Create' }} Category</button>
 
-  <!--A button that invokes the on clicke event "backToCategories" inside the typescript-file-->
-  <button class="btn btn-secondary" (click)="backToCategories()">Cancel</button>
-</form>
+    <!--A button that invokes the on clicke event "backToCategories" inside the typescript-file-->
+    <button class="btn btn-secondary" (click)="backToCategories()">Cancel</button>
+  </form>
+
+</div>
+

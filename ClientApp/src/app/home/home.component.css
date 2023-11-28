@@ -101,3 +101,14 @@ h2 {
     }
 
 /* Our Chosen Ones Section Styles */
+/**********************************Style for the smartphones**************************************************/
+@media screen and (max-width: 460px) {
+
+
+  .col-md-8 {
+    margin-top: 250px;
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    background-color: white;
+  }
+}

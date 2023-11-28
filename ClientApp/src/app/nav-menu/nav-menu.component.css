@@ -28,8 +28,10 @@ html {
 }
 
 .header-text {
+  margin-top: 20px;
   font-size: 40px;
-  color: inherit; /* Style the header text and ensure it inherits the color */
+  /* color: inherit*/; /* Style the header text and ensure it inherits the color// if we want black color */
+  text-align: left;
 }
 
   .header-text:hover {
@@ -71,4 +73,14 @@ a {
   text-decoration: none;
   font-size: 15px;
   color: #0047AB;
+}
+/**********************************Style for the smartphones**************************************************/
+@media screen and (max-width: 460px) {
+
+  .header-text {
+      margin-top:10px;
+    font-size: 20px;
+    /* color: inherit*/; /* Style the header text and ensure it inherits the color */
+  }
+
 }

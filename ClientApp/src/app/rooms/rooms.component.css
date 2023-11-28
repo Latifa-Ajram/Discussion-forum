@@ -107,3 +107,36 @@ th {
   margin-top: 16px;
   margin-bottom: 16px;
 }
+.search {
+  width: 450px;
+  padding: 2px 20px;
+  margin: 10px 0px;
+  height: 30px;
+}
+
+
+/**********************************Style for the smartphones**************************************************/
+@media screen and (max-width: 460px) {
+
+
+
+  .content {
+    margin-top: 200px;
+  }
+
+  .container {
+    margin-top: 250px;
+  }
+
+  .search {
+    padding: 2px 20px;
+    margin: 10px 0px;
+    height: 30px;
+  }
+
+  .btn {
+    padding: 5px 10px; /* Adjust padding to make buttons smaller */
+    margin-right: 10px; /* Add margin to separate buttons */
+    font-size: 0.8rem; /* Reduce font size for smaller screens */
+  }
+}
