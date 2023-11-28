@@ -26,7 +26,8 @@ body {
 
 /* Page title */
 #tableLabel {
-  font-size: 2.5rem;
+  font-size: 2.9rem;
+  padding-top: 30px;
   margin-bottom: 20px;
   color: #333;
 }

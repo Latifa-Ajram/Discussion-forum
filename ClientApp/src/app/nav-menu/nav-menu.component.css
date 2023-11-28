@@ -44,14 +44,16 @@ a {
 }
 
 /* Style the main navigation link and the logout button */
-.main-nav-link.nav-cta, #logout {
+.main-nav-link.nav-cta {
   font-size: 20px;
   color: inherit;
 }
 
-#logout {
-  padding: 0.5rem 2rem;
-  border-radius: 3px;
+.navbar-nav .nav-link {
+  color: white; /* Your text color */
+  margin-right: 15px; /* Adjust the spacing between links */
+  font-size: 20px; /* Adjust the font size as needed */
+  color:black
 }
 
 /* Style navigation links for a cleaner look */

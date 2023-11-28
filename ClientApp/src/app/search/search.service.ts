@@ -12,21 +12,26 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
+  // Function to perform a search based on the provided query
   search(query: string): Observable<ISearch> {
+    // Encode the query to handle special characters in the URL
     const encodedQuery = encodeURIComponent(query);
 
-    console.log("Du har kommet til seach.service", encodedQuery)
 
+    // Make an HTTP GET request to the search API endpoint with the encoded query 
     return this.http.get<ISearch>(`${this.apiUrl}?searchTerm=${encodedQuery}`)
-
       .pipe(
-        catchError(this.handleError)
-
-    );
+        // Handle errors using the private handleError method
+        catchError(this.Error)
+      );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  // Private method to handle errors in the HTTP request
+  private Error(error: HttpErrorResponse) {
+    // Log an error message to the console with details of the error
     console.error('Error during search:', error);
+
+    // Return an observable with a custom error message for the consumer
     return throwError('Internal Server Error');
   }
 }

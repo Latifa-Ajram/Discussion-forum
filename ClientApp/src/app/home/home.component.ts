@@ -1,3 +1,5 @@
+// home.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../posts/posts.service';
 import { IPost } from '../posts/post';
@@ -15,13 +17,15 @@ export class HomeComponent implements OnInit {
 
   constructor(private postService: PostService, private categoryService: Categorieservice) { }
 
+  // OnInit lifecycle hook
   ngOnInit(): void {
-    // Hent alle kategorier
+    // Fetch all categories
     this.categoryService.getCategories().subscribe((categoryData: ICategory[]) => {
       console.log('Received categories:', categoryData);
       this.categories = categoryData;
     });
 
+    // Fetch posts
     this.postService.getPosts().subscribe(data => {
       console.log('Received posts:', data);
 
@@ -35,14 +39,18 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // Private method to format post creation time
   private formatTime(postTime: Date): string {
+    // Calculate time difference in milliseconds
     const timeDifference = new Date().getTime() - new Date(postTime).getTime();
 
+    // Convert time to seconds, minutes, hours, and days
     const seconds = Math.floor(timeDifference / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
 
+    // Format time based on the duration
     if (days >= 1) {
       return `${days} day${days !== 1 ? 's' : ''} ago`;
     } else if (hours >= 1) {

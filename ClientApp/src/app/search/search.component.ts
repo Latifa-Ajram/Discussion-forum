@@ -1,4 +1,3 @@
-// search.component.ts
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,18 +13,24 @@ export class SearchComponent {
 
   constructor(private searchService: SearchService, private router: Router) { }
 
+  // Function to initiate the search process
   search(): void {
+    // Call the search service to perform the search operation
     this.searchService.search(this.query).subscribe(
+      // Success callback
       result => {
-        console.log('Search result:', result);
+      
+        // Navigate to the search route with the search result as a query parameter
         this.router.navigate(['/search'], { queryParams: { searchResult: JSON.stringify(result) } });
-        this.query = '';
 
+        // Clear the search query after the search is performed
+        this.query = '';
       },
+      // Error callback
       error => {
+        // Log an error message to the console in case of search failure
         console.error('Error during search:', error);
       }
     );
   }
 }
-
